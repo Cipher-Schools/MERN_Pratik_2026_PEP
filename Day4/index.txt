@@ -1,0 +1,199 @@
+Introduction to JS:
+
+What is Javascript?
+Javascript is one of the most popular and widely used programming languages.
+
+It's growing as fast as python.
+
+Giants like Netflix, Walmart, and Paypal are building entire applications around Javascript.
+
+
+What can you do with Javascript?
+Add interactivity to webpages
+Make full web/mobile apps with javascript
+Desktop applications
+Real-time networking applications
+Command-line tools
+Games
+Backend services
+Databases
+
+Detailed Explanation
+History of Web
+in 1993 the first web browser with an interface called Mosaic was released.
+in 1994, the lead developer of Mosaic founded a company called Netscape and released a more polished browser called Netscape Navigator.
+the pages could only be static and there was no interactivity after the page was loaded.
+in 1995, Netscape created a new scripting language called JavaScript.
+The name was purely for Marketing purposes as JAVA was very popular at that time.
+in 1995, Microsoft launched its browser called Internet Explorer.
+Microsoft realized that JavaScript fundamentally changed the user experience for the web and wanted the same for Internet Explorer.
+in 1996, Microsoft reverse-engineered the Navigator interpreter to create its own scripting language called JScript.
+The differences made it difficult for Developers to make their websites work well in both browsers.
+“Best viewed in Netscape” and “Best viewed in Internet Explorer” badges become common.
+To solve these issues in 1996, Netscape submitted JavaScript to Ecma International.
+Ecma International is an industry association dedicated to the standardization of informational and communication systems.
+Netscape wanted a standard specification that all browser vendors could conform to as it would help keep other implementations consistent across browsers.
+For Each specification, Ecma provides a standard specification and a committee.
+In the case of JavaScript, the standard is called ECMA-262, and the committee that works on ECMA-262 is called Technical Committee 39 (TC39).
+ECMA decided to use the term “ECMAScript” to talk about the official language.
+The reason for this is that Oracle owns the trademark for the term JavaScript.
+ECMAScript refers to the standard language whereas JavaScript which we use in practice builds on top of ECMAScript.
+ECMAScript Versions
+1997 - ECMAScript 1
+1998 - ECMAScript 2
+1999 - ECMAScript 3
+ECMAScript 4 never released
+2009 - ECMAScript 5
+2015 - ECMAScript 6 (ES6)
+
+-----------------------
+features added:-
+JavaScript (ES6 / 2015) – features list:
+
+let
+const
+Arrow functions (=>)
+Template literals
+Default parameters
+Destructuring assignment
+Spread operator (...)
+Rest parameters
+Classes
+Modules (import / export)
+Promises
+Enhanced object literals
+for...of loop
+Map
+Set
+WeakMap
+WeakSet
+Symbol
+Object.assign()
+Binary literals
+Octal literals
+Array.prototype.find()
+Array.prototype.findIndex()
+String.prototype.includes()
+String.prototype.startsWith()
+String.prototype.endsWith()
+---------------------------
+One version each year since 2015
+
+JavaScript Engine:
+The JavaScript code that we write can not be understood by the computer
+A JavaScript Engine is a program that converts JavaScript code into machine code that allows a computer to perform a specific task.
+The JavaScript engines are typically developed by web browser vendors
+
+--------------------------------
+JS Engine	Developed By
+V8	Google for Chrome (open-source)
+SpiderMonkey	Mozilla Firefox
+JavaScriptCore	Apple for Safari (open-source)
+Chakra	Microsoft Edge(the latest version of Edge uses V8)
+Chrome’s V8 engine and Node.js
+V8 is Google’s open-source JavaScript engine.
+in 2008 google created it.
+V8 implements ECMAScript as specified in ECMA-262
+V8 is written in C++ and can be run standalone or can be embedded into any C++ application.
+By embedding V8 into our C++ application, we can write C++ code that will execute when a user writes JavaScript code.
+ That means we can add new features to JavaScript.
+Since C++ is great for low-level operations like file handling, database connections, and network operations,
+ embedding V8 with our own C++ program, we have the power to add all of that functionality in JavaScript.
+Here the C++ program that we are talking about is Node.js
+JavaScript Runtime:
+JavaScript runtime is an environment that provides all the necessary components to run a JavaScript program.
+Every browser has a JavaScript Engine
+A JavaScript Engine is one component in the JavaScript Runtime
+-------------------------------------------
+
+-------------------------------------------
+What is Node.js?
+Node.js is an open-source, cross-platform JavaScript runtime environment. that helps us to run JavaScript outside the browser. 
+It is not a language, it is not a framework. It can execute not only the standard ECMAScript but also new features made available through C++ binding using the V8 engine.
+
+It consists of C++ files which form the core features and JavaScript files which expose common utilities and some C++ features for easier consumption.
+
+Open-source: source code is publically available for sharing and modification.
+
+Cross-platform: available for Mac, Windows, and Linux.
+
+Coding Platform
+
+codepen.io
+
+VSCode https://replit.com [optional]
+
+Running Javascript Code
+
+node filename.js
+--------------------------------------------
+
+Variables:
+Introduction
+Definition: A variable is a container for storing data in JavaScript.
+
+Declaration: Variables are declared using the var keyword.
+
+Naming Rules: Variable names should start with a letter or underscore, followed by letters, numbers, or underscores.
+
+Detailed Explanation
+We use programming languages like JavaScript to store and manipulate information. Variables in JavaScript are used to store different kinds of data. Think of a variable like a bottle. We use bottles to store water, in much the same way we use variables to store various forms of data in JavaScript.
+
+var age = 25;
+Syntax: You can also declare multiple variables in one statement as seen in the syntax below.
+var a = 200;
+a = 100;
+
+
+Declaration, Declaration with Initialisation, Assignment, Reassignment:
+
+//declare or define a variable called firstName
+let firstName;
+
+// initialize or assign value to a variable
+firstName = "John";
+
+// declare & initialize | define a variable and assign a value
+let lastName = "Smith";
+
+// re-assign value to a variable
+firstName = "Will";
+
+// Access or showing or logging or looking up the variable content
+console.log(firstName, lastName);
+
+
+Student activity
+Coding Challenge 1: Write a JavaScript function to calculate the area of a rectangle. The function should take two parameters, width and height, and return the calculated area.
+Coding Challenge 2: Write a JavaScript function to check if a given number is even or odd. The function should take one parameter, num, and return "Even" if the number is even, and "Odd" if the number is odd.
+Coding Challenge 3: Write a JavaScript function that takes an array of numbers and returns the sum of all the numbers in the array. The function should take one parameter, numbers, which is an array of numbers, and return the calculated sum.
+
+
+
+
+What is a variable in JavaScript and how is it declared?
+What are the naming rules for variables in JavaScript?
+How can you assign a value to a variable in JavaScript?
+How can you reassign a new value to an existing variable in JavaScript?
+What is the purpose of variables in JavaScript?
+How can you calculate the area of a rectangle using JavaScript?
+How can you determine if a number is even or odd using JavaScript?
+
+
+JS is a dynamically typed language. a dynamically typed language is a programming language in which the type of a variable is determined at runtime, not at compile time.
+
+In dynamic type languages, you can change the type of a variable during the program's execution. This is in contrast to statically typed languages where variable types are explicitly declared and checked at compile time.
+
+var x = 5; // x is now of type number
+x = "Hello, World!"; // x is now of type string
+x = [1, 2, 3]; // x is now an array
+
+
+Coding Challenge 1
+Write a JavaScript function that takes a variable x as an argument and returns its type. Do not use any built-in functions or methods to determine the type.
+
+Coding Challenge 2
+Write a JavaScript function that takes an array as an argument and returns a new array with the same elements, but with each element's type converted to a string. For example, if the input array is [1, "hello", true], the output should be ["number", "string", "boolean"].
+
+Coding Challenge 3
+Write a JavaScript function that takes a variable x as an argument and checks if its type is "object". The function should return true if the type is "object", and false otherwise.

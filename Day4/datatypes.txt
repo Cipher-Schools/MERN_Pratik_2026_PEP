@@ -1,0 +1,304 @@
+Data Typesin JS:-
+
+Primitives (value types)
+
+string
+
+number
+
+boolean
+
+undefined
+
+null
+
+bigInt
+
+symbol
+
+Non Primitives (reference types)
+
+object
+
+function
+
+array
+
+----------------------------------------------
+Strings The first type of data is a String. This is used to store a sequence of characters used to represent text. Example
+var name = "Masai School"; //using double quotes
+var subject = "Coding"; // using single quotes
+var val = `Hi`; //  using template literal
+----------------------------------------------
+
+Numbers The second type of data we want to know is a Number, which is used to store any kind of numbers. We have already seen this type of data in the variables example.
+ Numbers can store both Whole Numbers/Integers and Decimals. Example:
+
+var num = 100;
+var dec = 100.001;
+
+Booleans This data type has only two values true and false. Example
+var x = true;
+var y = false;
+
+
+Objects:
+Objects in a programming language are like an object in a real-world. An object has properties. An object is simply a group of related variables.
+
+ways to access properties:
+
+dot notation
+bracket notation
+
+Functions:-
+a Function is a set of statements that either perform a task or calculates and returns a value;
+
+A function is a set of statements in JS which is
+
+Callable (executable)
+It can take arguments
+has a set of statements that can either perform tasks or calculations
+return a value
+
+// what will it return
+function add(a, b) {
+  let c = a + b;
+}
+
+let result = add();
+console.log(result);
+
+// declare a function called giveMaxNumber
+// it takes in two numbers as arguments
+// returns the greater of the two
+// invoke the function with 3 & 7 and print the output in the console.
+
+// hint: 
+// if (num1 > num2) {
+//   // do something
+// } else {
+//   // do something else
+// }
+
+// 1. function declaration
+function giveMaxNumber(a, b) {
+
+}
+
+// 2. function expression
+
+
+// 3. arrow function
+
+
+console.log(giveMaxNumber(3,7))
+
+Array:-An array is used to store a list of objects
+// declare an array called students
+// students should contain 3 objects
+// each object should contain two properties - name & age
+// console log it
+
+
+// in other words, store data of 3 students and finally console.log it!
+
+// Write a JavaScript program to create an array named colors that contains three strings: "red", "green", and "blue".
+// Example Output: ["red", "green", "blue"]
+
+// Access the second item in the colors array and log it to the console.
+// Example Input: ["red", "green", "blue"]
+// Example Output: green
+
+// Replace "blue" with "orange" in the colors array and print the updated array to the console.
+
+Checking the type of data:
+
+Let's say you have some data but you don't know what type it is. You can use the typeof() inbuilt code to find the type of the data.
+
+Example:var name = "Masai School";
+console.log(typeof name); //output => string
+
+// declare a function called getArrayOfColors()
+// the function should take in 3 colors
+// return an array of 3 colors supplied to it
+
+Coding Challenge 1
+Write a function named reverseString that takes a string as an argument and returns the reverse of that string. Do not use any built-in reverse methods.
+function reverseString(str) {
+  let reversed = "";
+  for (let i = str.length - 1; i >= 0; i--) {
+    reversed += str[i];
+  }
+  return reversed;
+}
+
+
+Coding Challenge 2
+Write a function named sumArray that takes an array of numbers as an argument and returns the sum of all the numbers in the array.
+function sumArray(arr) {
+  let sum = 0;
+  for (let num of arr) {
+    sum += num;
+  }
+  return sum;
+}
+
+
+Coding Challenge 3
+Write a function named findMax that takes an array of numbers as an argument and returns the largest number in the array.
+function findMax(arr) {
+  let max = arr[0];
+  for (let num of arr) {
+    if (num > max) {
+      max = num;
+    }
+  }
+  return max;
+}
+
+--------------------------------------
+null & undefined:-
+
+undefined is js is a falsey value. A variable that has been declared but has not been assigned a value is said to have an "undefined" value. It essentially means the variable exists but lacks a meaningful value.
+var x; // Declares the variable x but leaves it undefined
+console.log(x); // This will output "undefined"
+
+Null represents the intentional absence of any object value. It is often used to explicitly indicate that a variable should have no value or that an object property is empty.
+
+var y = null; // Assigns the value null to the variable y
+console.log(y); // This will output "null"
+
+----------------------------------------
+
+Coding Challenges
+Challenge 1: Write a JavaScript function that checks if a variable is undefined. The function should return true if the variable is undefined, and false otherwise.
+function isUndefined(variable) {
+  return typeof variable === "undefined";
+}
+
+
+Challenge 2: Write a JavaScript function that checks if a variable is null. The function should return true if the variable is null, and false otherwise.
+function isNull(variable) {
+  return variable === null;
+}
+
+
+Challenge 3: Write a JavaScript function that checks if a variable is either undefined or null. The function should return true if the variable is undefined or null, and false otherwise.
+function isUndefinedOrNull(variable) {
+  return typeof variable === "undefined" || variable === null;
+}
+
+--------------------------------------
+Truthy/falsy Values:-
+The values that can be assigned to a variable can be classified into primitive vs non-primitive categories. They can also be classified as truthy vs falsy values.
+
+💡 There are only six ***falsy*** values in JavaScript: `undefined` , `null` , `NaN` , `0` , `""` (empty string), and `false`. Anything that is not falsy it truthy.
+
+Write a function that takes a value as an argument and returns true if the value is truthy and false if the value is falsy.
+function filterTruthyValues(arr) {
+  return arr.filter(Boolean);
+}
+
+Write a function that takes a number as an argument and returns true if the number is greater than 0 and false otherwise.
+function checkGreaterThanZero(num) {
+  return num > 0;
+}
+
+
+-----------------------------------------
+
+Template Literals:-
+JavaScript template literals are a way to output variables within a string. Before template literals, if you wanted to include variables or expressions within a string, you had to use the cumbersome concatenation with the + operator. Let's understand template literals with an analogy and examples:
+
+Analogy:
+Imagine you're writing a letter and you want to personalize it with the recipient's name and other details without having to write a new letter each time. Template literals are like having placeholders within your letter that automatically get replaced with the correct information when you print it out.
+
+Basics:
+A template literal is written between backticks (```) instead of single (') or double (") quotes. You can put any valid JavaScript expression inside ${} within the template literals.
+
+Example 1: Simple String
+Without template literals:
+
+var name = "Alice";
+console.log("Hello, " + name + "!");
+
+var name = "Alice";
+console.log(`Hello, ${name}!`);
+
+Example 2: Expression Inclusion
+You can also include whole expressions.
+
+Without template literals:
+var a = 5;
+var b = 10;
+console.log("The sum of a and b is " + (a + b) + ".");
+
+With template literals:
+var a = 5;
+var b = 10;
+console.log(`The sum of a and b is ${a + b}.`);
+
+ Multiline Strings
+Template literals can span multiple lines.
+var item = "apple";
+var quantity = 5;
+console.log(
+  "You have " + quantity + " " + item + "s.\n" + "Please come again!"
+);
+var item = "apple";
+var quantity = 5;
+console.log(`You have ${quantity} ${item}s.
+Please come again!`);
+
+
+-------------------------------
+let object={data:"Pratik"};
+
+// console.log(name,typeof name);
+let k=null
+// console.log(k,typeof k);
+if(!object && typeof object==="object"){
+    console.log("This data is null")
+}else{
+     console.log("The data is object")
+}
+--------------------------------
+
+Array-discuss all methods like push ,pop,shift,unshift,slice,splice,includes,index of
+
+Object- object.keyname-->to access and add values as well
+
+update,delete and all can be done 
+
+note:-using . notation we can add key valu pair and same can be done using [] notaion as well
+ex- obj["skill"]="coding"
+ inside [] --what ever we are writing is considered as js expression
+---------------------------------
+
+---------------------------------
+function---Explanation
+
+
+A function is a reusable block of code that performs a task
+
+It runs only when called (invoked)
+
+Can take parameters and return a value
+
+//fn decl
+function add(a, b) {
+  return a + b;
+}
+
+// fn expression
+Function Expression
+const add = function(a, b) {
+  return a + b;
+};
+---------------------------------
+
+
+
+
+
+
