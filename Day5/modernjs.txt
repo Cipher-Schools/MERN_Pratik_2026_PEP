@@ -1,0 +1,261 @@
+
+Note:To iterate over the object we  use for in loop 
+
+Store by value VS Store by reference:-
+
+Just like different things are stored in a different way, Javascript stores primitives and non-primitives in a very different way.
+
+Understanding the difference between storing data by value and storing it by reference is fundamental in JavaScript.
+ Primitives like strings and numbers are stored by value, meaning their actual values are stored directly in memory.
+ On the other hand, non-primitive types like objects and arrays are stored by reference, where only a reference to the memory location where the data is stored is kept.
+
+ This distinction is crucial because it affects how data is manipulated and passed around in JavaScript programs.Being aware of whether
+ you are working with primitive or non-primitive data types helps prevent unexpected behavior and enables you to write more efficient and effective code.
+
+Ex:-
+ let obj1 = { name: "Alice", age: 25 };
+let obj2 = obj1;
+
+obj2.age = 30;
+
+console.log(obj1.age);
+console.log(obj2.age);
+
+let arr1 = [1, 2, 3];
+let arr2 = arr1;
+
+arr2.push(4);
+
+console.log(arr1);
+console.log(arr2);
+
+Arrow Functions :
+
+Arrow functions in JavaScript provide a concise syntax for writing function expressions
+Ex:-
+// Regular function
+function greet(greeting, name) {
+  return `${greeting}, from ${name}`;
+}
+
+// Arrow function
+let newGreet = (greeting, name) => {
+  return `${greeting}, from ${name}`;
+};
+
+Problems:
+write a JavaScript function named multiplyByTwo that takes in a number as a parameter and returns the number multiplied by 2. You need to use arrow function with implicit returns;
+
+Create a JavaScript arrow function called sumArray that takes in an array of numbers as a parameter and returns the sum of all the numbers in the array.
+
+Write a JavaScript function named findEvenNumbers that takes in an array of numbers as a parameter and returns a new array containing only the even numbers from the original array.
+
+Note:-(a) implicit return: If all you have is a single expression that returns a value, you can get rid of the braces and the return keyword. Its a very common usage.
+let newGreet = (greeting, name) => `${greeting}, from ${name}`;
+
+(b) Arrow functions offer a modern and concise alternative to traditional function expressions in JavaScript.
+ Their succinct syntax makes code more readable and expressive, especially for short, one-liner functions and callback functions.
+ By leveraging arrow functions, developers can write cleaner and more maintainable code
+
+ (c) If the name of the key matches the name of the variable that's going into that key, you can get rid of the value and just use the variable name
+
+ const userData = (name, email) => ({
+  name,
+  email,
+});
+
+Rest operator:
+
+The rest operator in JavaScript allows us to collect multiple function arguments into an array. It is like having a basket to hold all the extra items you want to carry.
+The spread operator in JavaScript allows us to expand an array or object in place. It is like unpacking a suitcase and placing its contents separately.
+
+The rest operator in JavaScript allows us to collect multiple function arguments into an array. It is like having a basket to hold all the extra items you want to carry.
+
+Ex:-For example, imagine you are hosting a party and want to track the names of all the guests. Instead of listing each name separately, 
+you can use the rest operator to collect all the names into an array.
+
+function trackGuests(first, second, ...rest) {
+  console.log(first, second, rest);
+}
+
+trackGuests("John", "Jane", "Alice", "Bob", "Charlie");
+// Output: John Jane ["Alice", "Bob", "Charlie"]
+
+// rest operator helps collect all the arguments in an array
+function doSomething(first, second, ...rest) {
+  console.log(first, second, rest); // rest is guaranteed to be an array
+}
+
+doSomething("one", "two", "three", "four", "five");
+
+function printPerson(name, ...hobbies) {
+    console.log(`${name}'s hobbies are ${hobbies}`);
+}
+
+printPerson("Rahul", "Cricket", "Travel", "Gaming");
+
+const user = {
+  id: 1,
+  name: "John",
+  age: 25,
+  city: "Delhi"
+};
+
+const { age, ...rest } = user;
+
+console.log(rest);
+
+Spread Operator:-
+The spread operator in JavaScript allows us to expand an array or object in place. It is like unpacking a suitcase and placing its contents separately.
+
+For example, let's say you have an array of numbers and want to pass each number as separate arguments to a function. You can use the spread operator to achieve this.
+
+let numbers = [1, 2, 3, 4, 5];
+console.log(...numbers);
+// Output: 1 2 3 4 5
+
+let user = {
+  firstName: "John",
+  lastName: "Doe",
+};
+
+let updatedUser = {
+  ...user,
+  age: 25,
+};
+
+console.log(updatedUser);
+// Output: {firstName: 'John', lastName: 'Doe', age: 25}
+
+// The spread operator explodes the array or objects in place
+let arr = [1, 3, 5, 7, 9];
+console.log(...arr); //-> 1 3 5 7 9
+
+let user = {
+  firstName: "Vivek",
+  lastName: "Agarwal",
+};
+
+console.log({
+  ...user,
+  fullName: `${user.firstName} ${user.lastName}`,
+});
+//-> {firstName: 'Vivek', lastName: 'Agarwal', fullName: 'Vivek Agarwal'}
+
+
+Activity 1: Write a function that takes in an array of numbers and returns the sum of all the numbers using the rest operator.
+
+Activity 2: Write a function that takes in two objects and merges them together using the spread operator. The function should return the merged object.
+
+Activity 3: Write a function that takes in a string and uses the spread operator to split the string into an array of characters.
+
+
+Destructuring Arrays and Objects:-
+
+Destructuring in JavaScript is a way to extract values from arrays or objects
+ and assign them to variables in a concise and efficient manner.
+When destructuring arrays, you can use square brackets [] and assign variables in the same order as the array elements.
+
+Ex:-const arr = [1, 3, 5, 7, 9];
+
+const [first, second, ...rest] = arr;
+console.log(first, second, rest);
+
+let user = {
+  firstName: "Vivek",
+  lastName: "Agarwal",
+  age: 38,
+  posts: [
+    { title: "Post 1", comments: 10 },
+    { title: "Post 2", comments: 11 },
+  ],
+};
+
+const { firstName: first, lastName, age = 40, ...rest } = user;
+console.log(first, lastName, age, rest);
+
+// only the deepest keys become variables
+const {
+  posts: [{ title }, { title: t2 }],
+} = user;
+console.log(title, t2);
+
+// Solution:
+const user = {
+  id: 339,
+  name: "John",
+  age: 42,
+  subjects: ["HTML", "CSS", "Javascript"],
+  education: {
+    degree: {
+      name: "BCA",
+    },
+  },
+};
+
+
+Activity 1: Write a function that takes an array as input and destructures it to return the first and last elements of the array.
+
+Activity 2: Create a function that destructures an object and returns the number of posts for a given user.
+
+Activity 3: Implement a function that destructures an object and extracts the nested property education.degree.name.
+
+Optional Chaining:- is an advanced feature in JavaScript that allows you to safely access properties and call methods on an object
+ without worrying about whether the property or method exists. 
+It is particularly useful when working with nested objects or when accessing properties that may be null or undefined
+
+Ex:-const person = {
+  name: "John",
+  address: {
+    city: "New York",
+    street: "123 Main St",
+  },
+};
+
+const city = person.address.city; // New York
+const city = person.address?.city; // New York
+
+With optional chaining, if the address object or the city property doesn't exist, the result will be undefined instead of throwing an error.
+ This allows us to safely access properties without having to manually check for their existence.
+
+ Ex:-const person = {
+  name: "John",
+  address: {
+    city: "New York",
+    street: "123 Main St",
+  },
+};
+
+if(person.address){
+  let address=person.address;
+  if(address.city){
+    let city=address.city
+    console.log(city)
+  }
+}
+
+Activity 1: Write a function in JavaScript that uses optional chaining to safely access the age property of a given person object.
+ If the age property is present, return its value; otherwise, return a default value of 0.
+
+Activity 2: Create a function in JavaScript that takes an array of objects representing students. 
+Each student object has a name property and an optional grades property, which is an array of numbers. 
+The function should calculate and return the average grade for each student. If a student doesn't have any grades, their average should be 0.
+//Solution:
+function calculateAverageGrades(students) {
+  return students.map((student) => {
+    const grades = student?.grades || [];
+    const averageGrade =
+      grades.length > 0 ? grades.reduce((a, b) => a + b) / grades.length : 0;
+    return { name: student.name, averageGrade };
+  });
+}
+
+
+Activity 3: Implement a function in JavaScript that uses optional chaining to safely access the price property of a given product object. 
+If the price property is present, apply a discount of 10% and return the discounted price as a string with two decimal places.
+ If the price property is missing, return the string "Price not available".
+ //Solution:
+function applyDiscount(product) {
+  const price = product?.price;
+  return price ? (price * 0.9).toFixed(2) : "Price not available";
+}

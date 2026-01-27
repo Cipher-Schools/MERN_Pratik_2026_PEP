@@ -1,0 +1,242 @@
+Comparison Operators:-
+Equality Operator:
+The equality operator == lets you test if two values are equal or not. It accepts 2 inputs of any type and outputs true if they are equal and false if they are not equal. Example:
+1 == 1;
+1 == 2;
+"Masai" == "Masai";
+"Masai" == "masai";
+
+Output: true;
+false;
+true;
+false;
+
+Inequality Operator:-
+The inequality operator != performs the opposite function of the equality operator. It accepts 2 inputs of any type and outputs false if they are equal and true if they are not equal
+"Masai" != "Masai";
+"Masai" != "masai";
+
+Output: false;
+true;
+
+1 != "1";
+1 !== "1";
+
+Output: false;
+true;
+
+Write a function that takes two inputs and returns true if they are equal, and false otherwise.
+function isEqual(value1, value2) {
+  // your code here
+}
+
+// Test cases
+console.log(isEqual(1, 1)); // Output: true
+console.log(isEqual(1, 2)); // Output: false
+console.log(isEqual("Masai", "Masai")); // Output: true
+console.log(isEqual("Masai", "masai")); // Output: false
+
+Write a function that takes two inputs and returns true if they are not equal, and false if they are equal.
+function isNotEqual(value1, value2) {
+  // your code here
+}
+
+// Test cases
+console.log(isNotEqual("Masai", "Masai")); // Output: false
+console.log(isNotEqual("Masai", "masai")); // Output: true
+console.log(isNotEqual(1, "1")); // Output: false
+console.log(isNotEqual(1, "1")); // Output: true
+
+Exponentiation operator:
+This operator is represented by ** . This returns the value of the first operand raised to the power of the second operand. For example 
+‘2power4= 16`.
+
+Example:
+
+var a = 2 ** 4;
+var b = 3 ** 2;
+var c = 10 ** 1.5;
+Output: a = 16;
+b = 9;
+c = 31.622776601683793;
+
+
+Logical Operators:-
+These are asked a lot in interviews. Make sure that they understand it completely. It’s also used a lot in react.
+
+What will these expressions return: When we use logical OR (||) , javascript looks for the first truthy value and returns it as soon as it finds it. If it does not find any truthy value, it returns the last falsy value it finds. in other words, logical OR (||) is eager to find one truthy value, once it finds it - it happily returns. It does not even look any further. But if it does not find any - with lots of sadness it returns the last falsey value.
+let a = false;
+let b = 0;
+let c = null;
+
+let z = a || b || c;
+
+console.log(z);
+let a = false;
+let b = "Vivek";
+let c = "Rishi";
+
+let z = a || b || c;
+
+console.log(z);
+
+What will these expressions return When we use logical AND (&&), Javascript either returns the first falsey value it finds, else if all the operands are truthy, it returns the last truthy value. in other words, logical AND (&&) is eager to find one falsey value, once it finds it - it happily returns. It does not even look any further. But if it does not find any - with lots of sadness it returns the last truthy value.
+let defaultUser = false;
+let user = "Akash";
+console.log(defaultUser || user);
+
+let a = "Prachi";
+let b = "Vivek";
+let c = "Rishi";
+
+let z = a && b && c;
+
+console.log(z);
+
+Ex:-
+let res = (null && "A") || ("" || (5 && "Hi"));
+
+let res = !("" || 0) && (NaN || "JS");
+
+let res = (false || (0 && "X")) || (("A" && null) || 10);
+
+let res = (undefined || ("" && 5)) || (NaN && "OK") || "Final";
+
+let res = (("Hi" && 0) || (false && "No")) && ("Yes" || null);
+
+
+Coding Challenges:
+Challenge 1: Write a function named isTruthy that takes in three boolean arguments a, b, and c. The function should return true if at least one of the arguments is truthy, and false otherwise.
+
+Challenge 2: Write a function named findLargestNumber that takes in three numbers a, b, and c. The function should return the largest number among the three.
+
+Challenge 3: Write a function named calculateAverage that takes in an array of numbers as an argument. The function should calculate and return the average of all the numbers in the array.
+
+Type coercion (Implicit)
+What is Type Coercion in JavaScript?
+Type coercion in JavaScript is the automatic or implicit conversion of values from one data type to another. This conversion can occur in various contexts, such as during arithmetic operations, logical operations, or when working with strings and booleans. Coercion makes JavaScript a very flexible language, but it can also lead to unexpected results if not properly understood.
+
+Where Does Coercion Occur in JavaScript?
+Coercion can happen in several contexts within JavaScript:
+
+Arithmetic Operators: When using operators like +, **, **, /.
+Logical Operators: With operators like || (OR), && (AND), and ! (NOT).
+Comparison Operators: Such as == (loose equality), != (loose inequality).
+String Concatenation: Using the + operator with strings and non-string values.
+Unary Operators: Like the plus (+) to convert strings to numbers.
+Conditional Statements: Values are coerced to booleans in if, while, and other control structures.
+Template Literals: Embedded expressions are coerced to strings.
+
+Type conversion(Explicit)
+What is Explicit Type Conversion?
+Explicit type conversion, also known as typecasting, is the manual conversion of a value from one data type to another. In JavaScript, this is done using built-in functions and methods, giving you full control over the conversion process.
+
+Explicit Conversion Functions in JavaScript
+JavaScript provides several functions for converting to different data types:
+
+Number(): Converts to number.
+Boolean(): Converts to boolean.
+parseInt(): Parses a string and returns an integer.
+parseFloat(): Parses a string and returns a floating-point number.
+String(): Converts to string.
+
+ex:-Number("123")	123
+Converting Strings and Booleans to Numbers
+Use Number() for a direct conversion or parseInt() and parseFloat() for strings that represent integer and floating-point numbers, respectively.
+
+Data Type	Example	Result	How It Works
+String	Number("123")	123	Converts string to number
+String	parseInt("123px")	123	Parses integer from string
+String	parseFloat("3.14em")	3.14	Parses float from string
+Boolean	Number(false)	0	false becomes 0, true becomes 1
+Special Cases
+Some special cases include converting non-numeric strings or undefined values.
+
+Example	Result	How It Works
+Number("abc")	NaN	Non-numeric string converts to "Not a Number"
+Number(undefined)	NaN	undefined converts to NaN
+Boolean Conversion
+Converting Various Data Types to Booleans
+To convert values to booleans, use the Boolean() function. The rules are straightforward: 0, NaN, null, undefined, and empty strings ("") convert to false, everything else converts to true.
+
+Data Type	Example	Result	How It Works
+Number	Boolean(0)	false	0, NaN are falsy
+String	Boolean("hello")	true	Non-empty strings are truthy
+Object	Boolean({})	true	Objects are always truthy
+Undefined	Boolean(undefined)	false	undefined is falsy
+
+Imp:-
+let ans={}
+console.log(String(ans))
+
+ans is an empty object {}.
+
+String(ans) tries to convert the object into a string.
+
+JavaScript internally calls:
+
+Note:- This is called explicit conversion
+
+let x=10
+let y="2"
+console.log(x-y)
+
+//true+false
+//10*"abc"
+
+Tips for Effective Type Identification
+Use typeof for primitive types: It's great for identifying numbers, strings, booleans, and functions.
+Use Array.isArray for arrays: Since typeof will return "object" for arrays.
+Use instanceof for custom objects: It's useful for checking an object against a prototype or class.
+Use Object.prototype.toString for built-in objects: When you need to differentiate between various object types like Date, RegExp, etc.
+The Edge Cases in Type Identification
+Let's delve into some common and not-so-common edge cases you might encounter:
+
+Arrays: Despite being a specialized kind of object, JavaScript's typeof will simply return "object" for an array.
+Objects: The typeof will return "object" for any object literal, but this doesn't help to distinguish between different kinds of objects.
+Null: One of the oldest JavaScript gotchas is that typeof null returns "object", which is misleading.
+Reliable Type Identification Techniques
+Now, let's explore the methods that can help us correctly identify these types.
+
+Arrays
+To check if a value is an array, use Array.isArray():
+
+console.log(Array.isArray([])); // true
+console.log(Array.isArray({})); // false
+Why does this matter? Because operations on arrays, like push or pop, are not applicable to other objects and trying to use them will result in a runtime error.
+
+Objects
+For objects, typeof is limited. To get more information about an object, Object.prototype.toString.call() comes to the rescue:
+
+console.log(Object.prototype.toString.call({})); // "[object Object]"
+console.log(Object.prototype.toString.call(new Date())); // "[object Date]"
+console.log(Object.prototype.toString.call(/regex/)); // "[object RegExp]"
+This method allows you to distinguish between different object types in JavaScript, such as Dates, Regular Expressions, and many others.
+
+Null
+null is a unique case in JavaScript. It represents the absence of any object value, and due to a historical bug, typeof null returns "object". The best way to check for null is a direct comparison:
+
+let value = null;
+console.log(value === null); // true
+This is straightforward and avoids the confusion that arises from the typeof quirk.
+
+Functions
+Although functions in JavaScript are first-class objects, typeof returns "function", which is helpful:
+
+console.log(typeof function () {}); // "function"
+This is important when determining if a variable can be called as a function.
+
+Edge Case Galore: The document.all Anomaly
+document.all is an outdated and non-standard way to access DOM elements and is a peculiar edge case. In modern JavaScript, document.all is defined as "undefined":
+
+console.log(typeof document.all); // "undefined"
+console.log(document.all === undefined); // true
+However, it's not really undefined. This is an intentional quirk in web standards to discourage the use of document.all.
+
+How to Handle Edge Cases
+Understanding the edge cases in type identification is one thing, but handling them gracefully in your code is another. Here's some advice:
+
+Use Array.isArray() when dealing with array operations.
+Utilize Object.prototype.toString.call() when you need to differentiate between different types of objects.
+Directly compare with null to check for that value.
+Remember that while typeof is helpful, it's not infallible. Double-check when dealing with critical logic.

@@ -1,0 +1,202 @@
+Array Methods:-Arrays in programming are like containers that hold multiple values. 
+They have built-in methods that allow you to perform various operations on the elements stored in the array.
+ Here are some commonly used array methods along with examples and use cases:
+
+ . concat()
+The concat() method combines two or more arrays and returns a new array. It's like merging multiple lists into one.
+
+Example:
+
+let fruits = ['apple', 'banana'];
+let moreFruits = ['orange', 'grape'];
+let allFruits = fruits.concat(moreFruits);
+console.log(allFruits); // Output: ['apple', 'banana', 'orange', 'grape']
+
+join()
+The join() method joins all elements of an array into a string, using a specified separator. 
+It's like creating a comma-separated list from a list of items.
+
+Example:
+
+let fruits = ['apple', 'banana', 'orange'];
+let fruitString = fruits.join(', ');
+console.log(fruitString); // Output: 'apple, banana, orange'
+
+reverse()
+The reverse() method reverses the order of the elements in an array. It's like flipping a deck of cards.
+
+Example:
+
+let fruits = ['apple', 'banana', 'orange'];
+fruits.reverse();
+console.log(fruits); // Output: ['orange', 'banana', 'apple']
+
+ splice()
+The splice() method changes the contents of an array by removing, replacing, or adding elements. It takes three parameters: the start index, the number of elements to remove, and optional elements to add. It's like modifying a specific portion of an array.
+
+Example:
+
+let fruits = ['apple', 'banana', 'orange', 'grape'];
+fruits.splice(1, 2, 'kiwi', 'mango');
+console.log(fruits); // Output: ['apple', 'kiwi', 'mango', 'grape']
+
+Higher Order Functions:-
+
+Array methods in JavaScript, such as filter(), map(), sort(), and reduce(), play a pivotal role in modern programming paradigms, particularly in functional programming.
+ These higher-order functions empower developers to succinctly manipulate arrays, applying custom logic to filter, transform, organize, or reduce data efficiently.
+
+
+
+forEach() runs a function on each element of an array.
+It is used for performing actions and does not return a new array.
+Note:-forEach() always returns undefined, no matter what you return inside its callback.
+
+Print each element of an array using forEach().
+
+Count how many even numbers are in an array using forEach().
+
+From an array of objects, print each user’s name and age using forEach().
+
+
+How does the array.map works
+// How does Array.prototype.map works?
+// Its an array method
+// It returns a new array
+// the length of the output array is same as the length of the input array
+// its takes in a callback function
+// the callback function is called for each item in the input array
+// in every iteration we have access to the current item 
+// what ever you return from the cb function, becomes the item of the output array
+
+Ex:-
+Given an array of numbers, use map() to return a new array with each number doubled.
+
+Convert an array of strings to uppercase using map().
+
+Add 10 to each element of an array using map().
+
+Convert an array of prices in dollars to rupees (1$ = 83₹) using map().
+
+let arr = ["hello", "world", "js"];
+
+let result = arr.map(str => str.split("").reverse().join(""));
+
+console.log(result);
+// ["olleh", "dlrow", "sj"]
+
+
+Given ["1","2","3"], convert it into [1,2,3] using map().
+Given an array of objects {name, age}, return only the names using map().
+Given an array of numbers, return "Even" or "Odd" for each number using map().
+
+Convert ["hello world", "good day"] → ["HelloWorld", "GoodDay"]
+let arr = ["hello world", "good day", "js map"];
+
+let result = arr.map(str => str.replaceAll(" ", ""));
+
+console.log(result);
+// ["helloworld", "goodday", "jsmap"]
+
+Remove spaces from each string using map().
+
+Capitalize the first letter of each word
+let words = ["apple", "banana", "mango"];
+
+let result = words.map(word =>
+  word.charAt(0).toUpperCase() + word.slice(1)
+);
+
+console.log(result);
+// ["Apple", "Banana", "Mango"]
+
+
+ How does the array.filter method works
+// How array.filter works
+// Its an array methos
+// It returns a new array
+// the length of the the new array may be different from the original array
+// it takes in a callback function 
+// the callback function gets the current item in every iteration
+// the callback function is invoked originalarray.length number of times
+// if the cb function returns a truthy value the current item is added to the output array
+// the the cb function returns a falsey value the current item is not added to the output array
+
+
+Ex:-Filter all even numbers from an array.
+
+Remove empty strings from an array.
+
+Filter users whose age is 18 or above.
+let users = [
+  { name: "Aman", age: 16 },
+  { name: "Riya", age: 21 },
+  { name: "Kunal", age: 17 },
+  { name: "Neha", age: 25 }
+];
+
+let result = users.filter(user => user.age >= 18);
+
+console.log(result);
+
+
+Filter words that start with a capital letter.
+let words = ["Hello", "world", "JavaScript", "map", "Code"];
+
+let result = words.filter(word => word[0] === word[0].toUpperCase());
+
+console.log(result);
+// ["Hello", "JavaScript", "Code"]
+
+
+Reduce method:-
+The reduce() method is used to combine all elements of an array into a single value (like sum, product, object, array, etc.).
+
+It works by applying a function repeatedly and carrying forward a result called the accumulator.
+
+array.reduce((acc, curr) => {
+  return acc + curr;   // update and return acc
+}, startValue);
+
+let nums = [1, 2, 3];
+
+let sum = nums.reduce((acc, curr) => acc + curr, 0);
+
+console.log(sum); // 6
+
+Find the sum of all numbers in an array using reduce().
+
+Find the product of all numbers in an array using reduce().
+
+Find the largest number in an array using reduce().
+
+Count how many times each word appears in an array using reduce().
+let arr = ["apple", "banana", "apple", "orange", "banana", "apple"];
+
+let result = arr.reduce((acc, curr) => {
+  acc[curr] = (acc[curr] || 0) + 1;
+  return acc;
+}, {});
+
+console.log(result);
+// { apple: 3, banana: 2, orange: 1 }
+
+
+Group numbers into even and odd using reduce().
+let nums = [1, 2, 3, 4, 5];
+
+let result = nums.reduce((acc, curr) => {
+  if (curr % 2 === 0) {
+    acc.even.push(curr);
+  } else {
+    acc.odd.push(curr);
+  }
+  return acc;
+}, { even: [], odd: [] });
+
+console.log(result);
+// { even: [2, 4], odd: [1, 3, 5] }
+
+
+
+
+
