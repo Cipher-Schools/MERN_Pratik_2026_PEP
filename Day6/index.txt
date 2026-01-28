@@ -1,0 +1,66 @@
+Introduction to DOM :
+Introduction
+The Document Object Model (DOM) is a programming interface for web documents.
+ It represents the structure of HTML and XML documents as a tree where each node represents a part of the document.
+Understanding DOM is crucial for web development as it allows dynamic manipulation of web pages,
+ enabling interactive user experiences and dynamic content updates without reloading the entire page.
+
+Detailed Explanation:-
+
+What is the concept?
+The DOM is a cross-platform and language-independent interface that treats an HTML or XML document as a tree structure consisting of nodes. 
+Each node represents an element, attribute, or piece of text in the document.
+Why is it useful?
+DOM enables developers to access, modify, and manipulate the content, structure, and style of web documents dynamically using programming languages like JavaScript. 
+This capability is essential for creating interactive web applications and enhancing user experience.
+Real-world examples or analogies
+
+Think of the DOM as a blueprint of a house.
+ Each element (node) in the DOM tree represents a room (HTML element),
+  and developers can rearrange or modify the rooms (elements) as needed without rebuilding the entire house (web page).
+
+ Document node:-Refers to the doc type
+ Element node:-It refers to the html tags
+ Text Node:-Represents the text inside the tag
+ Attribute node:-It represnts the attributes given to any tag.
+ Comment node:-Refers to the comments inside the html
+
+
+Accessing Dom Elements:-
+// Returns a reference to the element by its ID.
+document.getElementById("someid");
+
+// Returns an array-like object of all child elements which have all of the given class names.
+document.getElementsByClassName("someclass");
+
+// Returns an HTMLCollection of elements with the given tag name.
+document.getElementsByTagName("LI");
+
+// Returns the first element within the document that matches the specified group of selectors.
+document.querySelector(".someclass");
+
+// Returns a list of the elements within the document (using depth-first pre-order traversal of the document's nodes)
+// that match the specified group of selectors.
+document.querySelectorAll("div.note, div.alert");
+
+//when using query selector , we have to rely same as of old way as style in html.
+//It will give the first matching element
+
+Note:- On html collection you can not run any higher order function on it 
+       on a node list you can run a HOF and i.e only forEach
+       HTML collection remains live and not node list , when ever dom updates  HTML collection also updates  not node list
+
+
+  let div = document.getElementById("parent");
+  console.log(div.innerText);
+
+  let p = document.getElementsByClassName("pTag");
+  console.log(p);
+  let tag = document.getElementsByTagName("p");
+  console.log(tag);
+
+  let ans = document.querySelector(".pTag");
+  console.log(ans);
+
+  let res = document.querySelectorAll(".pTag");
+  console.log(res);
