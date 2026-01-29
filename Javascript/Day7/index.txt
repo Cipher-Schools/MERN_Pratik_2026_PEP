@@ -1,0 +1,199 @@
+Introduction to DOM :
+Introduction
+The Document Object Model (DOM) is a programming interface for web documents.
+ It represents the structure of HTML and XML documents as a tree where each node represents a part of the document.
+Understanding DOM is crucial for web development as it allows dynamic manipulation of web pages,
+ enabling interactive user experiences and dynamic content updates without reloading the entire page.
+
+Detailed Explanation:-
+
+What is the concept?
+The DOM is a cross-platform and language-independent interface that treats an HTML or XML document as a tree structure consisting of nodes. 
+Each node represents an element, attribute, or piece of text in the document.
+Why is it useful?
+DOM enables developers to access, modify, and manipulate the content, structure, and style of web documents dynamically using programming languages like JavaScript. 
+This capability is essential for creating interactive web applications and enhancing user experience.
+Real-world examples or analogies
+
+Think of the DOM as a blueprint of a house.
+ Each element (node) in the DOM tree represents a room (HTML element),
+  and developers can rearrange or modify the rooms (elements) as needed without rebuilding the entire house (web page).
+
+ Document node:-Refers to the doc type
+ Element node:-It refers to the html tags
+ Text Node:-Represents the text inside the tag
+ Attribute node:-It represnts the attributes given to any tag.
+ Comment node:-Refers to the comments inside the html
+
+
+Accessing Dom Elements:-
+// Returns a reference to the element by its ID.
+document.getElementById("someid");
+
+// Returns an array-like object of all child elements which have all of the given class names.
+document.getElementsByClassName("someclass");
+
+// Returns an HTMLCollection of elements with the given tag name.
+document.getElementsByTagName("LI");
+
+// Returns the first element within the document that matches the specified group of selectors.
+document.querySelector(".someclass");
+
+// Returns a list of the elements within the document (using depth-first pre-order traversal of the document's nodes)
+// that match the specified group of selectors.
+document.querySelectorAll("div.note, div.alert");
+
+//when using query selector , we have to rely same as of old way as style in html.
+//It will give the first matching element
+
+//usinh queryselector all we can access all elements  and perform actions on them by selecting any one
+let items = document.querySelectorAll("p");
+
+let second = items[1]; // index starts from 0
+
+console.log(second);
+
+
+ Question to discuss:-
+ let allItems = document.querySelectorAll(".item");
+  console.log(allItems); // NodeList(8) [div.item, div.item, div.item, div.item, div.item, div.item, div.item, div.item]
+
+  allItems.forEach(function (element) {
+    console.log(element.getAttribute("data-id"));
+  });
+
+  let allItemsArray = Array.from(allItems);
+console.log(allItemsArray);
+//-> (8) [div.item, div.item, div.item, div.item, div.item, div.item, div.item, div.item]
+
+let allItemsArray2 = [...allItems];
+console.log(allItemsArray2);
+//-> (8) [div.item, div.item, div.item, div.item, div.item, div.item, div.item, div.item]
+
+
+Note:- On html collection you can not run any higher order function on it 
+       on a node list you can run a HOF and i.e only forEach
+       HTML collection remains live and not node list , when ever dom updates  HTML collection also updates  not node list
+
+
+  let div = document.getElementById("parent");
+  console.log(div.innerText);
+
+  let p = document.getElementsByClassName("pTag");
+  console.log(p);
+  let tag = document.getElementsByTagName("p");
+  console.log(tag);
+
+  let ans = document.querySelector(".pTag");
+  console.log(ans);
+
+  let res = document.querySelectorAll(".pTag");
+  console.log(res);
+
+  Note:- Use combinators whenever required instead of using id's  for multiple  elements.
+
+   // let val = document.getElementById("myId");
+  // val.innerText = "I am a new p Tag";
+  // val.style.color = "green";
+
+  // let id = document.getElementById("Parent");
+  // id.innerHTML = "<p>I am a Child p tag of Parent div</p>";
+
+
+  // To ceate an element in dom we use createElement methods
+
+   let div = document.createElement("div");
+  div.innerText = "I am a div tag";
+
+  let pTag = document.createElement("p");
+  pTag.innerText = "I am a p tag";
+  document.body.appendChild(div, pTag);
+
+  
+  Note:-Append can acces multiple node while appendChild can access only one node. Append can access  text node but not appendChild.
+
+Task:- use image tag to see in dom, and manipulate any image on the website.
+  
+
+
+
+// insertBefore can be used to insert  texts before any child 
+  let divTag = document.createElement("div");
+  divTag.id = "Parent";
+
+  let firstChild = document.createElement("p");
+  firstChild.innerText = "This is p tag";
+
+  let SecondChild = document.createElement("h1");
+  SecondChild.innerText = "This is h1 tag";
+
+  divTag.appendChild(firstChild);
+  divTag.insertBefore(SecondChild, firstChild);
+
+  document.body.appendChild(divTag);
+
+  //we can also delete any element using dom using remove method
+
+
+  //Earlier we were appending everything to the body 
+  //In the same way we can create a Root container and  append multiple child to it.
+
+  let container = document.getElementById("container");
+
+  let div = document.createElement("div");
+  div.style.height = "300px";
+  div.style.width = "300px";
+  div.style.border = "2px solid black";
+
+  let img = document.createElement("img");
+  img.src =
+    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR_Xgch04mbVydUS_UPbeagovZez-FUwjhDIyGL7kUDhzfp-Ji1oWFxdYfbYlSyeAH4XzRMBXdCncvfsRmmSz4Ba8hhSq6mQio0nvrWAw&s=10";
+  img.alt = "image";
+  img.style.maxWidth = "100%";
+
+  let p = document.createElement("p");
+  p.innerText = "This is a p tag";
+  p.style.textAlign = "center";
+
+  div.append(img, p);
+
+  container.appendChild(div);
+
+  document.body.appendChild(container);
+
+
+  //Problems:-
+  Select an element with id="box" and change its text to "Hello World".
+
+  Select all <p> tags on a page and change their color to blue.
+
+  Create a new <h2> element with text "Welcome" and add it inside a <div>.
+
+  Select the first element with class "card" and give it a border.  
+
+  Create an unordered list (ul) with 5 list items (li) numbered from 1 to 5.
+  
+
+Create a profile box with an image, name, and bio using only JavaScript.
+
+Generate 4 square boxes (100×100) inside a container using a loop.
+
+Create a table with 3 rows and 3 columns using JavaScript only.
+
+Dynamically create 3 images and place them inside a container.
+
+Create a message section with a heading, paragraph, and button.
+
+Select a paragraph from the page and remove it using JavaScript.
+
+Create a navigation bar with 4 links using createElement.
+
+Build a simple product card showing name, price, and description dynamically.
+
+Imp:-create a simple calculator using prompt() method using js and html 
+
+
+
+
+
+

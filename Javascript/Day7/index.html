@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <!-- <div class="item" data-id="1">Item 1</div>
+    <div class="item" data-id="2">Item 2</div>
+    <div class="item" data-id="3">Item 3</div>
+    <div class="item" data-id="4">Item 4</div>
+    <div class="item" data-id="5">Item 4</div>
+    <div class="item" data-id="6">Item 6</div>
+    <div class="item" data-id="7">Item 7</div>
+    <div class="item" data-id="8">Item 8</div> -->
+  </body>
+</html>
+<script>
+  let allItems = document.querySelectorAll(".item");
+  console.log(allItems); // NodeList(8) [div.item, div.item, div.item, div.item, div.item, div.item, div.item, div.item]
+
+  allItems.forEach(function (element) {
+    console.log(element.getAttribute("data-id"));
+  });
+
+  let allItemsArray = Array.from(allItems);
+console.log(allItemsArray);
+//-> (8) [div.item, div.item, div.item, div.item, div.item, div.item, div.item, div.item]
+
+let allItemsArray2 = [...allItems];
+console.log(allItemsArray2);
+//-> (8) [div.item, div.item, div.item, div.item, div.item, div.item, div.item, div.item]
+
+</script>
+
+<!-- // getElementById
+//getElementsByClassName
+//getElementsByTagName
+//querySelector
+//querySelectorAll -->
