@@ -1,0 +1,222 @@
+JavaScript Execution Context – Notes
+
+Definition:
+Execution Context is the environment in which JavaScript code is created and executed.
+It is a container where JavaScript manages memory, variables, functions, and runs the code.
+
+Types of Execution Context:
+1. Global Execution Context
+2. Function Execution Context
+3. Eval Execution Context (rarely used)
+
+Main focus: Global and Function Execution Context
+
+Phases of Execution Context:
+Each execution context has two phases.
+
+1. Memory Creation Phase (Hoisting Phase):
+- Memory is allocated to variables and functions
+- this keyword is set
+- Code is not executed
+
+var   → undefined
+let   → TDZ (Temporal Dead Zone)
+const → TDZ (Temporal Dead Zone)
+function → complete function stored
+
+2. Execution Phase:
+- Code is executed line by line
+- Values are assigned to variables
+- Functions are executed
+
+Working Flow:
+
+JS File Runs
+↓
+Global Execution Context Created
+↓
+Memory Creation Phase
+↓
+Execution Phase
+
+For every function call, a new execution context is created.
+
+Example 1 (var):
+
+console.log(a);
+var a = 10;
+
+Memory Phase:
+a → undefined
+
+Execution Phase:
+console.log(a) → undefined
+a = 10
+
+Example 2 (Function Hoisting):
+
+hello();
+
+function hello() {
+  console.log("Hi");
+}
+
+Memory Phase:
+hello → function
+
+Execution Phase:
+hello() → Hi
+
+Example 3 (let and TDZ):
+
+console.log(x);
+let x = 5;
+
+Memory Phase:
+x → TDZ
+
+Execution Phase:
+ReferenceError (Cannot access before initialization)
+
+Important Keywords:
+Execution Environment
+Hoisting
+Temporal Dead Zone
+Memory Allocation
+Call Stack
+Line-by-Line Execution
+
+Summary:
+Execution Context is created when JavaScript runs.
+It has two phases: Memory and Execution.
+var is hoisted with undefined.
+let and const are in TDZ.
+Functions are fully hoisted.
+
+-----------------------------------------------------------------------------------
+JavaScript Execution Context – Practice Questions
+Instructions:
+For each question:
+1. Write Memory Creation Phase
+2. Write Execution Phase
+3. Write Output / Error
+
+--------------------------------------------------
+
+SIMPLE LEVEL
+Q1.
+
+console.log(a);
+var a = 10;
+
+console.log(a);
+
+--------------------------------------------------
+
+Q2.
+
+sayHi();
+
+function sayHi() {
+  console.log("Hello");
+}
+
+--------------------------------------------------
+
+Q3.
+
+var x = 5;
+function test() {
+  console.log(x);
+}
+
+test();
+
+--------------------------------------------------
+
+Q4.
+
+console.log(num);
+
+var num;
+
+num = 20;
+
+console.log(num);
+
+--------------------------------------------------
+
+MEDIUM LEVEL
+
+Q5.
+
+console.log(a);
+var a = 5;
+
+hello();
+
+function hello() {
+  console.log("Hi");
+}
+
+--------------------------------------------------
+
+Q6.
+
+console.log(x);
+
+let x = 10;
+
+console.log(x);
+
+--------------------------------------------------
+
+Q7.
+
+var a = 10;
+
+function demo() {
+  console.log(a);
+  var a = 20;
+  console.log(a);
+}
+
+demo();
+
+--------------------------------------------------
+
+Q8.
+
+hello();
+
+var hello = function() {
+  console.log("Hello");
+};
+
+--------------------------------------------------
+
+Q9.
+
+let x = 5;
+
+function show() {
+  console.log(x);
+  let x = 10;
+}
+
+show();
+
+--------------------------------------------------
+
+Q10.
+
+console.log(a + b);
+
+var a = 10;
+
+let b = 20;
+
+console.log(a + b);
+
+--------------------------------------------------
+

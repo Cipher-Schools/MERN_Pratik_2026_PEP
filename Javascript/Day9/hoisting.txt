@@ -1,0 +1,137 @@
+Hoisting in JavaScript:-
+
+//Hoisting is JavaScript’s behavior of moving variable and function declarations to the top of their scope before execution.
+Imp:- only Declaration goes up, value stays down
+
+//How Hoisting Works:-
+Before code runs, JS does:
+Creates memory
+Stores variable/function names
+Then executes line by line
+This phase is called Memory Creation Phase.
+
+//Hoisting with var:-
+var is hoisted and initialized with undefined
+Ex:-console.log(a);
+var a = 10;
+
+Ex:-var x = 5;
+
+function test() {
+  console.log(x);
+  var x = 20;
+}
+test();
+
+Note:-Local x is hoisted inside function.
+
+//Hoisting with let and const:-
+let and const are hoisted
+BUT not initialized.
+They stay in Temporal Dead Zone (TDZ).
+
+//Temporal Dead Zone (TDZ):-
+TDZ is the time between hoisting and initialization of let/const variables where they cannot be accessed
+Ex:-{
+  console.log(x); // TDZ
+  let x = 5;
+}
+
+//Hoisting with Functions:-
+Function declarations are fully hoisted
+Ex:-hello();
+
+function hello() {
+  console.log("Hello");
+}
+
+Ex:-sum(2,3);
+
+function sum(a,b) {
+  return a+b;
+}
+
+//Function Expression (Not Fully Hoisted)
+Function expressions follow variable hoisting.
+
+Ex:-test();
+
+var test = function() {
+  console.log("Hi");
+};
+
+Ex:-show();
+
+let show = function() {
+  console.log("Hello");
+};
+
+//Arrow Functions & Hoisting:-
+Arrow functions behave like function expressions.
+Ex:-demo();
+
+const demo = () => {
+  console.log("Hey");
+};
+
+Note📌:- Comparison Table (Easy Revision)
+
+| Type                 | Hoisted    | Initialized | Can Use Before?    |
+| -------------------- | ---------- | ----------- | ------------------ |
+| var                  | ✅ Yes      | undefined   | ⚠️ Yes (undefined) |
+| let                  | ✅ Yes      | ❌ No        | ❌ No (TDZ)         |
+| const                | ✅ Yes      | ❌ No        | ❌ No (TDZ)         |
+| Function Declaration | ✅ Yes      | ✅ Yes       | ✅ Yes              |
+| Function Expression  | ⚠️ Partial | ❌           | ❌                  |
+
+
+Activity:-
+
+Ex:-var num = 100;
+
+function show() {
+  console.log(num);
+  var num = 50;
+}
+show();
+
+Ex:-demo();
+const demo = () => {
+  console.log("Arrow");
+};
+
+
+Ex:-var x = 5;
+
+function test() {
+  console.log(x);
+  let x = 10;
+}
+test();
+
+Ex:-var show = function() {
+  console.log("First");
+};
+function show() {
+  console.log("Second");
+}
+show();
+
+Ex:-
+hello();
+var hello = function() {
+  console.log("Hi");
+};
+function hello() {
+  console.log("Hello");
+}
+------------------------
+Ex:-function demo() {
+  console.log(x);
+
+  if (true) {
+    var x = 10;
+  }
+}
+demo();
+------------------------

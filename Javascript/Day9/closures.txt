@@ -1,0 +1,100 @@
+Closures in JavaScript:-
+//A closure is a function that remembers and can access variables from its outer function even after the outer function has finished execution.
+//Inner function + Outer variables = Closure
+
+Q.Why Do We Need Closures?
+
+Closures help to:-
+Remember data
+Create private variables
+Control access
+Use in callbacks, timers, modules
+------------------------------------
+Note:-
+Data is not destroyed
+Used for private data
+Works because of scope chain
+------------------------------------
+Ex:-function outer() {
+  let x = 10;
+  function inner() {
+    console.log(x);
+  }
+  return inner;
+}
+let fn = outer();
+fn();
+
+Note:-
+How Closure Works (Concept)
+When outer() runs:
+x is created
+inner() uses x
+JS saves x in memory
+Even after outer() ends → x is not deleted.
+-----------------------------------------------------
+Ex:-
+function counter() {
+  let count = 0;
+  return function() {
+    count++;
+    console.log(count);
+  };
+}
+let c1 = counter();
+c1(); // 1
+c1(); // 2
+c1(); // 3
+
+Activity:-
+Ex:-function createCounter() {
+  let count = 0;
+  return function () {
+    count += 2;
+    console.log(count);
+  };
+}
+let c = createCounter();
+c();
+c();
+c();
+
+---------------
+Ex:-for (var i = 1; i <= 3; i++) {
+  (function (x) {
+    setTimeout(function () {
+      console.log(x);
+    }, x * 1000);
+  })(i);
+}
+
+
+Imp:-Counter with Increment & Decrement
+function counterApp() {
+  let count = 0;
+  return {
+    inc: function () {
+      count++;
+      return count;
+    },
+    dec: function () {
+      count--;
+      return count;
+    },
+    value: function () {
+      return count;
+    }
+  };
+}
+let c = counterApp();
+console.log(c.inc());   // 1
+console.log(c.inc());   // 2
+console.log(c.dec());   // 1
+console.log(c.value()); // 1
+------------------------------------------------
+
+
+
+
+
+

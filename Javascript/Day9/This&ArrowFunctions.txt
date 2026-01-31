@@ -1,0 +1,334 @@
+# JavaScript `this` & Arrow Functions
+## 1. Introduction
+
+In JavaScript, `this` is a keyword that refers to the object related to the current function call.
+Its value depends on **how a function is called**, not where it is written.
+Arrow functions (introduced in ES6) work differently. They do not have their own `this`. 
+Instead, they use `this` from their surrounding scope.
+Understanding `this` and arrow functions helps in writing clear and error-free code.
+
+---
+## 2. What is Execution Context?
+
+An execution context is the environment in which JavaScript code runs. It decides:
+* The value of `this`
+* Which variables can be used
+* How the code is executed
+
+Main types of execution context:
+
+1. Global Execution Context
+2. Function Execution Context
+3. Object Method Context
+
+The value of `this` is decided using these contexts.
+---
+
+## 3. `this` in Global Context
+
+### In Browser
+
+In the browser, when `this` is used outside any function:
+
+```js
+console.log(this);
+```
+
+It refers to the `window` object.
+
+So:
+
+```js
+this === window // true
+```
+
+### In Strict Mode
+
+```js
+"use strict";
+console.log(this);
+```
+
+In strict mode, `this` is `undefined` in global context.
+
+### In Node.js
+
+In Node.js, `this` in global scope refers to `module.exports`.
+---
+
+## 4. `this` Inside a Regular Function
+
+When a normal function is called directly:
+
+```js
+function show() {
+  console.log(this);
+}
+show();
+```
+
+### Non-Strict Mode
+
+`this` refers to `window` (in browser).
+
+### Strict Mode
+
+`this` becomes `undefined`.
+
+```js
+"use strict";
+function show() {
+  console.log(this);
+} 
+show(); // undefined
+```
+So, in regular functions, `this` depends on how the function is called.
+---
+
+## 5. `this` Inside an Object Method
+
+When a function is called as a method of an object, `this` refers to that object.
+
+```js
+const user = {
+  name: "Pratik",
+  greet() {
+    console.log(this.name);
+  }
+};
+
+user.greet(); // Pratik
+```
+Here:
+
+* `greet()` is called using `user`
+* So `this` refers to `user`
+
+---
+
+## 6. `this` in Nested Functions
+
+Problem example:
+
+```js-------------->imp
+const obj = {
+  name: "Alex",
+  show() {
+    function inner() {
+      console.log(this.name);
+    }
+    inner();
+  }
+};
+
+obj.show();
+```
+Output: `undefined`
+Reason:
+
+* `inner()` is a normal function
+* It is not called by `obj`
+* So `this` refers to `window` or `undefined`
+
+This is a common mistake.
+---
+
+## 7. Arrow Functions and `this`
+
+Arrow functions do **not** have their own `this`.
+They take `this` from their surrounding scope.
+This is called **lexical `this`**.
+
+Example:
+```js
+const obj = {
+  name: "Alex",
+  show() {
+    const inner = () => {
+      console.log(this.name);
+    };
+    inner();
+  }
+};
+obj.show(); // Alex
+```
+Here:
+
+* `inner` is an arrow function
+* It takes `this` from `show()`
+* `show()` belongs to `obj`
+* So `this` refers to `obj`
+---
+## 8. `this` in Arrow Functions
+Important Rule:
+> Arrow functions never create their own `this`.
+Example:
+```js
+const demo = () => {
+  console.log(this);
+};
+demo();
+```
+Here, `this` refers to global scope (or undefined in strict mode).
+Because arrow functions look outside for `this`.
+---
+## 9. Arrow Functions as Object Methods (Important)
+
+Using arrow functions as object methods is usually wrong.
+```js
+const obj = {
+  name: "John",
+  greet: () => {
+    console.log(this.name);
+  }
+};
+obj.greet(); // undefined
+```
+Reason:
+* Arrow function does not bind `this` to `obj`
+* It takes `this` from global scope
+
+So `this.name` becomes undefined.
+Best Practice:
+Use normal functions for object methods.
+---
+## 10. `this` in Event Handlers
+### Regular Function
+```js
+button.addEventListener("click", function() {
+  console.log(this);
+});
+```
+Here:
+`this` refers to the button element.
+### Arrow Function
+```js
+button.addEventListener("click", () => {
+  console.log(this);
+});
+```
+Here:
+`this` refers to outer scope (window).
+So, arrow functions are usually not used when `this` is needed in events.
+---
+
+## 11. Explicit Binding: call(), apply(), bind()
+
+JavaScript provides methods to control `this`.
+### call()
+
+```js
+function greet(city) {
+  console.log(this.name, city);
+}
+greet.call({ name: "Rahul" }, "Delhi");
+```
+### apply()
+Same as call, but arguments are in array.
+```js
+greet.apply({ name: "Rahul" }, ["Delhi"]);
+```
+
+### bind()
+Returns a new function.
+
+```js
+const newFn = greet.bind({ name: "Rahul" });
+newFn("Delhi");
+---------------------------------------------
+Ex:-
+function introduce(city, country) {
+  console.log(
+    this.name + " " + this.age + " " + city + " " + country
+  );
+}
+
+let p1 = { name: "Amit", age: 22 };
+
+// call
+introduce.call(p1, "Delhi", "India");
+
+// apply
+introduce.apply(p1, ["Mumbai", "India"]);
+
+// bind
+let fn = introduce.bind(p1, "Pune", "India");
+fn();
+
+//
+call  → normal arguments
+apply → array arguments
+bind  → backup function
+
+```
+### Important Note
+
+Arrow functions ignore call, apply, bind.
+---
+
+## 12. Comparison: Regular vs Arrow Functions
+
+| Feature              | Regular Function | Arrow Function |
+| -------------------- | ---------------- | -------------- |
+| Own this             | Yes              | No             |
+| Lexical this         | No               | Yes            |
+| Constructor          | Yes              | No             |
+| arguments object     | Yes              | No             |
+| Suitable for methods | Yes              | No             |
+
+---
+## 13. Common Mistakes
+
+1. Using arrow functions as object methods
+2. Losing `this` inside callbacks
+3. Forgetting strict mode behavior
+4. Using arrow functions in event handlers
+5. Assuming `this` works like other languages
+---
+
+## 14. Best Practices
+
+* Use regular functions for object methods
+* Use arrow functions for callbacks
+* Use arrow functions to preserve `this`
+* Avoid arrow functions when dynamic `this` is needed
+* Always test `this` using console.log
+---
+## 15. Real-Life Use Case Example
+
+### Without Arrow Function
+
+```js
+function Timer() {
+  this.count = 0;
+  setInterval(function() {
+    this.count++;
+    console.log(this.count);
+  }, 1000);
+}
+new Timer(); // NaN
+```
+### With Arrow Function
+
+```js
+function Timer() {
+  this.count = 0;
+
+  setInterval(() => {
+    this.count++;
+    console.log(this.count);
+  }, 1000);
+}
+new Timer(); // Works
+```
+Arrow function preserves `this`.
+---
+## 16. Summary
+
+* `this` depends on how a function is called
+* Regular functions have dynamic `this`
+* Arrow functions have lexical `this`
+* Do not use arrow functions as methods
+* Arrow functions are best for callbacks
+* call, apply, bind control `this`
+---
