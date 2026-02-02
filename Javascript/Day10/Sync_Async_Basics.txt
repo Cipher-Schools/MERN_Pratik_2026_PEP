@@ -1,0 +1,135 @@
+JavaScript Synchronous vs Asynchronous Programming
+
+Synchronous Code:
+Synchronous code runs step by step and waits for each task to finish.
+
+Ex:- (Synchronous)
+console.log("A");
+console.log("B");
+console.log("C");
+Output: A, B, C (in order)
+
+
+Asynchronous Code:
+Asynchronous code runs tasks in the background without stopping the main program.
+
+Ex:-(Asynchronous)
+console.log("A");
+setTimeout(() => {
+  console.log("B");
+}, 1000);
+console.log("C");
+Output: A, C, B (B runs after 1 second)
+
+
+Blocking Code & Execution:
+Blocking code stops program execution until the task is completed.
+
+Ex:-(Blocking)
+while(true) {
+  // Infinite loop (blocks program)
+}
+console.log("Hello"); // Never runs
+
+
+Non-Blocking Code:
+Non-blocking code allows other tasks to run while waiting.
+
+Ex:-(Non-Blocking)
+setTimeout(() => {
+  console.log("Hello");
+}, 2000);
+console.log("Start");
+Output: Start, Hello
+
+
+Blocking vs Non-Blocking:
+Blocking waits for a task to finish before moving to the next one.
+Non-blocking allows other tasks to run while waiting.
+
+Ex:-
+// Non-blocking
+setTimeout(() => {
+  console.log("Task Done");
+}, 1000);
+console.log("Next Task");
+
+Output: Next Task, Task Done
+
+
+Why Asynchronous Code is Important?
+Async code keeps apps fast and responsive.
+
+Ex:-setTimeout(() => {
+  console.log("Loading Done");
+}, 3000);
+console.log("User Can Work");
+
+Output: User Can Work, Loading Done (user doesn't wait for loading)
+
+
+Real-world Use Cases:
+- Fetching data from an API without freezing the UI
+- Loading images or files in the background
+- Timers and notifications
+- Database queries
+- File I/O operations
+
+
+Introduction to Callbacks:
+A callback is a function passed to another function to execute later.
+This is the foundation of async programming.
+
+Ex:-function fetchData(callback) {
+  setTimeout(() => {
+    callback("Data loaded");
+  }, 2000);
+}
+fetchData((data) => console.log(data));
+
+Output: Data loaded (after 2 seconds)
+
+
+Simulate Delayed Greetings (setTimeout)
+setTimeout runs code after some delay
+
+Ex:-setTimeout(() => {
+  console.log("Hello Students!");
+}, 2000);
+
+
+Timing Demo (setTimeout & setInterval)
+setTimeout runs once.
+setInterval runs repeatedly.
+
+Ex:-setInterval(() => {
+  console.log("Tick");
+}, 1000);
+
+
+🎯 Summary
+
+| Topic        | Key Idea                 |
+| ------------ | ------------------------ |
+| Sync         | Runs step by step        |
+| Async        | Runs in background       |
+| Blocking     | Stops execution          |
+| Non-blocking | Keeps running            |
+
+
+📝 Practice Questions
+
+Easy Questions:
+1. What is the output of this code?
+   console.log("A");
+   setTimeout(() => console.log("B"), 0);
+   console.log("C");
+
+2. Write code that uses setInterval to count from 1 to 5, logging each number every second.
+
+3. Create a non-blocking function that simulates loading data for 2 seconds.
+
+Medium Questions:
+4. Write a function that executes multiple tasks in parallel and waits for all to complete.
+
+5. Create a simple timer that counts down from 10 to 0, logging each number every second.

@@ -1,0 +1,110 @@
+JavaScript Event Loop & Execution
+
+Event Loop:
+The Event Loop manages how JavaScript executes synchronous and asynchronous code.
+It constantly checks if there are tasks to execute in the callback queue.
+
+Ex:-console.log("Start");
+
+setTimeout(() => {
+  console.log("Timeout");
+}, 0);
+
+console.log("End");  
+
+Output: Start, End, Timeout
+
+
+Why Understanding Event Loop Matters:
+- Helps debug timing issues
+- Optimizes performance
+- Prevents blocking the UI
+- Enables writing efficient async code
+
+Ex:- Bad (Blocking):
+for(let i = 0; i < 1000000000; i++) {} // Blocks UI
+console.log("Done");
+
+Good (Non-blocking):
+setTimeout(() => console.log("Done"), 0); // Doesn't block UI
+
+
+Call Stack & Event Loop:
+Call Stack stores functions being executed.
+Event Loop checks when async code can run.
+
+Ex:-function first() {
+  console.log("First");
+}
+function second() {
+  console.log("Second");
+}
+first();
+second();
+
+Output: First, Second
+
+
+Web APIs, Callback Queue, Microtasks & Macrotasks:
+Web APIs handle timers, fetch, etc.
+Callback Queue stores async tasks.
+Microtasks (Promises) run before Macrotasks (setTimeout).
+
+Ex:-console.log("Start");
+
+setTimeout(() => console.log("Timeout"), 0);
+Promise.resolve().then(() => console.log("Promise"));
+console.log("End");
+
+Output: Start, End, Promise, Timeout
+
+
+Event Loop Execution Order:
+1. Synchronous code runs first (Call Stack)
+2. Microtasks (Promises) run next
+3. Macrotasks (setTimeout) run last
+
+
+Event Loop: setTimeout vs Promise
+Promises run before setTimeout in the Event Loop
+
+Ex:-setTimeout(() => console.log("Timeout"));
+
+Promise.resolve().then(() => console.log("Promise"));
+
+console.log("Sync");
+
+Output: Sync, Promise, Timeout
+
+
+Understanding the Call Stack:
+The call stack keeps track of function calls.
+When a function is called, it goes on the stack.
+When it returns, it comes off the stack.
+
+Flow:
+Start → Call Stack Empty
+Function Called → Added to Stack
+Function Returns → Removed from Stack
+Program Ends → Stack Empty
+
+
+📝 Practice Questions
+
+Easy Questions:
+1. What is the output of this code?
+   console.log("Start");
+   setTimeout(() => console.log("Timeout"), 0);
+   console.log("End");
+
+2. Write code that shows a Promise running before setTimeout.
+
+3. Fix this code to log "Done" after 2 seconds without blocking:
+   console.log("Start");
+   // Add your code here
+   console.log("End");
+
+Medium Questions:
+4. Write a function that logs numbers 1 to 5 with 1 second delays between each number.
+
+5. Create a function that takes a callback and executes it after the call stack is clear.
