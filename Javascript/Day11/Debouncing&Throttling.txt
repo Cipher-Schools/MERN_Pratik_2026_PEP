@@ -1,0 +1,64 @@
+Debouncing & Throttling:-
+//In web development, certain events (like scroll, resize, or keyup) can trigger rapid and frequent calls to event handlers, potentially leading to performance issues. 
+Debouncing and throttling are two techniques used to control the rate at which these functions are executed, ensuring better performance and user experience.
+
+//Debouncing:-
+Debouncing ensures that a function is executed only after a specific time has passed since the last time the event was triggered.
+Use Case: Searching in a search bar. A user typing rapidly should not trigger a search on every keystroke but only after they pause typing for a short duration.
+Example: Waiting 300ms after the last keystroke to perform the search.
+
+Debouncing Implementation
+Define a delay time.
+Use a timer to reset every time the event is triggered.
+Execute the function only if the timer completes without interruption.
+
+let timer;
+
+addEventListener("input", function (event) {
+  clearTimeout(timer);
+  timer = setTimeout(() => {
+    // console.log("The user has called api for thsi number of times");
+    searchMovie(event.target.value);
+  }, 5000);
+});
+
+function searchMovie(query) {
+  console.log("Api request " + query);
+}
+//
+
+
+
+//Throttling:-
+Throttling ensures that a function is executed at most once in a given interval, regardless of how many times the event is triggered.
+
+Use Case: A resize event when adjusting the browser window. The function executes at regular intervals instead of every millisecond during the resize.
+Example: Running a function at most once every 500ms while scrolling.
+
+Throttling Implementation
+Define a fixed interval.
+Ensure the function runs only once in each interval.
+
+addEventListener("click", buyItem);
+
+let clickButton = true;
+function buyItem() {
+  if (clickButton) {
+    console.log("Button clicked...");
+
+    console.log("Item bought.....");
+    clickButton = false;
+    setTimeout(() => {
+      clickButton = true;
+    }, 2000);
+  }
+}
+
+// Usage Example:
+const logScroll = throttle(() => {
+  console.log("Scrolling...");
+}, 500);
+window.addEventListener("scroll", logScroll);
+
+
+

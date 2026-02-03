@@ -1,0 +1,83 @@
+Introduction to Web Storage API:-
+
+//The Web Storage API provides a way to store data in the browser that persists across page reloads and even browser sessions. 
+Unlike cookies, which are sent to the server with every request, data stored in web storage is accessible only through JavaScript on the client side, making it faster and more secure.
+
+//There are two types of web storage:
+localStorage: Stores data without an expiration date.
+sessionStorage: Stores data for the duration of the page session (until the browser or tab is closed)
+
+//LocalStorage:-
+Persistent storage: Data in localStorage persists even after the browser is closed and reopened.
+Shared across tabs: Data is shared across all tabs and windows with the same origin (same protocol, host, and port).
+Capacity: Has a larger storage capacity compared to cookies, typically 5-10 MB per origin.
+Ex:-Storing user preferences or theme settings that should persist across browser sessions.
+
+//SessionStorage:-
+Session-based storage: Data in sessionStorage is stored for the duration of the page session. Once the tab or window is closed, the data is cleared.
+Unique to each tab: Data stored in sessionStorage is unique to each tab, so opening a new tab with the same page won't share the session data.
+Capacity: Similar to localStorage, but scoped only to the active session.
+Ex:-Storing temporary form data that should be available while the user is on the page, but doesn’t need to persist across sessions or tabs.
+
+//Storing Data in Web Storage:-
+To store data in localStorage or sessionStorage, you can use the setItem() method.
+localStorage.setItem('key', 'value'); // For localStorage
+sessionStorage.setItem('key', 'value'); // For sessionStorage
+Ex:-
+<button id="themeButton">Toggle Theme</button>
+
+<script>
+  const themeButton = document.getElementById('themeButton');
+
+  themeButton.addEventListener('click', () => {
+    const currentTheme = localStorage.getItem('theme');
+
+    if (currentTheme === 'dark') {
+      localStorage.setItem('theme', 'light');
+      document.body.style.backgroundColor = '#fff';
+    } else {
+      localStorage.setItem('theme', 'dark');
+      document.body.style.backgroundColor = '#333';
+    }
+  });
+</script>
+
+//Retrieving and Deleting Data:-
+To retrieve data from localStorage or sessionStorage, use the getItem() method. It returns the value associated with the key or null if the key does not exist.
+const value = localStorage.getItem('key');
+const value = sessionStorage.getItem('key');
+
+Ex:-
+Loading User Preferences
+window.addEventListener('DOMContentLoaded', () => {
+  const savedTheme = localStorage.getItem('theme');
+
+  if (savedTheme === 'dark') {
+    document.body.style.backgroundColor = '#333';
+  } else {
+    document.body.style.backgroundColor = '#fff';
+  }
+});
+
+//Deleting Data:-
+To remove a specific key-value pair from localStorage or sessionStorage, use the removeItem() method. To clear all data from storage, use the clear() method.
+localStorage.removeItem('key'); // Removes a specific key
+sessionStorage.removeItem('key');
+
+localStorage.clear(); // Clears all keys and values
+sessionStorage.clear();
+
+Ex:-
+Clearing User Preferences
+<button id="clearPreferences">Clear Preferences</button>
+
+<script>
+  const clearButton = document.getElementById('clearPreferences');
+
+  clearButton.addEventListener('click', () => {
+    localStorage.removeItem('theme'); // Removes the 'theme' key from localStorage
+    alert('Preferences cleared!');
+  });
+</script>
+
+

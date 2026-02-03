@@ -1,0 +1,82 @@
+Working with JSON and Storing Data Locally:-
+
+Q.What is JSON?
+Ans:-
+JSON (JavaScript Object Notation) is a lightweight data interchange format that is easy for both humans to read and machines to parse and generate.
+ It is widely used for data exchange between web clients and servers, and it is language-independent, meaning it can be used in almost any programming environment.
+
+Key Characteristics of JSON:
+Text-based format: Data is stored as plain text, making it easy to transmit and store.
+JavaScript-like syntax: Although JSON is language-independent, its syntax is very similar to JavaScript objects.
+Data structure: JSON supports key-value pairs (similar to objects in JavaScript), arrays, and simple data types like strings, numbers, booleans, and null.
+JSON Syntax
+JSON data is represented as key-value pairs inside curly braces {} (like objects in JavaScript). Arrays are enclosed in square brackets [].
+Ex:-
+{
+  "name": "John Doe",
+  "age": 30,
+  "isStudent": false,
+  "courses": ["Math", "Science", "History"],
+  "address": {
+    "street": "123 Main St",
+    "city": "New York"
+  }
+}
+
+Common Uses of JSON
+Data exchange: JSON is used in APIs to exchange data between a client and server.
+Configuration files: JSON is often used to store configuration settings.
+Storing data locally: JSON is used in localStorage or sessionStorage to store structured data in the browser.
+
+//Converting Data: Using JSON.stringify() and JSON.parse()
+JSON.stringify()
+The JSON.stringify() function converts a JavaScript object or array into a JSON string. 
+This is useful for storing data in formats that require strings, such as localStorage or sending data over the network.
+JSON.stringify(object);
+Ex:-
+const user = {
+  name: "Alice",
+  age: 25,
+  isMember: true
+};
+
+// Convert the object to a JSON string
+const jsonString = JSON.stringify(user);
+console.log(jsonString);
+// Output: {"name":"Alice","age":25,"isMember":true}
+
+JSON.parse()
+The JSON.parse() function converts a JSON string back into a JavaScript object. 
+This is useful when you retrieve data from a string-based storage system (like localStorage) or receive JSON data from a server.
+JSON.parse(jsonString);
+Ex:-
+const jsonString = '{"name": "Alice", "age": 25, "isMember": true}';
+
+// Convert the JSON string back to a JavaScript object
+const userObject = JSON.parse(jsonString);
+console.log(userObject);
+// Output: {name: "Alice", age: 25, isMember: true}
+
+//Handling Nested Objects and Arrays
+Both JSON.stringify() and JSON.parse() work seamlessly with nested objects and arrays.
+
+Ex:-
+const user = {
+  name: "Bob",
+  age: 30,
+  hobbies: ["reading", "gaming"],
+  address: {
+    city: "San Francisco",
+    state: "CA"
+  }
+};
+
+// Stringify the object
+const jsonString = JSON.stringify(user);
+console.log(jsonString);
+// Output: {"name":"Bob","age":30,"hobbies":["reading","gaming"],"address":{"city":"San Francisco","state":"CA"}}
+
+// Parse the JSON string back to an object
+const parsedObject = JSON.parse(jsonString);
+console.log(parsedObject);
+// Output: {name: "Bob", age: 30, hobbies: ["reading", "gaming"], address: {city: "San Francisco", state: "CA"}}

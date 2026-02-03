@@ -1,0 +1,204 @@
+JavaScript Asynchronous Patterns
+
+Callbacks:
+A callback is a function passed to another function to run later.
+
+Ex:-function add(a, b, callback) {
+  callback(a + b);
+}
+add(5, 3, result => console.log(result));
+
+Output: 8
+
+
+Callbacks with setTimeout:
+Ex:- 
+function greet(callback) {
+  setTimeout(() => {
+    callback("Hello");
+  }, 1000);
+}
+greet(msg => console.log(msg));
+
+Output: Hello (after 1 second)
+
+
+Callback Hell:
+Many nested callbacks make code hard to read (called Callback Hell or Pyramid of Doom)
+
+Ex:-
+setTimeout(() => {
+  console.log("1");
+  setTimeout(() => {
+    console.log("2");
+    setTimeout(() => {
+      console.log("3");
+    }, 1000);
+  }, 1000);
+}, 1000);
+
+
+
+Promises:
+A Promise is an object that represents the eventual completion or failure of an asynchronous operation.
+It has three states: Pending, Fulfilled (resolved), Rejected
+
+Promise States Flow:
+Pending → Fulfilled (resolved) or Rejected
+Once settled, state cannot change. ----------------->imp
+
+Ex:-let promise = new Promise((resolve, reject) => {
+  resolve("Success");
+});
+promise.then(result => console.log(result));
+
+Output: Success
+
+
+Promise Chaining:
+Promises can be chained for sequential async operations.
+
+Ex:-
+function getNumber() {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      resolve(5); // Step 1: return 5
+    }, 1000);
+  });
+}
+
+getNumber()
+  .then((num) => {
+    console.log("First:", num); // 5
+    return num * 2;            // Step 2: return 10
+  })
+  .then((num) => {
+    console.log("Second:", n um); // 10
+    return num + 3;             // Step 3: return 13
+  })
+  .then((result) => {
+    console.log("Final:", result); // 13
+  });
+
+
+
+//Async / Await:-
+
+async/await is a JavaScript syntax used to handle Promises in a simpler
+ and more readable way by writing asynchronous code that looks like synchronous code.
+
+//async/await allows us to wait for a Promise to finish before moving to the next line, without using .then() chaining.
+
+
+Ex:-function getData() {
+  return new Promise(resolve => {
+    setTimeout(() => resolve("Data"), 1000);
+  });
+}
+
+async function show() {
+  const result = await getData(); // waits here
+  console.log(result);
+}
+
+show();
+
+
+Ex:-
+async function getData() {
+  let res = await fetch("https://api.example.com");
+  let data = await res.json();
+  console.log(data);
+}
+getData();
+
+//Error Handling (try / catch):-
+try/catch handles errors in async code.
+
+Ex:-async function loadData() {
+  try {
+    let res = await fetch("wrong-url");
+    let data = await res.json();
+  } catch (error) {
+    console.log("Error:", error);
+  }
+}
+
+loadData();
+
+
+Fetch user data with async/await:
+Ex:-
+async function fetchUser() {
+  try {
+    let res = await fetch("https://api.example.com/user");
+    let data = await res.json();
+    console.log(data);
+  } catch (error) {
+    console.log("Failed to fetch user:", error);
+  }
+}
+
+fetchUser();
+
+//https://jsonplaceholder.typicode.com/users
+
+
+Summary:
+Callbacks - Basic but leads to Callback Hell
+Promises - Better, chainable
+Async/Await - Cleanest, looks like sync code
+
+
+🎯 Summary Table
+
+| Topic        | Key Idea                 |
+| ------------ | ------------------------ |
+| Callback     | Function inside function |
+| Promise      | Future value             |
+| Async/Await  | Cleaner async            |
+| try/catch    | Error handling           |
+
+----------------------------------------------------------------------
+ Instance Methods (Used on a Promise)
+
+.then()
+
+.catch()
+
+.finally()
+
+=>.then(), .catch(), and .finally() are called instance methods because
+ they are available on Promise objects and are used to handle the result of a specific Promise instance.
+
+ Static Methods (Used on Promise)
+
+Promise.all()
+
+Promise.race()
+
+Promise.allSettled()
+
+Promise.any()
+
+Promise.resolve()
+
+Promise.reject()
+-------------------------------------------------------
+
+📝 Practice Questions
+
+Easy Questions:
+1. Create a Promise that resolves with "Hello World" after 1 second.
+
+2. Convert this callback code to use a Promise:
+   function getData(callback) {
+     setTimeout(() => callback("Data"), 1000);
+   }
+
+3. Write an async function that waits 2 seconds then returns "Complete".
+
+Medium Questions:
+4. Create a function that fetches data from two URLs sequentially using async/await.
+
+5. Write a Promise-based function that retries a failed operation up to 3 times.
