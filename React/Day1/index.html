@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script
+      crossorigin
+      src="https://unpkg.com/react@18/umd/react.development.js"
+    ></script>
+    <script
+      crossorigin
+      src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"
+    ></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  </head>
+  <body>
+    <div id="root">Hello From Dom</div>
+  </body>
+  <script type="text/babel">
+    // let fruits = ["apple", "banana", "mango", "grapes"];
+
+    // let element = React.createElement(
+    //   "ul",
+    //   {},
+    //   fruits.map((fruit) => React.createElement("li", null, fruit)),
+    // );
+
+    function Greet(props) {
+      console.log(props);
+
+      return (
+        <>
+          <h1>
+            Hello, I am {props.name}, My age is {props.age} and i am from
+            {props.city}
+          </h1>
+        </>
+      );
+    }
+    function App() {
+      return (
+        <>
+          {Greet({ name: "Pratik", age: 28, city: "Patna" })}
+          <Greet name="Pratik" age={28} city="Patna" />
+        </>
+      );
+    }
+
+    let element = <h1>This is h1 Tag </h1>;
+    let value;
+    let root = ReactDOM.createRoot(document.getElementById("root"));
+    root.render(App());
+  </script>
+</html>
