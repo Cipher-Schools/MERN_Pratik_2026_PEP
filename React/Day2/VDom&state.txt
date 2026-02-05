@@ -1,0 +1,101 @@
+Virtual Dom:-
+The Virtual DOM is a lightweight copy of the real DOM stored in memory.
+React does not update the browser directly.
+Instead:
+1️ Updates Virtual DOM
+2️ Compares with old VDOM
+3️ Finds changes
+4️ Updates only changed parts
+
+
+//Batch Updates in React:-
+React enhances application performance by batching state updates.
+This means that when you invoke a state setter function, such as setCount, React doesn't immediately cause the component to re-render.
+Instead, it schedules the update and later performs all the state updates together in a single batch. 
+This behavior is particularly observable in event handlers or lifecycle methods, contributing significantly to efficiency and performance optimization.
+
+React's batching of state updates is a mechanism designed to aggregate multiple state changes into a single update cycle. 
+This process allows React to minimize the number of re-renders required, thereby optimizing the performance of React applications.
+When multiple state setter functions are called, instead of updating the state and re-rendering the component after each call, React waits and updates the component once with all the changes. 
+This approach is not only efficient but also ensures consistency across state updates.
+------------------------------------------------------------------------------
+Note:-
+This process is called Reconcilation.It has two parts.
+(a)Render Pahse:- In this phase chnages are prepared(state updates are noted but now=t shown on the UI)
+(b)Commit Phase:-React  applies all the chnages at once.
+-------------------------------------------------------------------------------
+Ex:-
+function App() {
+  let [count, setCount] = useState(0);
+  let handleIncrement = () => {
+    setCount(count + 1);
+    setCount(count + 1);
+    setCount(count + 1);
+    setCount(count + 1);
+    console.log(count);
+  };
+
+  return (
+    <div>
+      <h2>{count}</h2>
+      <button onClick={handleIncrement}>+</button>
+    </div>
+  );
+}
+
+const root = createRoot(document.getElementById("root"));
+root.render(<App />);
+
+Ex:-
+// Implement Decrement feature
+
+function App() {
+  let [count, setCount] = useState(0);
+
+  let handleIncrement = () => {
+    setCount((prevCount) => prevCount + 1);
+    setCount((prevCount) => prevCount + 1);
+    setCount((prevCount) => prevCount + 1);
+    console.log(count);
+  };
+
+  return (
+    <div>
+      <h2>{count}</h2>
+      <button onClick={handleIncrement}>+</button>
+    </div>
+  );
+}
+
+const root = createRoot(document.getElementById("root"));
+root.render(<App />);
+
+Activity:-Modify the App component to include a decrement button that decreases the count.
+--------------------------------------------------------------------------
+Note:-useSatate can handle any type of value which is passed inside it.
+--------------------------------------------------------------------------
+
+Ex:-
+function App() {
+      let [data, setData] = React.useState({
+        name: "Pratik",
+        age: 28,
+        city: "Patna",
+      });
+      function increaseAge() {
+        setData({ ...data, age: data.age + 1 });
+      }
+
+      return (
+        <>
+          <h1>
+            Hello I am {data.name} and I am {data.age}
+          </h1>
+          <button onClick={increaseAge}>Increase Age</button>
+        </>
+      );
+    }
+
+    const root = ReactDOM.createRoot(document.getElementById("root"));
+    root.render(<App />);
+------------------------------------------------------------

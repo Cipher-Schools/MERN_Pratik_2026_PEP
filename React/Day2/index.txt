@@ -1,0 +1,162 @@
+Component and Props:-
+A React component is essentially a JavaScript function that returns React elements, facilitating the development of complex UIs from simple, reusable pieces.
+ Components can range from basic UI elements, like buttons and text, to entire application pages.
+ They are defined either as JavaScript functions or classes and are distinguished by their ability to return
+  JSX (a syntax extension for JavaScript), which describes the UI structure.
+ Props.
+
+Props:-
+Props are how components receive data from their parent, enabling them to be dynamic and reusable.
+ They are passed to components in a manner similar to function arguments and can include various data types, such as strings, numbers, arrays, objects, and functions. 
+ Notably, props are read-only, ensuring a unidirectional data flow that enhances predictability and debugging ease.
+
+Passing Data: Demonstrated by passing different greetings and names to a Greet component.
+Read-Only Nature: Props cannot be modified by the component that receives them.
+One-Way Data Flow: Props allow data to flow from parent to child components, simplifying data management and component hierarchy.
+
+Ex:-function Greet({ text, name }) {
+  return (
+    <p>
+      {text}, {name}
+    </p>
+  );
+}
+
+const element = (
+  <div className="container">
+    <Greet text="Happy Birthday" name="Bruce" />
+    <Greet text="Good Morning" name="Rachel" />
+  </div>
+);
+
+// Rendering the element in a React application
+const reactRoot = ReactDOM.createRoot(document.getElementById("root"));
+reactRoot.render(element);
+
+Activity1:-
+Your task is to create a UserProfile component that conditionally renders the user's bio and applies different styling based on the user's role (admin vs user).
+
+Step-by-Step:
+
+Define a UserProfile component accepting user object as props.
+Use conditional rendering to display the user's bio only if it's provided.
+Apply conditional styling to the user's name, coloring it differently for admins and regular users.
+
+
+
+Activity2:-Create a Component: Develop a Card component that accepts title and content as props and displays them.
+Nesting Components: Use the Card component within an App component to create a simple page with multiple cards, each displaying different information.
+Passing Functions as Props: Create a Button component that accepts a label (string) and an onClick (function) as props.
+Use this button within another component and handle its click event to display an alert message.
+
+-------------------------------------------------------------------------------------------------------------
+
+//State Management in React: Understanding the useState Hook
+
+
+What is the useState Hook?
+useState is a built-in hook in React that allows function components to have their own state. 
+It enables the initialization of a state variable and provides a function to update this state. When the state changes,
+React automatically re-renders the component to reflect the update. This mechanism is fundamental for creating dynamic and interactive applications.
+
+Advantages of Using useState
+Simplicity: Simplifies the state management in functional components, making code more readable and maintainable.
+Reusability: Enables the use of state logic across multiple components, promoting code reuse.
+Optimization: React optimizes for performance, ensuring minimal re-renders and efficient updates.
+
+Note:-We can not use variables in react directly.
+React tracks these values, and when state or props change, it re-renders the component and updates the UI.
+
+Ex:-function App() {
+  // Destructuring the array returned by useState
+  const [count, setCount] = React.useState(0);
+
+  // Function to increment the count
+  const handleClick = () => {
+    setCount(count + 1);
+  };
+
+  // Rendering the component
+  return (
+    <div>
+      <p>Button is clicked {count} times</p>
+      <button onClick={handleClick}>Click Me</button>
+    </div>
+  );
+}
+
+// Rendering the App component into the DOM
+const reactRoot = ReactDOM.createRoot(document.getElementById("root"));
+reactRoot.render(<App />);
+
+Activity:- Extend the counter app to include a decrement button
+
+//Controlled and Uncontrolled Components in React:-
+Controlled Components--->
+Controlled components are React components that control the values of input form elements.
+ The form data is managed by the React component's state rather than the DOM. Any changes to the input value are handled by a function that updates the component's state, making the React state the "single source of truth."
+
+Benefits:
+Synchronization: The input value is always in sync with the component state.
+State Management: Easier to integrate with other UI elements or complex state logic.
+Validation: Can easily validate user input on-the-fly.
+Uncontrolled Components--->
+Uncontrolled components, on the other hand, maintain their own state in the DOM.
+ React does not have direct control over them, and their values are retrieved through a ref directly from the DOM when needed.
+
+Side Note : We will talk about ref and useRef later in upcoming sessions.
+ For now having knowledge of controlled component and understanding the difference between controlled and uncontrolled component should suffice.
+
+Benefits:
+Simplicity: Less code is required to set up, as React does not manage the input state.
+Integration: Easier to integrate with non-React code that relies on direct DOM manipulation.
+
+Ex:-function App() {
+  const [message, setMessage] = React.useState(""); // State for input value
+
+  const handleChange = (event) => {
+    setMessage(event.target.value); // Update state based on input
+  };
+
+  return (
+    <div>
+      <input
+        value={message}
+        onChange={handleChange}
+        placeholder="Type a message"
+      />
+      <p>Your message: {message}</p>
+    </div>
+  );
+}
+
+
+Ex:-
+function App() {
+  const [message, setMessage] = React.useState("");
+
+  const handleChange = (event) => {
+    setMessage(event.target.value);
+  };
+
+  const handleReset = () => {
+    setMessage(""); // Resets the message state, thus clearing the input field
+  };
+
+  return (
+    <div>
+      <p>
+        Message: <strong>{message}</strong>
+      </p>
+      <input
+        placeholder="Add your message here"
+        onChange={handleChange}
+        value={message} // Controlled component
+      />
+      <button onClick={handleReset}>Reset</button>
+    </div>
+  );
+}
+
+
+Activity:- Implement a form with a controlled <textarea> component that updates its value based on the state.

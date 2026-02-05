@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script
+      crossorigin
+      src="https://unpkg.com/react@18/umd/react.development.js"
+    ></script>
+    <script
+      crossorigin
+      src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"
+    ></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  </head>
+  <body>
+    <div id="root">Hello From Dom</div>
+  </body>
+  <script type="text/babel">
+    let { useState } = React;
+    function UserInfo() {
+      const [user, setUser] = useState({
+        name: "Pratik",
+        age: 28,
+        city: "Patna",
+      });
+      function handleUser() {
+        // alert(`The user data updated :${user.name}`);
+        setUser({ ...user, age: user. age + 1 });
+      }
+      return (
+        <>
+          <h1>User Information: </h1>
+          <div>
+            Hey I am <strong>{user.name}</strong> and my age is
+            <b>{user.age}</b>
+          </div>
+          <button onClick={handleUser}>Increase Count</button>
+        </>
+      );
+    }
+    function App() {
+      return (
+        <>
+          <UserInfo />
+        </>
+      );
+    }
+    let root = ReactDOM.createRoot(document.getElementById("root"));
+    root.render(App());
+  </script>
+</html>

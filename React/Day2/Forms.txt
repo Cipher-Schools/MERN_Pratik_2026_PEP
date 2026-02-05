@@ -1,0 +1,43 @@
+Forms in React:-
+Forms in React are powerful tools for collecting user input and handling form submissions.
+ React's approach to form management emphasizes the power of the state to control the input elements, making it easier to manage complex form data and validations.
+ This lesson explores how to create and manage forms in React, using controlled components to handle form data.
+
+Q. What are Forms in React?
+In React, forms are used to gather input from the user. A form can include text fields, checkboxes, radio buttons, and more.
+ React handles form data through the component state, allowing for an interactive and controlled form experience.
+
+//Controlled Components
+A controlled component in React is an input that gets its value from the component's state and updates the state on every change. 
+This means React controls the form's data at any given time, enabling the form to react instantaneously to user input.
+
+Handling Form Submission
+Form submission in React is typically handled by a function that is triggered when the form is submitted.
+This function can prevent the default form submission behavior, process form data, and perform actions like sending the data to a server or updating the local state.
+
+Ex:-
+  function App() {
+      let [name, setName] = React.useState("");
+      function handleSubmit(e) {
+        e.preventDefault();
+        alert(`The user has submitted the form: ${name}`);
+        setName("");
+      }
+      return (
+        <>
+          <form onSubmit={handleSubmit}>
+            <label>Enter ypur name:</label>
+            <input
+              type="text"
+              name="userName"
+              value={name}
+              placeholder="Enter the name here...."
+              onChange={(e) => setName(e.target.value)}
+            />
+            <button type="Submit">Submit</button>
+          </form>
+        </>
+      );
+    }
+    const root = ReactDOM.createRoot(document.getElementById("root"));
+    root.render(<App />);
