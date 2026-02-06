@@ -19,54 +19,60 @@
   </body>
   <script type="text/babel">
     function App() {
-      const [movie, setMovie] = React.useState([]);
+      const [movies, setMovies] = React.useState([]);
       const [movieName, setMovieName] = React.useState("");
+
       async function fetchData() {
         try {
           let response = await fetch(
             "https://reactmovie-7dcf7-default-rtdb.asia-southeast1.firebasedatabase.app/movies.json",
           );
           let result = await response.json();
-          const movieArray = Object.entries(result).map(
-            ([id, movie]) => (id, movie),
-          );
+          const movieArray = Object.entries(result).map(([id, movies]) => ({
+            id,
+            movies,
+          }));
           console.log(movieArray);
-
-          setMovie(result);
-          console.log(result);
+          setMovies(movieArray);
         } catch (error) {
           error;
         }
       }
 
-      async function addMovie() {
+      async function addMovies() {
+        if (!movieName) {
+          alert("Enter the movie name first...");
+          return;
+        }
         try {
           let response = await fetch(
             "https://reactmovie-7dcf7-default-rtdb.asia-southeast1.firebasedatabase.app/movies.json",
             {
               method: "POST",
+              body: JSON.stringify({ name: movieName }),
+              headers: { "content-type": "application/json" },
             },
           );
-          let result = await response.json();
+          setMovieName("");
         } catch (error) {
-          error;
+          console.log("Error while adding movie :", error);
         }
       }
+
       return (
         <>
           <h1>Fetching data from Api:</h1>
           <input
             type="text"
             value={movieName}
-            placeholder="Enter the movie name..."
+            placeholder="Enter your movie name..."
             onChange={(e) => setMovieName(e.target.value)}
           />
-          <button onClick={addMovie}>Add Movie</button>
+          <button onClick={addMovies}>Add Movie</button>
           <button onClick={fetchData}>Fetch Data</button>
-
           <ul>
-            {data.map((ele, ind) => (
-              <li key={ind}>{ele.title}</li>
+            {movies.map((movie, ind) => (
+              <li key={movie.id}>{movie.movies.name}</li>
             ))}
           </ul>
         </>
