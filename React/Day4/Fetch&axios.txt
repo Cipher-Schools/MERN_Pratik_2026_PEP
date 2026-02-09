@@ -1,0 +1,203 @@
+Q.What is fetch()?
+
+fetch() is a built-in JavaScript function used to get data from a server (API).
+It is mainly used to send requests and receive responses over the internet.
+fetch() helps our website talk to a backend/server.
+
+//Basic Syntax of fetch()
+fetch(url)
+  .then(response => response.json())
+  .then(data => {
+    console.log(data);
+  })
+  .catch(error => {
+    console.log(error);
+  });
+
+//Using fetch() with Async/Await
+async function getUsers() {
+  try {
+    const res = await fetch("https://reqres.in/api/users?page=1");
+    const data = await res.json();
+    console.log(data.data);
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+getUsers();
+
+//Why Do We Use fetch()?
+We use fetch to:
+✔ Get data from database
+✔ Load users/products
+✔ Submit forms
+✔ Connect frontend to backend
+✔ Build real-world apps
+Note:-fetch() is used to get data from an API and convert it into usable JavaScript objects.
+
+Ex:-
+function App() {
+  const [users, setUsers] = useState([]);
+
+  function getUsers() {
+    fetch("https://reqres.in/api/users?page=1")
+      .then(res => res.json())
+      .then(data => {
+        setUsers(data.data);
+      })
+      .catch(err => console.log(err));
+  }
+
+  return (
+    <div>
+      <button onClick={getUsers}>Load Users</button>
+
+      {users.map(user => (
+        <p key={user.id}>
+          {user.first_name} {user.last_name}
+        </p>
+      ))}
+    </div>
+  );
+}
+
+
+Activity:-Add a button called Get Tasks. Modify the application to fetch latest tasks from the server whenever this button is clicked
+
+
+
+//Axios Library to make network requests ( JSON Server ):-
+JSON-server
+JSON-server provides a full fake REST API with zero coding in less than 30 seconds.
+ It's great for prototyping and mocking server-side operations like creating, reading, updating, and deleting data (CRUD operations).
+
+Axios:-
+Axios is a JavaScript library used to send HTTP requests (GET, POST, PUT, DELETE) to APIs.
+Axios helps React apps communicate with backend servers easily.
+Axios is a popular, promise-based HTTP client that works both in the browser and in node.js environments.
+ It's easy to use and handles requests and responses in JSON format, making it a perfect fit for communicating with a JSON-server.
+
+Updating the Application
+To integrate with a server, we need to modify our form's handleSubmit function to send data to the server using Axios instead of updating the local state directly.
+
+Axios Syntax:-
+Promise Syntax (.then() / .catch()):-
+
+axios.get("https://reqres.in/api/users?page=1")
+  .then((response) => {
+    console.log(response.data);
+  })
+  .catch((error) => {
+    console.log(error);
+  });
+
+  Async / Await Syntax:-
+
+  async function getUsers() {
+  try {
+    const response = await axios.get(
+      "https://reqres.in/api/users?page=1"
+    );
+
+    console.log(response.data);
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+getUsers();
+
+Ex:-
+import axios from "axios";
+import { useState } from "react";
+
+function App() {
+  const [users, setUsers] = useState([]);
+
+  async function loadUsers() {
+    try {
+      const res = await axios.get(
+        "https://reqres.in/api/users?page=1"
+      );
+
+      setUsers(res.data.data);
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
+  return (
+    <div>
+      <button onClick={loadUsers}>Load Users</button>
+
+      {users.map(user => (
+        <p key={user.id}>
+          {user.first_name} {user.last_name}
+        </p>
+      ))}
+    </div>
+  );
+}
+
+Activity:-
+Create a React application that fetches user data from an API using Axios
+ when a button is clicked and displays the data on the UI using .map() and key.
+
+ //Working with firebase 
+ import { useState } from "react";
+
+function App() {
+  const [users, setUsers] = useState([]);
+
+  const URL =
+    "https://myproject-default-rtdb.firebaseio.com/users.json";
+
+  // Add Data
+  function addUser() {
+    fetch(URL, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        name: "Amit Singh",
+        age: 23,
+      }),
+    })
+      .then(res => res.json())
+      .then(() => alert("User Added"));
+  }
+
+  // Get Data
+  function getUsers() {
+    fetch(URL)
+      .then(res => res.json())
+      .then(data => {
+        const arr = Object.keys(data).map(key => ({
+          id: key,
+          ...data[key],
+        }));
+
+        setUsers(arr);
+      });
+  }
+  return (
+    <div>
+      <h1>Firebase + Fetch</h1>
+
+      <button onClick={addUser}>Add User</button>
+      <button onClick={getUsers}>Load Users</button>
+
+      {users.map(user => (
+        <p key={user.id}>
+          {user.name} - {user.age}
+        </p>
+      ))}
+    </div>
+  );
+}
+export default App;
+
+
+

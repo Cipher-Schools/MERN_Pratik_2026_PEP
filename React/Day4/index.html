@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script
+      crossorigin
+      src="https://unpkg.com/react@18/umd/react.development.js"
+    ></script>
+    <script
+      crossorigin
+      src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"
+    ></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  </head>
+  <body>
+    <div id="root">Hello From Dom</div>
+  </body>
+  <script type="text/babel">
+    const { useState } = React;
+    function ApiData() {
+      const [data, setData] = React.useState([]);
+      const [movieName, setMovieName] = useState("");
+
+      async function dataFech() {
+        try {
+          let response = await fetch(
+            "https://movieapp-6eb2d-default-rtdb.asia-southeast1.firebasedatabase.app/movies.json",
+          );
+          let ans = await response.json();
+          const result = Object.entries(ans).map(([id, movie]) => {
+            return { id, movie };
+          });
+          setData(result);
+          console.log(ans);
+        } catch (error) {
+          console.log("Error while fetching data");
+        }
+      }
+
+      async function addMovie() {
+        try {
+          let response = await fetch(
+            "https://movieapp-6eb2d-default-rtdb.asia-southeast1.firebasedatabase.app/movies.json",
+            {
+              method: "POST",
+              body: JSON.stringify(movieName),
+            },
+          );
+        } catch (error) {
+          console.log("Error while adding movie");
+        }
+      }
+
+      return (
+        <>
+          <h1>Api Data:</h1>
+          <input
+            type="text"
+            value={movieName}
+            pleaceholder="Enter the data"
+            onChange={(e) => setMovieName(e.target.value)}
+          />
+          <button onClick={addMovie}>Add Movie</button>
+          <button onClick={dataFech}> Fetch Cities</button>
+          <div>
+            {data.map((ele, ind) => {
+              return (
+                <p key={ele.id}>
+                  {ind + 1}.{ele.movie}
+                </p>
+              );
+            })}
+          </div>
+        </>
+      );
+    }
+    function App() {
+      return (
+        <>
+          <ApiData />
+        </>
+      );
+    }
+
+    let root = ReactDOM.createRoot(document.getElementById("root"));
+    root.render(<App />);
+  </script>
+</html>

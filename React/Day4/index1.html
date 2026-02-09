@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script
+      crossorigin
+      src="https://unpkg.com/react@18/umd/react.development.js"
+    ></script>
+    <script
+      crossorigin
+      src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"
+    ></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  </head>
+  <body>
+    <div id="root">Hello From Dom</div>
+  </body>
+  <script type="text/babel">
+    const { useState } = React;
+    function ApiData() {
+      const [data, setData] = React.useState([]);
+      const [city, setCity] = useState("");
+
+      async function dataFech() {
+        try {
+          const response = await axios.get(
+            "https://movieapp-6eb2d-default-rtdb.asia-southeast1.firebasedatabase.app/city.json",
+          );
+          console.log(response.data);
+          const CityArray = Object.entries(response).map(([id, city]) => ({
+            id,
+            city,
+          }));
+          setData(CityArray);
+        } catch (error) {
+          console.log("Error while fetching data");
+        }
+      }
+      async function addCity() {
+        try {
+          const response = await axios.post(
+            "https://movieapp-6eb2d-default-rtdb.asia-southeast1.firebasedatabase.app/city.json",
+            {
+              body: { name: city },
+            },
+          );
+        } catch (error) {
+          console.log(error.message);
+        }
+      }
+
+      return (
+        <>
+          <h1>Api Data:</h1>
+          <input
+            type="text"
+            value={city}
+            placeholder="Enter the city name here ..."
+            onChange={(e) => setCity(e.target.value)}
+          />
+          <button onClick={addCity}>Add City</button>
+          <button onClick={dataFech}> Fetch City</button>
+          <div>
+            {data.map((val, ind) => {
+              return (
+                <p key={ind}>
+                  {ind + 1}.{val.name}
+                </p>
+              );
+            })}
+          </div>
+        </>
+      );
+    }
+    function App() {
+      return (
+        <>
+          <ApiData />
+        </>
+      );
+    }
+
+    let root = ReactDOM.createRoot(document.getElementById("root"));
+    root.render(<App />);
+  </script>
+</html>
