@@ -1,0 +1,49 @@
+Component Lifecycle in React:-
+The lifecycle of React components is an essential concept for developers working with this library.
+It refers to the series of events that occur from the moment a component is mounted on the UI until it is unmounted.
+Understanding these lifecycle phases is crucial for effectively managing resources, optimizing performance, and ensuring that components behave as expected throughout their existence in the application.
+
+//Lifecycle Phases
+A React component's lifecycle can be compared to a person's lifecycle, encompassing birth, life, and death phases, each marked by specific events:
+
+Birth (Mount Phase): This is the phase where the component is created and rendered on the UI for the first time.
+It involves initialization and mounting processes.
+Life (Update Phase): This phase occurs when there are changes to the component's state or props, which lead to re-rendering.
+It's a cycle that can repeat many times as long as the component is displayed.
+Death (Unmount Phase): The final phase of a component's lifecycle, this is when the component is removed from the UI, allowing for cleanup activities.
+
+//Events and Event Handlers: A Quick Recap
+In React, as in vanilla JavaScript, events are actions or occurrences that happen in the system you are programming, 
+which the system tells you about so you can respond to them in some way if desired.
+React encapsulates these events and provides its own event handling system which is very similar to handling events on DOM elements.
+Here are basic examples of event and event handler in JavaScript:
+
+//Event: An action or occurrence, e.g., a button click, window load.
+Event Handler: A function that is triggered in response to an event, e.g., a function that runs when a button is clicked.
+
+//Side Effects, useEffect and Mount Phase:-
+In modern web development, React has become a cornerstone for building interactive user interfaces.
+Among its features, the useEffect hook is a powerful tool for managing side effects in functional components.
+This lesson dives into the useEffect hook, explaining its syntax, usage, and practical applications,
+especially in handling network requests and updating the DOM after the component mounts.
+
+
+SideEffects:-
+Side effects are tasks that are performed outside the normal rendering of a component.
+These are not directly dependents on the function.
+They run in the background even if the function does not exists.
+
+Ex:-
+Fetching data from an API (server calls)
+Updating the browser tab title using document.title
+Setting timers using setTimeout or setInterval
+Adding event listeners (click, scroll, resize)
+Storing data in Local Storage
+Making WebSocket or real-time connections
+Directly modifying the DOM
+Subscribing and unsubscribing to services
+
+Note:-API calls, timers, browser updates, and storage operations are common side effects in React.
+
+//Side effects can be handled efficiently at a single place using a special hook called useEffect.
+  
