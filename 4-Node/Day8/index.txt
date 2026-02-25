@@ -1,0 +1,144 @@
+
+Authentication - It's a process of Identifying who the user is.
+                 It's more about the "identity of the user";
+
+
+Authorisation - It's a process of Identifying what permissions/access does a user have and handling it.
+                It's more the about the "access/permissions a user has"
+
+        
+Authentication  - 
+
+
+                1.  POST /signup
+                    request payload - {email, password}
+                    ---We'll save it in the DB  ("users" collection)
+                    response - "sign up successfull"
+
+
+                2.  POST /login
+                    request payload - {email, password}
+                    --- check if both this email, password together exist in our DB/users collection;
+                        If it exists ? "msg : login successfull, token : "12345" : "login failed" 
+
+                3. GET /reports - protected endpoint
+                   --- if the user is logged in(by checking if they have the token, and if the token is correct) ?
+                         "here are the reports" 
+                         : "login first"
+---------------------------------------------------------------------
+todo:-
+1.create a basic express app,establish connection to  db auth
+2.create :-signup/login and try completeing them
+---------------------------------------------------------------------
+How do we Identify if a user has logged in?
+
+By giving a token - remember the Hospital or the Office example.
+
+
+
+**Token**
+
+1. is 12345 being sent as a same token for everyone - right thing to do?
+   It's like giving a blank A4 sheet as a ID card;
+
+2. Let's make it unique for each user
+   Will Math.random() work? - No, it's psuedo random and everytime we generate, it may give a new value
+   MongoDB _id - No,
+   email - anyone can pass anyone's email then,
+   a random unique string (from crypto, some other library) - No
+
+
+   Solution : 
+   The Industry solution is to use JWT (Json web token)
+
+   JWT is used both to 
+   
+   1) generate the token
+   2) verify the token
+
+   Ex:-
+   //login route
+app.post("/login", async (req, res) => {
+  const { name, email, password } = req.body;
+  let user = await UserModel.findOne({ name, email, password });
+  if (!user) {
+    res.send({ message: "Login failed" });
+  }
+  const token = jwt.sign({ foo: "bar" }, "shhhhh");
+  res.send({ message: "Login successful", token: token });
+});
+
+//rports route
+app.get("/reports", async (req, res) => {
+  let { token } = req.query;
+  jwt.verify(token, "shhhhh", function (err, decoded) {
+    if (err) {
+      res.send({ message: "login first" });
+    } else {
+      res.send({ message: "This is your report" });
+    }
+  });
+});
+
+-------------------------------------------------------------------------------------------------
+code:-
+
+const express = require("express")
+const jwt = require('jsonwebtoken');
+
+
+const {connection} = require("./db")
+const {UserModel} = require("./models/User.model")
+
+const app = express();
+app.use(express.json())
+
+app.get("/", (req, res) => {
+    res.send({msg : "API working, check docs"})
+})
+
+
+app.post("/signup", async (req, res) => {
+    const {email, password} = req.body;
+    await UserModel.create({email, password})
+    res.send({msg : "Sign up successfull"})
+})
+
+app.post("/login", async (req, res) => {
+    const {email, password} = req.body;
+    const user = await UserModel.findOne({email, password})
+
+    if(!user){
+        return res.send({msg : "Login failed"})
+    }
+    
+    const token = jwt.sign({optional : "yes"}, 'shhhhhh')
+    res.send({msg : "Login successfull", token : token})
+})
+
+app.get("/reports", (req, res) => {
+    const {token} = req.query;
+    
+    jwt.verify(token, 'shhhhhh', function(err, decoded) {
+        if(decoded){
+            return res.send({msg : "here are the reports"})
+        }
+        else{
+            return res.send({msg : "login first"})
+        }
+    })
+    
+})
+
+
+app.listen(8080, async () => {
+    try{
+        await connection;
+        console.log("Connected to mongodb successfully")
+    }
+    catch(err){
+        console.log("error while connecting to MongoDB")
+        console.log(err)
+    }
+    console.log("listening on port 8080")
+})
