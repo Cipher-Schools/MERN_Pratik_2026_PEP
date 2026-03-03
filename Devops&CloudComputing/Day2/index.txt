@@ -113,7 +113,10 @@ Banking systems
 High-budget and high-risk projects
 
 
-(b)Bigbang, etc.
+(b)Bigbang,
+(c)V-Model etc
+(d)Incremental Model etc.
+These models are used based on project requirements and risk level.
 
 ---
 
@@ -155,7 +158,6 @@ DevOps removes this gap by encouraging collaboration, shared responsibility, and
 ## 6. DevOps Lifecycle
 
 The DevOps lifecycle is continuous and includes:
-
 1. Plan
 2. Develop
 3. Build
@@ -189,12 +191,11 @@ It is a DevOps practice that automates building, testing, and deploying applicat
 * Code is automatically tested and prepared for release
 * Deployment to production requires manual approval
 
-### Continuous Deployment
+### What is Continuous Deployment?
 
-* Code automatically deployed to production
-* No manual approval needed
+Continuous Deployment automatically releases code to production without manual approval.
 
-### Difference Summary
+### CI vs CD vs Continuous Deployment
 
 | Feature                 | CI           | Continuous Delivery | Continuous Deployment |
 | ----------------------- | ------------ | ------------------- | --------------------- |
@@ -202,7 +203,6 @@ It is a DevOps practice that automates building, testing, and deploying applicat
 | Automated Testing       | Yes          | Yes                 | Yes                   |
 | Manual Approval         | Not Required | Required            | Not Required          |
 | Auto Production Release | No           | No                  | Yes                   |
-
 ---
 
 ## 9. Why Cloud?
@@ -305,9 +305,6 @@ Reasons to use Cloud:
 | Hybrid  | Both         | Balanced | Moderate |
 
 ---
-
----
-
 ## 5. Traditional IT vs Agile (Conceptual Understanding)
 
 ### Traditional IT Approach
@@ -325,102 +322,4 @@ Reasons to use Cloud:
 * Continuous feedback
 * Frequent releases
 * Better customer satisfaction
-
----
-
-## 6. Introduction to DevOps
-
-### What is DevOps?
-
-DevOps is a culture and set of practices that combines Development (Dev) and Operations (Ops) teams to improve collaboration, automation, and faster software delivery.
-
-### Why DevOps is Needed?
-
-* To remove the gap between Dev and Ops
-* To automate build, testing, and deployment
-* To deliver software faster and more reliably
-
----
-
-## 7. Dev vs Ops Gap
-
-### Development Team (Dev)
-
-* Focuses on writing new features
-* Works quickly
-* Wants frequent changes
-
-### Operations Team (Ops)
-
-* Focuses on stability and uptime
-* Prefers fewer changes
-* Responsible for production systems
-
-Problem:
-Dev wants speed, Ops wants stability → This creates conflict.
-
-Solution:
-DevOps promotes collaboration, shared responsibility, and automation.
-
----
-
-## 8. DevOps Lifecycle
-
-The DevOps lifecycle is continuous and includes the following stages:
-
-1. Plan
-2. Develop
-3. Build
-4. Test
-5. Release
-6. Deploy
-7. Operate
-8. Monitor
-
-This cycle repeats continuously for improvement and faster delivery.
-
----
-
-## 9. CI/CD Overview
-
-### What is CI?
-
-Continuous Integration (CI) is the practice of automatically integrating code changes into a shared repository multiple times a day, followed by automated build and testing.
-
-### What is CD?
-
-Continuous Delivery (CD) ensures that code is always ready to be deployed to production after automated testing.
-
-### What is Continuous Deployment?
-
-Continuous Deployment automatically releases code to production without manual approval.
-
-### CI vs CD vs Continuous Deployment
-
-| Feature                 | CI           | Continuous Delivery | Continuous Deployment |
-| ----------------------- | ------------ | ------------------- | --------------------- |
-| Code Integration        | Yes          | Yes                 | Yes                   |
-| Automated Testing       | Yes          | Yes                 | Yes                   |
-| Manual Approval         | Not Required | Required            | Not Required          |
-| Auto Production Release | No           | No                  | Yes                   |
-
----
-## 10. Other SDLC Models (For Knowledge)
-
-Apart from Waterfall and Agile, other SDLC models include:
-
-* V-Model
-* Spiral Model
-* Iterative Model
-* Incremental Model
-These models are used based on project requirements and risk level.
----
-
-## Updated Connection with DevOps
-
-* SDLC defines how software is built.
-* Agile improves development speed and flexibility.
-* Scrum helps implement Agile.
-* DevOps extends Agile by integrating operations and automation.
-* CI/CD enables faster and reliable delivery.
----
+--------------------------------
