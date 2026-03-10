@@ -1,0 +1,75 @@
+QWhat is Virtual machine?
+Virtual machine is computer inside your computer.
+You can create multiple vm's ,install multiple os,connect them together and practice like multinode environment.
+Today one computer can have multiple os running at the same time parallely.
+
+Q.what is virtualization?
+
+Virtualization is a technology that allows multiple operating systems to run on a single physical computer using virtual machines.
+
+Ex:-Suppose you have one laptop.
+With virtualization you can run:
+
+Windows
+Linux
+Ubuntu
+all at the same time on that single laptop.
+Each operating system runs inside a Virtual Machine (VM)
+
+//Before Virtualization:-
+To run app/services we needed servers
+physical computers(in Datacenters)
+oneservice-one server(isolated)
+servers wre overprovisioned(means requirement never fulfilled,it gets increased if we have the resource available.)
+server resources were mostly underutilized
+
+//Virtualization:-
+Enter Vmware(Introduction)
+It allowed one computer to run multiple os
+Partitions of physical resource into virtual resource
+These vms are isolated from each other
+Each vm require it's own os
+Server virtualization is most common virtualization.
+
+//Terminologies:-
+Host Os-->This is the os of physical computer
+Guest Os-->Os of virtual machines
+snapshot-->It's a way of taking the backup of virtual machine
+
+//HyperViser-->A Hypervisor is a software or firmware that allows you to create and run Virtual Machines (VMs) on a physical computer.
+A Hypervisor manages hardware resources (CPU, RAM, Storage) and allocates them to multiple virtual machines,
+so several operating systems can run on one physical system.
+
+Ex:-
+If your computer has:
+16 GB RAM
+8 CPU cores
+
+A hypervisor can create multiple VMs like:
+VM1 → 4 GB RAM, 2 cores (Linux)
+VM2 → 8 GB RAM, 4 cores (Windows)
+VM3 → 4 GB RAM, 2 cores (Ubuntu)
+All run simultaneously on the same machine.
+
+Types of Hypervisors:-
+(a) Type 1 (Bare-metal Hypervisor)
+    Runs directly on hardware(As Base os).
+Ex-:
+VMware ESXi
+Microsoft Hyper-V
+Xen
+
+Used in cloud platforms and data centers.
+
+(b) Type 2 (Hosted Hypervisor)
+    Runs on top of an existing operating system.
+Ex-:
+Oracle VirtualBox
+VMware server
+Parallels
+
+Used for development and testing.  
+
+
+
+

@@ -1,0 +1,151 @@
+We will set up virtual machines to practice linux:-
+
+Here we will create two linux vm's 
+(a)CentralOs Vm and
+(b)Ubuntu Vm
+There are two very popular linux os.
+
+There are two ways to create the vm's-->
+1. Manual
+2.Aumated
+Rule:- If you want to automate something make sure you know how to do it manually.
+
+Note:-Automation is a way to assemable all the steps together in a logical way by using a tool or scrpting or any programming language.
+
+Requirements:-Mentioned in the image
+------------------------------------------------------------------------------------------------------------------------------------
+To setup Vm manually:-
+
+For windows----------->
+
+VT-x (Intel Virtualization Technology):-
+VT-x is a CPU feature that enables hardware virtualization or
+VT-x is a CPU feature that allows hypervisors to create and run virtual machines efficiently.
+It allows a hypervisor (like VirtualBox, VMware, Hyper-V) to create and run virtual machines efficiently.
+
+Need:->Without VT-x enabled, many VM tools either won’t run or will run very slowly.
+
+Enable virtualization is BIOS(Basic Input/Output System)
+VT-x must be enabled in BIOS/UEFI so the operating system and hypervisor can use the CPU virtualization features.
+
+Steps:-
+Restart computer
+Enter BIOS/UEFI (F2 / DEL / ESC depending on system)
+Find Virtualization Technology / Intel VT-x
+Enable it
+Save and restart
+
+Relation Between These Terms
+| Term                     | Meaning                                  |
+| ------------------------ | ---------------------------------------- |
+| **VT-x**                 | CPU feature that supports virtualization |
+| **Hypervisor**           | Software that creates and manages VMs    |
+| **Virtual Machine (VM)** | A virtual computer running its own OS    |
+
+
+//Disable other windows virtualization
+Microsoft HyperV
+Windows Hypervisor platform
+Windows Subsystem for Linux
+Docker Desktop
+Note:-When you want to use VirtualBox or Vagrant, sometimes Windows virtualization features conflict with them.
+So you may need to disable these features in Windows.
+
+How?
+Look for windows features on/off 
+
+SetUp:-
+Search for oracle VirtualBox
+To create a new vm ->click on the gear symbol new
+give a proper name to the vm(your choice).
+choose type linux
+
+
+to download virtual os for centralos:- serach for 
+centos stream 9 iso download
+for ubuntu-->
+ubuntu 22 server iso
+
+Networking(Brief):-
+If you want to connect your device to any network you need a device called network adaptor.
+In mdern days we a wireless adaptor which is connected to wifi router(has an ip address to identify a network device)
+
+A Virtual Machine (VM) has a virtual network adapter (like a network card).
+Using Bridged Networking, the VM connects directly to the physical network (router).
+The router treats the VM like a separate computer on the same network.
+
+Physical Router
+      │
+      │
+Laptop (Host Machine)
+      │
+ ┌─────────────┐
+ │ VirtualBox  │
+ │   VM        │
+ │ Ubuntu VM   │
+ └─────────────┘
+ With Bridging:-
+
+The VM gets its own IP address
+It connects directly to the same WiFi router
+Other devices on the network can see the VM
+
+Note:- You can check your computer network adaptor and it's ip address through cmd
+type ipconfig and for mac use ifconfig
+ remeber your own device ip address 
+  Ex:-IPv4 Address. . . . . . . . . . . : 192.168.1.38
+
+  you will have to select network adaptor wisely
+  to know which netwok cable you are connectd go to control pannel and find in the netwrok and sharing
+  and once you do the setting your vm will have an ip address.
+
+  To set up manually you will have to foloow the given link:-
+  https://www.udemy.com/course/decodingdevops/learn/lecture/26460442#overview
+
+-------------------------------------------------------------------------------------------------------------------------------
+To set up vm automatically:- We need a tool called Vagrant
+We use this tool to manage virtual machines automatically.
+Vagrant solves many problem which being encountered while vm setup previously:-
+1.No Os installation 
+2.Reduces time usage
+3.Avoids human error(while maual installation)
+4.For multiple vm installation manual way may be tough but while using Vagrant we can do easily.
+
+To install vagrant on local system:-
+Vagrant is a commnad line tool not a graphical tool and to execute 
+for windows ------------------------> we use  git bash and 
+for mac users----------------------->terminal
+
+Here you can follow the commnads to install vagrant on your local device:-
+1. look for present working directory.
+2. use command mkdir ~/Desktop/vagrant-vms(optional, referred c drive)
+3.now go to current folder using cd vagrant-vms
+4. create two folders Ex:- centos and ubuntu
+5.Go to centos
+6. You will be putting a file with command vagrant init and the box name(find the boxname from vagrant cloud) 
+follow this link:--> https://portal.cloud.hashicorp.com/vagrant/discover
+7. copy eurolinux-vagrant/centos-stream-9 and paste inside gitbash
+8. to know the details of your file use cat Vagrant(if you have done any mistake while writing you can still modify it)
+9.You may get some error while installing (common because of antivirous/using any VPN/or corporate netwok)
+10.Now follow command vagrant up
+11. you can check the box list using vagrant box list /vagrant status or vagrant global-status --prune
+12. To login follow the command vagrant ssh and to check the user you can follow the command whoami to logout use exit
+13.To power off the vm use command  vagrant halt
+14. To reboot the vm use vagrant reload and to remove it use  vagrant destroy
+
+For ubuntu:-->
+1.type ubuntu jammy on vagrant cloud
+2. follow the command -> vagrant init ubuntu/jammy64
+3.To switch to root user use sude -i, # exit to logout from root user and again exit to logout from vm
+4. you can check the status of all vms using -->vagrant global-status
+5. you check all previously executed commands using history
+
+Note:- Always power off your vm first before powering off your computer.
+----------------------------------------------------------------------------------------------------------
+Vm Setup for MacOs(Latest)
+(a)VMWARE FUSION
+It's a hypervisor to run and maintain vm
+(b)VAGRANT
+We will do same process for it as well
+will install centos/fedora and ubuntu(both are linux os)
+ for detailed inf follow the given lecture:->https://www.udemy.com/course/decodingdevops/learn/lecture/32300988#overview
