@@ -1,0 +1,291 @@
+**Linux**
+------------------------------------------------------------------------
+In DevOps, Linux is the most widely used operating system for building, deploying, and managing applications.
+Most servers, cloud platforms, containers (like Docker), and DevOps tools run on Linux.
+
+--->Around 90%+ cloud servers run Linux.
+Platforms like Amazon Web Services, Google Cloud, and Microsoft Azure mainly deploy Linux-based servers.
+When you deploy an app, it usually runs on:
+Ubuntu
+CentOS
+Red Hat Enterprise Linux
+
+//Automation & Scripting:-
+DevOps involves automation, and Linux provides powerful scripting tools.
+Common tools:
+Bash scripting
+Cron jobs
+Shell utilities (grep, awk, sed)
+
+Why Linux is Important in DevOps:-
+
+(a)Server Environment:-
+Most production servers run on Linux.
+
+(b)Cloud Platforms:-
+AWS, Azure, and Google Cloud mainly use Linux-based systems.
+
+(c)Automation Friendly:-
+Linux supports shell scripting (Bash), which helps automate tasks.
+
+(d)Tool Compatibility:-
+DevOps tools like Git, Jenkins, Docker, Kubernetes, and Ansible work best on Linux.
+
+(e)Security & Stability:-
+Linux is secure, stable, and efficient for production environments.
+
+Note:-
+Linux is the foundation OS on which most DevOps tools, servers, and cloud systems run.
+Without Linux knowledge, working in DevOps becomes very difficult.
+---------------------------------------------------------------------------
+## 1. Linux Architecture
+Linux architecture is divided into the following main layers:
+
+1. Hardware
+   * CPU
+   * RAM
+   * Disk
+   * Input/Output devices
+   Everything in Linux ultimately runs on this hardware.
+
+2. Kernel
+
+   * Core of the Linux operating system/ heart of Linux
+   * Manages hardware resources
+   * Handles memory management, process management, device drivers, and system calls
+   *It manages communication between software and hardware.
+
+   Ex:-When you run a command, the kernel tells the CPU and memory what to do.
+
+3. Shell
+
+   * Interface between user and kernel
+   * It interprets commands entered by the user.
+   * Examples: Bash,Zsh, Sh
+
+   When user types any commnad ex- ls shell send this request to kernel
+
+   Note:-Some commna programs used by the users are-->
+   vi → text editor
+   grep → search text
+   cd → change directory
+   date → show system date
+   compilers / applications
+   Multiple users can run applications at the same time.
+
+4. System Utilities
+
+   * Tools and commands used to perform operations
+   * Example: ls, cp, mv, ps, top
+
+5. Applications
+
+   * User-installed programs like editors, browsers, servers
+
+In simple terms:
+User → Application/Command → Shell → Kernel → Hardware
+-----------------------------------------------------------------------------
+
+## 2. Linux File System Hierarchy
+
+Linux follows a tree-like structure starting from the root directory (/).
+
+Important directories:
+
+/        - Root directory
+/bin     - Essential user commands
+/sbin    - System administration commands
+/etc     - Configuration files
+/home    - User home directories
+/root    - Root user home directory
+/var     - Log files and variable data
+/tmp     - Temporary files
+/usr     - User programs and utilities
+/dev     - Device files
+/proc    - Process information
+
+Everything in Linux is treated as a file.
+ 
+**Some basic commands used:-
+After logging in vm--->
+To check the user use command-->whoami,pwd,cat to read a file and we mention the file path
+To look for version of version type command--->cat etc/os-release
+To switch from vagrant user to root user type command--->sudo -i (it takes to root user)
+follow the command---->cd /bin and to get the list of all files  and info use command--> # ls
+To see the configuration switch through command cd /etc/ and use command--->ls
+To create a directory(folder) we use command----> mkdir directory name and to create a file use command---->touch filename
+you can create multiple files in one go ,use command---> touch file1.txt file2.txt file3.txt or touch file{1..5}.txt
+To copy file use command cp file_name and source destination
+To copy directory to another location use command--->cp -r dir1 dir2/
+
+
+------------------------------------------------------------------------------
+
+## 3. File Permissions
+
+Linux has three types of permissions:
+
+r = Read (4)
+w = Write (2)
+x = Execute (1)
+
+Three categories of users:
+
+* Owner
+* Group
+* Others
+
+Example permission:
+-rwxr-xr--
+
+Meaning:
+Owner: Read, Write, Execute
+Group: Read, Execute
+Others: Read only
+
+### chmod Command
+
+Used to change file permissions.
+
+Examples:
+chmod 755 file.txt
+chmod +x script.sh
+
+755 means:
+Owner = 7 (rwx)
+Group = 5 (r-x)
+Others = 5 (r-x)
+
+### chown Command
+
+Used to change file ownership.
+
+Example:
+chown user:group file.txt
+---------------------------------------------------------------------------
+
+## 4. Process Management
+
+A process is a running instance of a program.
+
+### ps Command
+
+Displays current running processes.
+
+Example:
+ps aux
+
+### top Command
+
+Displays real-time system processes and resource usage.
+
+### kill Command
+
+Terminates a process using Process ID (PID).
+
+Example:
+kill 1234
+kill -9 1234  (force kill)
+-------------------------------------------------------------------------------
+
+## 5. Cron Jobs
+
+Cron is a time-based job scheduler in Linux.
+It is used to automate repetitive tasks.
+
+### crontab Command
+
+Used to schedule tasks.
+
+Open crontab editor:
+crontab -e
+
+Cron format:
+
+* * * * * command
+          | | | | |
+          | | | | +---- Day of week (0–7)
+          | | | +------ Month (1–12)
+          | | +-------- Day of month (1–31)
+          | +---------- Hour (0–23)
+          +------------ Minute (0–59)
+
+Example:
+0 2 * * * /home/user/backup.sh
+(Runs daily at 2 AM)
+--------------------------------------------------------------------------------------
+
+## 6. Bash Scripting Basics
+
+Bash is a shell scripting language used to automate tasks.
+
+### Basic Script Structure
+
+#!/bin/bash
+
+echo "Hello World"
+
+Save file as script.sh and give execute permission:
+chmod +x script.sh
+./script.sh
+
+### Variables
+
+name="Pratik"
+echo "My name is $name"
+
+### If Condition
+
+if [ $name == "Pratik" ]
+then
+echo "Welcome"
+fi
+
+### Loop Example
+
+for i in 1 2 3
+do
+echo $i
+done
+------------------------------------------------------------------------------------------
+
+## 7. Vagrant VM Provisioning
+
+Vagrant is a tool used to create and manage virtual machines in a simple and automated way.
+
+### Why Use Vagrant?
+
+* Easy VM setup
+* Reproducible environments
+* Useful for development and testing
+
+### Basic Steps:
+
+1. Install VirtualBox
+2. Install Vagrant
+3. Initialize project:
+   vagrant init
+4. Start VM:
+   vagrant up
+5. Connect to VM:
+   vagrant ssh
+6. Stop VM:
+   vagrant halt
+
+### Vagrantfile
+
+The Vagrantfile defines VM configuration such as:
+
+* Box image
+* CPU and memory
+* Network settings
+* Provisioning scripts
+
+Example Provisioning:
+config.vm.provision "shell", inline: <<-SHELL
+sudo apt update
+sudo apt install nginx -y
+SHELL
+
+This automatically installs Nginx when VM starts.
+-------------------------------------------------------------------------------------
