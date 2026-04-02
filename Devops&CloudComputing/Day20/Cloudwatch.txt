@@ -1,0 +1,46 @@
+📊 Amazon CloudWatch
+----------------------------------------------------------
+Q.What is CloudWatch?
+CloudWatch is a monitoring and logging service in AWS
+It helps you track performance, collect logs, and set alerts
+Used to monitor AWS resources like EC2, RDS, Lambda, etc.
+------------------------------------------------------------
+Why CloudWatch?
+To monitor system health
+To detect issues early
+To automate actions based on conditions
+----------------------------------------------------------
+Key Features:-
+Real-time monitoring
+Centralized logging
+Automated alerts
+Dashboard visualization
+Integration with multiple AWS services
+------------------------------------------------------------
+Core Components:-
+
+1. Metrics
+Numerical data points (time-based)
+Examples:
+CPU Utilization
+Network In/Out
+Disk usage
+-->Stored automatically for AWS services
+
+2. Logs
+Stores application and system logs
+Helps in debugging issues
+
+Ex:-
+EC2 logs
+Application logs
+3. Alarms
+Trigger actions based on conditions
+
+Ex:-
+If CPU > 80% → Send alert / Auto-scale
+4. Events (EventBridge - basic idea)
+Responds to changes in AWS
+
+Ex:-
+When EC2 stops → trigger notification

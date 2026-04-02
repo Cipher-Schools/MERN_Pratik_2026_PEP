@@ -1,0 +1,59 @@
+Amazon RDS (Relational Database Service)
+
+Amazon RDS is a managed relational database service provided by AWS
+It allows us to create, operate, and scale databases in the cloud without handling infrastructure management tasks like
+hardware provisioning, patching, backups, and scaling.
+
+Note:-RDS = Database service where AWS manages everything, you just use the database.
+--------------------------------------
+Supported Engines:-
+MySQL
+PostgreSQL
+Oracle
+SQL Server
+Aurora
+--------------------------------------
+Important Features:-
+
+1️. Fully Managed Service
+AWS handles:
+Installation
+Updates
+Maintenance
+-> No need for manual DB setup
+
+2️. Automated Backups
+Automatic daily backups
+Point-in-time recovery
+-> Helps recover lost data
+
+3️ Multi-AZ Deployment (High Availability)
+Data is replicated to another Availability Zone
+Automatic failover if primary DB fails
+-> Ensures high reliability
+
+4️. Read Replicas (Scaling)
+Create copies of database for read operations
+Improves performance
+->Used in high-traffic apps
+
+5️. Scalability
+Easily increase:
+Storage
+CPU
+RAM
+-> Vertical scaling (instance size)
+
+6️.Security
+Encryption (data at rest & in transit)
+IAM integration
+VPC isolation
+
+7️. Monitoring (CloudWatch Integration)
+Track:
+CPU usage
+Connections
+Storage
+
+8️. Automatic Patching
+AWS updates database software automatically

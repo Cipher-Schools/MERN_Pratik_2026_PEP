@@ -1,0 +1,62 @@
+VPC (Virtual Private Cloud):-
+A VPC (Virtual Private Cloud) is your own private network inside AWS where you can launch resources like EC2 securely.
+
+Ex:-Your company’s private office network inside the internet
+----------------------------------------------------------------
+Q.Why Do We Need VPC?
+Without VPC → Everything is public ❌
+With VPC → You control everything ✅
+Control who can access your resources
+Decide which servers are public/private
+Secure your applications
+---------------------------------------------------------------
+Core Components of VPC:-
+
+1.CIDR Block (IP Range)
+Defines the IP address range of your VPC
+Example:
+10.0.0.0/16
+Meaning:-
+Total IPs available inside your network
+You divide this into smaller networks (subnets)
+
+2. Subnets
+Subdivision of VPC
+
+Types:-
+Public Subnet
+Has internet access
+Private Subnet
+No direct internet access
+
+Ex:-
+Web server → Public subnet
+Database → Private subn
+
+3. Route Tables
+Controls where traffic goes
+Ex:-
+If destination = Internet → send to Internet Gateway
+If internal → stay inside VPC
+
+4. Internet Gateway (IGW)
+Allows communication between:
+VPC ↔ Internet
+
+Without IGW:-No internet access
+--------------------------------------------------
+Q.How Everything Works Together?
+Create VPC (CIDR block)
+Create subnets
+Attach Internet Gateway
+Configure route table
+Launch resources (EC2)
+--------------------------------------------------
+Real-World Ex:-
+
+Let’s say you build a website:-
+Public Subnet → Web Server (accessible by users)
+Private Subnet → Database (hidden from internet)
+This ensures:
+Security 🔐
+Better architecture ⚙️

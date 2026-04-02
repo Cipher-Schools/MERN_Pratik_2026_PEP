@@ -1,0 +1,95 @@
+Amazon S3 :-
+** What is S3?
+It is one of the most popular and oldest service of Aws.
+S3 is an object storage service used to store files as objects in buckets.
+You can use s3 to store and retrieve any amount of data at any time, from anywhere on the web.
+You can relate it with Gdrive,Dropbox but it has many more features.
+-------------------------------------------
+Fetaures:-
+Provides unlimited storage
+Data is replicated across multiple facilities (Multi-AZ)
+Highly durable and scalable
+-------------------------------------------
+** Key Concepts:-
+Bucket → Container for storing data
+Object → Actual file + metadata
+Key → Unique identifier for object
+Bucket name must be globally unique
+------------------------------------------
+** How S3 Works (Flow)----------->
+Create a Bucket
+(Optional) Create Folders inside bucket
+Upload Objects (files)
+Provide access (public/private)
+-----------------------------------------
+** Architecture Understanding:-
+Multiple clients (EC2 instances) can access S3
+S3 acts as central object storage
+Used by applications for storing/retrieving data
+-----------------------------------------
+** S3 Storage Classes:-
+S3 Storage Classes define how your data is stored, accessed, and priced.
+Different classes are used based on:
+Access frequency
+Cost requirements
+Retrieval speed
+-----------------------------------------
+1. S3 Standard
+Frequently accessed data
+Fast access
+Multi-AZ replication
+
+2. S3 IA (Infrequent Access)
+Less frequently accessed
+Lower cost than Standard
+Still replicated across AZ
+
+3. S3 One Zone-IA
+Stored in single AZ
+No replication
+Cheaper but less durable
+
+4. S3 Intelligent-Tiering
+Automatically moves data
+Optimizes cost based on usage
+
+5. S3 Glacier
+Archival storage
+Low cost
+Slow retrieval
+
+6. Glacier Deep Archive
+Lowest cost storage
+Retrieval time ~12 hours
+---------------------------------
+** Lifecycle Policies
+Automatically move data between storage classes
+
+** Flow:---------------------------------------------->Important
+S3 Standard (0–30 days)
+→ S3 IA (30 days)
+→ One Zone-IA (next 30 days)
+→ Glacier (after 90 days)
+Helps reduce cost automatically
+----------------------------------
+
+** S3 Charges (Important for Interview)
+-----------------------------------
+Storage (GB stored)
+Requests (GET, PUT, DELETE)
+Storage Class (tiers)
+Data Transfer
+Cross-region replication
+---------------------------------
+** Features
+Versioning
+Lifecycle policies
+Encryption
+Static website hosting
+---------------------------------
+** Use Cases
+File storage
+Backup & archive
+Static websites
+Media storage (images/videos)
+----------------------------------------------
