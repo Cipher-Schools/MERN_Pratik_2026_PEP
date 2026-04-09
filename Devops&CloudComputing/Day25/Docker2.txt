@@ -1,0 +1,172 @@
+🧱Dockerfile:-
+--------------------------------------------
+Q.What is Dockerfile?
+A Dockerfile is a text file containing instructions to automatically build a Docker image.
+
+It defines:
+Base image
+Application setup
+Dependencies
+Command to run the app
+
+Basic Example:-
+FROM node:18
+WORKDIR /app
+COPY . .
+RUN npm install
+CMD ["npm", "start"]
+--->
+🔍 Explanation of Instructions
+FROM → Base image (starting point)
+WORKDIR → Sets working directory inside container
+COPY → Copies files from local → container
+RUN → Executes commands (install dependencies)
+CMD → Default command to run app
+
+EXPOSE Command-Tells Docker which port the app uses
+Ex:-EXPOSE 3000
+
+ENV-Used to store config values
+ENV NODE_ENV=production
+
+.dockerignore
+Prevents unnecessary files from being copied
+Ex:-
+node_modules
+.git
+.env
+
+Layer Concept
+Each instruction creates a layer
+Layers are cached
+Improves build speed
+Ex:-
+FROM → Layer 1
+COPY → Layer 2
+RUN → Layer 3
+
+CMD vs RUN:-
+| RUN               | CMD                         |
+| ----------------- | --------------------------- |
+| Runs during build | Runs during container start |
+| Used for install  | Used to start app           |
+
+ENTRYPOINT-Fixes the main command
+
+Build Command:-
+docker build -t myapp .
+Meaning:
+-t → tag name
+. → current directory
+--------------------------------------------------
+🧱Layers:-
+--------------------------------------------------
+Q.What are Layers?
+Layers are read-only stacked steps used to build a Docker image.
+Each Dockerfile instruction creates a layer
+Ex:-
+FROM → layer
+COPY → layer
+RUN → layer
+-->Layers = stacked steps of image creation
+
+Q.Why Important?
+1.Faster builds (caching)
+Docker reuses unchanged layers
+Ex:-
+If only code changes → only COPY layer rebuilds
+npm install layer stays cached
+
+2.Reusability
+Same layers can be reused across images
+Multiple apps using node:18 → reuse base layer
+
+3.Less storage
+Layers are shared, not duplicated
+-------------------------------------------------
+🚀Multi-Stage Builds:-
+-------------------------------------------------
+Q.What is it?
+Use multiple FROM statements in one Dockerfile to create different stages.
+Helps separate:
+Build environment
+Production environment
+
+Ex:-
+# Stage 1 (build)
+FROM node:18 AS builder
+WORKDIR /app
+COPY . .
+RUN npm install && npm run build
+# Stage 2 (production)
+FROM nginx
+COPY --from=builder /app/build /usr/share/nginx/html
+
+Note:-
+Only final stage is used in output image
+Builder stage ❌ not included
+Only production files ✅ included
+
+Benefit:-
+Smaller image
+Faster
+More secure
+---------------------------------------------------
+📦Volumes:-
+---------------------------------------------------
+Used to store data permanently outside container
+Data is NOT deleted when container stops
+Ex:-
+docker run -v mydata:/app/data nginx
+
+🧠 Analogy
+   Container = temporary worker
+   Volume = permanent storage
+
+   Note:-
+   Data persists even if container is deleted
+   Can be shared between multiple containers
+
+    Use Cases
+   Database storage
+   Logs
+   File uploads
+---------------------------------------------------
+🌐Docker Networks:-
+---------------------------------------------------
+Allows containers to communicate with each other
+Ex:-
+docker network create mynet
+docker run -d --name app --network mynet nginx
+docker run -d --name db --network mynet mongo
+
+Containers can talk using container name
+
+Ex:-
+app → connect to db using "db"
+
+Use Cases
+Backend ↔ Database
+Microservices communication
+----------------------------------------------------
+⚙️ Docker Compose:-
+----------------------------------------------------
+Tool to run multiple containers using one YAML file
+Ex:-
+version: "3"
+services:
+  web:
+    image: nginx
+    ports:
+      - "3000:80"
+
+  db:
+    image: mongo
+
+    Run Command:-
+    docker-compose up
+
+Benefits:-
+Easy setup
+Manage multiple services
+Single command execution

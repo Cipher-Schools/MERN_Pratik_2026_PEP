@@ -1,0 +1,119 @@
+## 🐳 Docker Additional Useful Commands (Advanced but Important)
+
+## 🔍 IMAGE MANAGEMENT (VERY USEFUL)
+
+docker pull nginx
+Explanation:- Downloads image from Docker Hub
+
+docker push myapp
+Explanation:- Pushes image to Docker Hub (after login)
+
+docker tag myapp myrepo/myapp:latest
+Explanation:- Tags image for pushing to registry
+
+docker history myapp
+Explanation:- Shows image layer history
+
+---
+
+## 📦 CONTAINER DEBUGGING (VERY IMPORTANT)
+
+docker attach mycontainer
+Explanation:- Attach terminal to running container
+
+docker top mycontainer
+Explanation:- Shows running processes inside container
+
+docker stats
+Explanation:- Shows live CPU, memory usage of containers
+
+docker diff mycontainer
+Explanation:- Shows file changes inside container
+
+---
+
+## 📂 FILE OPERATIONS
+
+docker cp file.txt mycontainer:/app/
+Explanation:- Copy file from local → container
+
+docker cp mycontainer:/app/file.txt .
+Explanation:- Copy file from container → local
+
+---
+
+## ⚙️ ADVANCED RUN OPTIONS
+
+docker run -it myapp
+Explanation:- Interactive mode (terminal input)
+
+docker run --env NODE_ENV=production myapp
+Explanation:- Pass environment variables
+
+docker run --rm myapp
+Explanation:- Auto-delete container after stop
+
+docker run -d -p 3000:3000 --name app myapp
+Explanation:- Combined flags (real-world usage)
+
+---
+
+## 💾 VOLUME INSPECTION
+
+docker volume inspect myvolume
+Explanation:- Detailed info about volume
+
+---
+
+## 🌐 NETWORK DEBUGGING
+
+docker network inspect mynet
+Explanation:- Shows connected containers
+
+---
+
+## 📊 SYSTEM INFORMATION
+
+docker info
+Explanation:- Docker system-wide info
+
+docker version
+Explanation:- Docker version details
+
+---
+
+## 🔐 LOGIN & REGISTRY
+
+docker login
+Explanation:- Login to Docker Hub
+
+docker logout
+Explanation:- Logout from Docker Hub
+
+---
+
+## 🔥 SAVE & LOAD IMAGES (VERY USEFUL)
+
+docker save -o myapp.tar myapp
+Explanation:- Saves image as file
+
+docker load -i myapp.tar
+Explanation:- Loads image from file
+
+---
+
+## 🧹 CLEANUP (MORE CONTROL)
+
+docker container prune
+Explanation:- Remove stopped containers
+
+docker image prune
+Explanation:- Remove unused images
+
+docker volume prune
+Explanation:- Remove unused volumes
+
+docker network prune
+Explanation:- Remove unused networks
+
+---

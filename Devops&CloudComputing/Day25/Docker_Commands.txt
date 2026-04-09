@@ -1,0 +1,122 @@
+## 🐳 Docker Most Used Commands
+
+## 📦 IMAGE COMMANDS
+
+docker build -t myapp .
+Explanation:- Builds Docker image from Dockerfile
+              -t = tag name (image name)
+            . = current directory
+
+docker images
+Explanation:- Lists all Docker images
+
+docker rmi myapp
+Explanation:- Deletes an image
+
+---
+
+## 🚀 CONTAINER COMMANDS
+
+docker run myapp
+Explanation:- Runs a container from image
+
+docker run -d myapp
+Explanation:- Runs container in background (detached mode)
+
+docker run -p 3000:3000 myapp
+Explanation:- Maps ports (local:container)
+
+docker run --name mycontainer myapp
+Explanation:- Assigns custom name to container
+
+docker ps
+Explanation:- Shows running containers
+
+docker ps -a
+Explanation:- Shows all containers (running + stopped)
+
+docker stop mycontainer
+Explanation:- Stops a running container
+
+docker start mycontainer
+Explanation:- Starts a stopped container
+
+docker restart mycontainer
+Explanation:- Restarts container
+
+docker rm mycontainer
+Explanation:- Deletes a container
+
+---
+
+## 📄 LOGS & EXECUTION
+
+docker logs mycontainer
+Explanation:- Shows container logs/output
+
+docker exec -it mycontainer bash
+Explanation:- Opens terminal inside container
+
+docker inspect mycontainer
+Explanation:- Shows detailed container info
+
+---
+
+## 💾 VOLUME COMMANDS
+
+docker volume create myvolume
+Explanation:- Creates a volume
+
+docker volume ls
+Explanation:- Lists volumes
+
+docker volume rm myvolume
+Explanation:- Deletes a volume
+
+docker run -v myvolume:/app/data myapp
+Explanation:- Mounts volume to container
+
+---
+
+## 🌐 NETWORK COMMANDS
+
+docker network create mynet
+Explanation:- Creates a network
+
+docker network ls
+Explanation:- Lists networks
+
+docker network rm mynet
+Explanation:- Deletes a network
+
+docker run --network mynet myapp
+Explanation:- Runs container in a network
+
+---
+
+## ⚙️ DOCKER COMPOSE COMMANDS
+
+docker-compose up
+Explanation:- Starts all services
+
+docker-compose up -d
+Explanation:- Runs in background
+
+docker-compose down
+Explanation:- Stops and removes all services
+
+docker-compose build
+Explanation:- Builds services from Dockerfile
+
+docker-compose ps
+Explanation:- Lists running services
+
+---
+
+## 🧹 CLEANUP COMMANDS (IMPORTANT)
+
+docker system prune
+Explanation:- Removes unused containers, images, networks
+
+docker system prune -a
+Explanation:- Removes everything unused (more aggressive)
