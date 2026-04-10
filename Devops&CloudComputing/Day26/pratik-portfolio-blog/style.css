@@ -1,0 +1,42 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    background: #f4f4f4;
+    color: #333;
+}
+
+header {
+    background: #111;
+    color: white;
+    text-align: center;
+    padding: 20px;
+}
+
+section {
+    padding: 20px;
+    margin: 10px auto;
+    max-width: 900px;
+    background: white;
+    border-radius: 8px;
+}
+
+h2 {
+    color: #222;
+    border-bottom: 2px solid #eee;
+    padding-bottom: 5px;
+}
+
+.card {
+    background: #fafafa;
+    padding: 15px;
+    margin: 10px 0;
+    border-left: 4px solid #007BFF;
+    border-radius: 5px;
+}
+
+footer {
+    text-align: center;
+    padding: 10px;
+    background: #111;
+    color: white;
+}

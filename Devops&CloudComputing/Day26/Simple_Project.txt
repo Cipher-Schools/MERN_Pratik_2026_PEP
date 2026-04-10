@@ -1,0 +1,180 @@
+========================================================
+Deploying a Static HTML Website with Docker and Nginx
+========================================================
+
+1) Goal
+--------------------------------------------------------
+We want to deploy a simple static HTML website using:
+- Docker
+- Nginx
+
+Nginx will act as the web server
+Docker will package the website and run it inside a container
+
+This is useful because:
+- Easy to deploy
+- Same setup works on any machine
+- Fast and lightweight
+- Good for simple frontend or static sites
+
+
+2) What is a Static Website?
+--------------------------------------------------------
+A static website is a website made of files like:
+- HTML
+- CSS
+- JavaScript
+- Images
+
+There is no backend code running
+No database is required
+
+Example:
+- index.html
+- style.css
+- script.js
+3) Basic Idea of Deployment
+--------------------------------------------------------
+Flow:
+
+Static Website Files
+        ↓
+Docker Image
+        ↓
+Docker Container
+        ↓
+Nginx serves the files
+        ↓
+Website opens in browser
+
+So in short:
+We put our website files inside an Nginx Docker image
+Then we run a container from that image
+Nginx serves the website on a port
+
+
+4) Project Structure
+--------------------------------------------------------
+Create a folder like this:
+
+my-static-site/
+│
+├── index.html
+├── style.css
+├── script.js
+└── Dockerfile
+
+You can also have:
+- images/
+- assets/
+- about.html
+- contact.html
+
+5) Step 1: Create Your Static Website
+--------------------------------------------------------
+Create your website files first.
+
+Example:
+- index.html
+- style.css
+- script.js
+
+Make sure your homepage is named:
+index.html
+
+Because Nginx will usually serve index.html by default.
+
+6) Step 2: Create Dockerfile
+--------------------------------------------------------
+Now create a Dockerfile in the root folder.
+
+Dockerfile:
+
+FROM nginx:latest
+COPY . /usr/share/nginx/html
+
+Explanation:
+- FROM nginx:latest
+  This uses the official Nginx image from Docker Hub
+
+- COPY . /usr/share/nginx/html
+  This copies all website files into the default Nginx web folder
+
+Nginx serves files from:
+ /usr/share/nginx/html
+
+
+7) Better Dockerfile (Recommended)
+--------------------------------------------------------
+You may use this version to avoid copying unnecessary files:
+
+FROM nginx:latest
+COPY index.html /usr/share/nginx/html/
+COPY style.css /usr/share/nginx/html/
+COPY script.js /usr/share/nginx/html/
+
+If you have more files and folders, copy them too.
+
+Example:-
+
+FROM nginx:latest
+COPY . /usr/share/nginx/html/
+
+This is the simplest and most common method for static sites.
+
+
+8) Step 3: Build Docker Image
+--------------------------------------------------------
+Open terminal inside the project folder and run:
+
+docker build -t my-static-site .
+
+Explanation:
+- docker build
+  Builds a Docker image
+
+- -t my-static-site
+  Gives a name to the image
+
+- .
+  Means current folder is the build context
+
+After this, Docker creates an image containing:
+- Nginx
+- Your website files
+
+
+9) Step 4: Run Docker Container
+--------------------------------------------------------
+Run the container using:
+
+docker run -d -p 8080:80 --name static-site-container my-static-site
+
+Explanation:
+- docker run
+  Runs a container
+
+- -d
+  Runs in detached mode (background)
+
+- -p 8080:80
+  Maps port 8080 of your machine to port 80 of the container
+
+- --name static-site-container
+  Gives a name to the container
+
+- my-static-site
+  Image name
+
+Now the website will be available at:
+
+http://localhost:8080
+
+
+10) Step 5: Open in Browser
+--------------------------------------------------------
+Open browser and visit:
+
+http://localhost:8080
+
+If everything is correct, your static website will appear.

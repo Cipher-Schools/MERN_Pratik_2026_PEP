@@ -7,7 +7,7 @@ Docker container = running app
 EC2 = remote machine/server on AWS
 Security Group = firewall that decides which ports are open
 ---------------------------------------------------------------------------
-Phase 1 — Run project locally
+Note:- Run project locally
 Before Docker, make sure project works normally.
 
 Steps:-
@@ -20,3 +20,52 @@ Note:-If project does not work locally, Docker will not magically fix it
 ----------------------------------------------------------------------------
 Phase 2 — Dockerize backend first
 Always start with backend first, because it is easier.
+
+---------------------------------------------------------------------------
+Note:-
+We can run Docker containers directly on EC2, but it’s not the usual approach because it requires manual setup, scaling, and management.
+In real-world production, services like AWS ECS(Elastic Container Service) or Kubernetes are preferred as they automate deployment, scaling, load balancing, and health monitoring.
+EC2 + Docker is great for learning, but orchestration tools are better for reliability and scalability.
+
+ECR = Elastic Container Registry
+It is a service to store, manage, and retrieve Docker images (like GitHub but for Docker images).
+---------------------------------------------------------------------------
+Complete Process:-
+We take code from GitHub, build a Docker image on EC2, store it in ECR, and then ECS runs that image as a container.
+CloudWatch helps us monitor everything, and IAM controls permissions.
+
+Code (GitHub) → Build (EC2 + Docker) → Store (ECR) → Run (ECS) → Monitor (CloudWatch)
+--------------------------------------------------------------------------Steps:-
+1.GitHub → EC2 (Get Code)
+You pull your Node/MERN app from GitHub into EC2
+git clone <repo-url>
+
+2.EC2 → Docker (Build Image)
+Inside EC2, you create Docker image
+docker build -t my-app .
+
+3.Docker → ECR (Push Image)
+You push image to ECR (AWS Docker storage)
+docker tag my-app <ecr-repo>
+docker push <ecr-repo>
+
+4.IAM (Permissions - VERY IMPORTANT)
+
+IAM allows:
+EC2 → push image to ECR
+ECS → pull image from ECR
+Without IAM, nothing connects
+
+5.ECR → ECS (Deploy)
+ECS pulls image from ECR
+ECS runs container
+his is your actual deployment step
+
+6.ECS → CloudWatch (Monitoring)
+Logs go to CloudWatch
+Errors, CPU usage, etc.
+Helps in debugging
+---------------------------------------------------------------------------------
+Note:-
+You don’t always need EC2 to build image
+You can build locally or via CI/CD
