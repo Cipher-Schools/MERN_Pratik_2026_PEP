@@ -1,0 +1,193 @@
+Local project → Docker image → Docker container → EC2 server → live app
+
+GitHub = where code is stored
+Dockerfile = instructions to pack the app
+Docker image = packaged app
+Docker container = running app
+EC2 = remote machine/server on AWS
+Security Group = firewall that decides which ports are open
+---------------------------------------------------------------------------
+Note:- Run project locally
+Before Docker, make sure project works normally.
+
+Steps:-
+Clone project from GitHub
+Run frontend locally
+Run backend locally
+Confirm API works
+Confirm frontend talks to backend
+Note:-If project does not work locally, Docker will not magically fix it
+----------------------------------------------------------------------------
+Phase 2 — Dockerize backend first
+Always start with backend first, because it is easier.
+
+---------------------------------------------------------------------------
+Note:-
+We can run Docker containers directly on EC2, but it’s not the usual approach because it requires manual setup, scaling, and management.
+In real-world production, services like AWS ECS(Elastic Container Service) or Kubernetes are preferred as they automate deployment, scaling, load balancing, and health monitoring.
+EC2 + Docker is great for learning, but orchestration tools are better for reliability and scalability.
+
+ECR = Elastic Container Registry
+It is a service to store, manage, and retrieve Docker images (like GitHub but for Docker images).
+---------------------------------------------------------------------------
+Complete Process:-
+We take code from GitHub, build a Docker image on EC2, store it in ECR, and then ECS runs that image as a container.
+CloudWatch helps us monitor everything, and IAM controls permissions.
+
+GitHub repo → EC2 → Docker build → run container → open in browser
+--------------------------------------------------------------------------
+Simple Approach:-
+launch an EC2 instance
+install Docker
+clone the repo on EC2
+go into isaras-react
+build the app with Docker
+serve it using Nginx inside the container
+----------------------------------------------------------------------
+Steps to follow:-
+----------------------------------------------------------------------
+1.launch an EC2 instance
+Give a proper name :-my-react-app
+Create an EC2 instance with:
+AMI: Ubuntu
+Instance type: t2.micro or t3.micro
+Key pair: create/download one ------------------->my-ec2-key   ->Keep this file safe. Do not lose it.
+Security Group: allow
+SSH → port 22
+HTTP → port 80
+
+Look for other port:-
+Type: HTTP
+Port: 80
+Source: Anywhere
+
+Storage:
+Keep the default storage as it is.
+No need to change anything.
+
+Launch instance:
+Wait until AWS says the instance was launched successfully.
+
+After launch, copy the Public IPv4 address.
+-----------------------------------------------------------------------------------------------
+2.Connect to EC2 from VS Code terminal
+Open terminal in VS Code and run:---> ssh -i your-key.pem ubuntu@YOUR_EC2_PUBLIC_IP
+ ye
+If you are on Windows PowerShell and permission issue comes, keep the .pem in a simple folder and run from there.
+Once connected, you are inside your EC2 machine.
+----------------------------------------------------------------------------------------------
+
+3. install Docker on EC2
+(a).Update package list
+ In the EC2 terminal, run:-->sudo apt update -y
+Run command:-sudo apt update && sudo apt upgrade -y
+-->It refreshes the package list, so Ubuntu knows the latest available software.
+
+(b).Type this in your EC2 terminal to install docker:----->sudo apt install docker.io -y
+    It will take 1–3 minutes to install docker
+
+(c).Start Docker:-->sudo systemctl start docker
+   Starts the Docker service on your EC2 server
+   Without this, Docker won’t run
+
+(d).Enable Docker:--->sudo systemctl enable docker
+    Ensures Docker starts automatically when EC2 restarts
+    Important for real-world deployment
+
+(e).Give your Ubuntu user permission to run Docker
+   Run:--->sudo usermod -aG docker ubuntu
+   It adds the ubuntu user to the Docker group, so later you can run:sudo docker ps
+
+(f).Exit EC2  Run:-exit
+
+ (g).Connect again
+    ssh -i your-key.pem ubuntu@YOUR_EC2_PUBLIC_IP
+    Now run:-docker ps
+
+-->You should see table output like:CONTAINER ID   IMAGE   COMMAND   ...
+   Even if empty → ✔️ correct
+
+
+4.Install Git if needed
+Usually Git is available, but if not:sudo apt install git -y
+Check:git --version
+
+6.Clone your GitHub project
+Run:git clone https://github.com/kPratik07/Aramporul-_Project.git
+
+Go inside your project folder
+:cd Aramporul-_Project
+
+Then check contents:ls
+
+Go into the actual React app folder
+Run:cd isaras-react
+
+Then run:ls
+
+Create Dockerfile:-nano Dockerfile
+
+Paste this exactly:-
+````
+FROM node:22 AS builder
+
+WORKDIR /app
+
+COPY package*.json ./
+RUN npm install
+
+COPY . .
+RUN npm run build
+
+FROM nginx:alpine
+
+COPY --from=builder /app/dist /usr/share/nginx/html
+
+EXPOSE 80
+
+CMD ["nginx", "-g", "daemon off;"]FROM node:22 AS builder
+
+WORKDIR /app
+
+COPY package*.json ./
+RUN npm install
+
+COPY . .
+RUN npm run build
+
+FROM nginx:alpine
+
+COPY --from=builder /app/dist /usr/share/nginx/html
+
+EXPOSE 80
+
+CMD ["nginx", "-g", "daemon off;"]
+```````````````
+Save and exit:-Ctrl + O--->Enter--->Ctrl + X
+Confirm file exists:-ls
+
+Build the Docker image
+docker build -t isaras-react-app .
+
+Docker reads your Dockerfile
+installs dependencies
+builds the Vite app
+prepares an Nginx image to serve it
+
+At the end, we want something like:
+Successfully tagged isaras-react-app:latest
+
+Run your app:-docker run -d -p 80:80 isaras-react-app
+
+What this does
+-d → run in background
+-p 80:80 → expose your app to internet
+isaras-react-app → your built image
+
+After running
+Check running container:docker ps
+
+Open in browser:-
+http://publice ipv4 address
+
+http://107.22.86.88
