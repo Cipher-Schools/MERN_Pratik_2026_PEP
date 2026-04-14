@@ -1,0 +1,98 @@
+# Jenkins Setup (macOS + Linux)
+-----------------------------------------------------------------
+We will install Jenkins and run it on:
+
+* macOS
+* Linux (Ubuntu)
+----------------------------------------------------------------
+
+# 🍎 macOS Setup (Using Homebrew)
+
+## Step 1: Install Homebrew (if not installed)
+
+```bash
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+```
+## Step 2: Install Jenkins
+```bash
+brew install jenkins-lts
+```
+## Step 3: Start Jenkins
+```bash
+brew services start jenkins-lts
+```
+## Step 4: Open Jenkins in Browser
+```text
+http://localhost:8080
+```
+## Step 5: Get Initial Admin Password
+```bash
+cat /Users/$(whoami)/.jenkins/secrets/initialAdminPassword
+```
+## Step 6: Complete Setup in Browser
+* Paste password
+* Click: Install Suggested Plugins
+* Create Admin User
+----------------------------------------------------------
+ 🐧 Linux Setup (Ubuntu)
+ ---------------------------------------------------------
+
+## Step 1: Update System
+```bash
+sudo apt update
+```
+## Step 2: Install Java (Required)
+```bash
+sudo apt install openjdk-17-jdk -y
+```
+## Step 3: Add Jenkins Key
+```bash
+curl -fsSL https://pkg.jenkins.io/debian-stable/jenkins.io.key | sudo tee \
+  /usr/share/keyrings/jenkins-keyring.asc > /dev/null
+```
+## Step 4: Add Jenkins Repository
+```bash
+echo deb [signed-by=/usr/share/keyrings/jenkins-keyring.asc] \
+  https://pkg.jenkins.io/debian-stable binary/ | sudo tee \
+  /etc/apt/sources.list.d/jenkins.list > /dev/null
+```
+## Step 5: Update Again
+```bash
+sudo apt update
+```
+## Step 6: Install Jenkins
+```bash
+sudo apt install jenkins -y
+```
+## Step 7: Start Jenkins
+
+```bash
+sudo systemctl start jenkins
+```
+## Step 8: Enable Jenkins (Auto Start)
+```bash
+sudo systemctl enable jenkins
+```
+## Step 9: Check Status
+```bash
+sudo systemctl status jenkins
+```
+## Step 10: Open Jenkins in Browser
+```text
+http://localhost:8080
+```
+## Step 11: Get Admin Password
+```bash
+sudo cat /var/lib/jenkins/secrets/initialAdminPassword
+```
+## Step 12: Complete Setup
+* Paste password
+* Install Suggested Plugins
+* Create Admin User
+-------------------------------------------------------------
+ Notes:-
+* Default Port: **8080**
+* Jenkins runs as a **service**
+* Java is mandatory for Jenkins
+* First setup always happens in browser
+------------------------------------------------------------

@@ -1,0 +1,282 @@
+Dependency Management
+-------------------------------------------------------
+Q.What is Dependency Management?
+
+Dependency Management means handling external libraries or tools that your project needs to run properly.
+Ex:-
+Your project = 📱 Mobile Phone
+Dependencies = 🔋 Battery, 🔌 Charger, 📶 SIM Card
+Without these, the mobile won’t work properly
+Same way, your project needs dependencies
+
+Key Points:
+Avoid writing everything from scratch
+Reuse already built libraries
+Save time and effort
+Keep versions consistent (important ⚠️)
+
+Note:-
+If a dependency version changes, your app may break — that’s why management is important
+-----------------------------------------------------
+📘Jenkins
+-----------------------------------------------------
+Q.What is Jenkins ?
+
+Jenkins is an automation tool used to build, test, and deploy applications automatically.
+Whenever we push code to platforms like GitHub, Jenkins can automatically start the process.
+
+Ex:-
+Jenkins = Factory machine
+Code = Raw material
+Output = Deployed application
+
+Just like a factory converts raw material into a product
+Jenkins converts code into a deployed application
+
+Q.What Jenkins Does ?
+Automatically builds the project
+Runs tests
+Deploys the application
+Reduces manual work
+
+Flow:-
+Developer pushes code to GitHub
+Jenkins detects the change (via webhook)
+Webhook:-An automatic trigger that notifies another system when something happens
+Jenkins runs a pipeline:
+Build
+Test
+Deploy
+
+Key Points:-
+Saves time ⏱️
+Reduces human errors 
+Enables Continuous Integration & Deployment (CI/CD)
+Works with many tools (GitHub, Docker, etc.)
+
+Note:-Jenkins is like an automatic machine that takes your code and turns it into a running application
+----------------------------------------------------
+Jenkins Setup:-Will do later
+---------------
+Install Jenkins (or use Docker)
+Open browser → localhost:8080
+Unlock Jenkins (password from logs)
+Install plugins
+Create first job
+----------------------------------------------------
+CI/CD
+----------------------------------------------------
+Q.What is CI/CD ?
+
+CI/CD is a process that helps us automatically build, test, and deploy code whenever changes are made.
+
+CI (Continuous Integration) → Automatically test code when pushed
+CD (Continuous Deployment) → Automatically deploy code
+
+In simple term:-CI/CD automatically takes your code from development to live application
+
+Ex:-
+Developer = 👨‍🍳 Chef
+Code = 🍲 Ingredients
+CI/CD = 🏭 Automated Kitchen
+Output = 🍽️ Ready Dish (Live Application)
+ Chef gives ingredients
+ Kitchen automatically cooks and serves
+
+ **CI means:
+ Developers regularly push code to a repository like GitHub
+ Code is automatically:
+Built
+Tested
+Goal: Catch errors early
+
+CD (Continuous Deployment/Delivery)
+CD means:
+After testing, code is automatically:
+Deployed to server
+Made live for users
+Goal: Fast and reliable releases
+-------------------------
+🔄 Flow:- 
+Developer pushes code
+CI runs:
+Build
+Test
+CD runs:
+Deploy application
+-------->Developer → GitHub → Jenkins → Build → Deploy
+
+Key Points:-
+Automation 
+Faster delivery 
+Fewer bugs 
+No manual work 
+------------------------------------------------------------------------
+🧾Jenkinsfile
+------------------------------------------------------------------------
+Q.What is Jenkinsfile ?
+A Jenkinsfile is a text file that contains the pipeline (steps) Jenkins will follow to build, test, and deploy your application.
+It is written in code and stored inside your project (usually in GitHub)
+
+Ex:-
+Jenkins = 🏭 Factory
+Jenkinsfile = 📜 Instruction Manual
+Code = 🧱 Raw Material
+Factory works based on instructions
+Jenkins works based on Jenkinsfile
+
+Q.What does it contain?
+
+It defines:
+Build steps
+Test steps
+Deployment steps
+
+```
+pipeline {
+    agent any
+
+    stages {
+        stage('Build') {
+            steps {
+                echo 'Building application...'
+            }
+        }
+
+        stage('Test') {
+            steps {
+                echo 'Running tests...'
+            }
+        }
+
+        stage('Deploy') {
+            steps {
+                echo 'Deploying application...'
+            }
+        }
+    }
+}
+```
+Key Points:-
+Written in code (Groovy-based syntax)
+Stored in project repo
+Defines CI/CD pipeline
+Makes automation reusable
+
+In Simple term:-Jenkinsfile is a script that tells Jenkins what to do step-by-step.
+
+Flow:- Code → Jenkins → Jenkinsfile → Build → Test → Deploy
+-------------------------------------------------------
+⚙️ Declarative Pipeline:-
+----------------------
+A Declarative Pipeline is a simple and structured way to write a Jenkins pipeline using predefined syntax.
+
+In Simpler term:-Declarative Pipeline is a structured way to define CI/CD steps in Jenkins
+
+Ex:-
+Declarative Pipeline = 📋 Fixed Form
+You just fill the sections (Name, Address, etc.)
+
+You don’t write everything from scratch
+You follow a proper structure
+
+Q.Why use?
+
+Easy to read
+Standard format
+Beginner-friendly
+
+Stages in Pipeline:-
+Steps divided into phases
+Common Stages:
+1.Build
+2.Test
+3.Deploy
+
+Basic Structure:-
+```
+pipeline {
+    agent any
+
+    stages {
+        stage('Build') {
+            steps {
+                // build steps
+            }
+        }
+
+        stage('Test') {
+            steps {
+                // test steps
+            }
+        }
+
+        stage('Deploy') {
+            steps {
+                // deploy steps
+            }
+        }
+    }
+}
+```
+Main Components
+1. pipeline
+Starting point of the pipeline
+
+2. agent
+Where the pipeline runs (server/machine)
+
+3. stages
+Different phases of work
+
+4. stage
+One step (Build / Test / Deploy)
+
+5. steps
+Actual commands executed
+
+Key Features:-
+Easy to read 
+Structured format 
+Less chances of errors 
+Best for beginners 
+
+Q.Why do we prefer Declarative over Scripted?   ----->Think
+
+----------------------------------------------------------
+🔔 Webhooks
+----------------------------------------------------------
+Q.What are Webhooks
+
+Webhooks are a way for one application to send real-time data or notifications to another application automatically when an event happens.
+
+Ex:-
+Webhook = 📞 Instant Phone Call
+Without webhook = 📬 Checking email again and again
+Instead of asking “Did something change?”
+You get notified instantly 
+
+Flow:-
+Developer pushes code
+GitHub triggers webhook
+Jenkins receives notification
+Pipeline starts (Build → Test → Deploy)
+You push code → GitHub notifies Jenkins → Jenkins starts build
+
+--->GitHub Push → Webhook → Jenkins → Pipeline runs
+
+Key Points:-
+Real-time communication 
+No need for manual checking 
+Event-based trigger 
+Used in CI/CD pipelines
+
+Uses:-
+Where Webhooks are Used
+GitHub → Jenkins
+Payment systems (like success/failure alerts)
+Notifications between services
+
+Webhook = automatic trigger from GitHub to Jenkins
+
+Q.Webhook vs Manual Trigger — which is faster?  --->Think
