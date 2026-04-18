@@ -1,0 +1,358 @@
+CI/CD WORKFLOW (GitHub Actions + GitLab CI)
+================================================
+
+------------------------------------------------------------
+1. What is Workflow YAML?
+------------------------------------------------------------
+A Workflow YAML file is a configuration file that defines automation steps 
+like build, test, and deploy in CI/CD pipelines.
+
+GitHub Actions file → .github/workflows/main.yml  
+GitLab CI file → .gitlab-ci.yml  
+
+Think:
+Workflow = Recipe  
+Steps = Instructions  
+
+In simple term:-Workflow YAML is a recipe that tells CI/CD what to do automatically when code changes
+------------------------------------------------------------
+2. GitHub Actions Workflow Structure
+------------------------------------------------------------
+Basic Syntax:
+
+name: My Workflow
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Run command
+        run: echo "Hello World"
+
+------------------------------------------------------------
+3. Triggers (When workflow runs)
+------------------------------------------------------------
+Triggers define WHEN the workflow executes.
+Webhook → Signal sent by GitHub when event happens
+
+Ex:-
+Trigger = Alarm ⏰
+Webhook = Notification 📩
+
+Common Triggers:
+
+on:
+  push
+  pull_request
+  workflow_dispatch   # manual trigger
+
+Ex:-
+
+on:
+  push:
+    branches:
+      - main
+      - dev
+
+Ex:-
+on:
+  push
+  pull_request
+  workflow_dispatch   # manual trigger
+  schedule            # run at specific time (cron)
+  release             # when a release is created
+
+Explanation:-
+push → Runs when code is pushed
+pull_request → Runs when PR is created/updated
+workflow_dispatch → Run manually from UI
+schedule → Runs automatically at fixed time (like alarm)
+release → Runs when we publish a version      
+
+------------------------------------------------------------
+4. Jobs
+------------------------------------------------------------
+A Job is a set of steps that run together in the same environment (machine)
+Each job runs on a runner (server/VM)
+
+In Simple Terms:-
+Workflow = Full process
+Job = One big task inside workflow
+Steps = Small tasks inside a job
+
+Ex:-
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+  test:
+    runs-on: ubuntu-latest
+
+Note:
+- Jobs run in parallel by default
+- Use "needs" to control order
+
+Ex:-
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Install Dependencies
+        run: npm install
+
+      - name: Build Project
+        run: npm run build
+
+Ex:-
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Building..."
+
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Testing..."
+
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Deploying..."
+
+Key Points:-
+Each job runs on a separate machine
+Jobs can run parallel or sequential
+runs-on defines environment (Ubuntu, Windows, Mac)
+needs controls execution order
+------------------------------------------------------------
+5. Steps
+------------------------------------------------------------
+Steps are individual tasks inside a job.
+
+Types:
+- uses → prebuilt actions
+- run → shell commands
+
+Example:
+
+steps:
+  - uses: actions/checkout@v3
+  - run: npm install
+  - run: npm test
+------------------------------------------------------------
+6. Matrix Builds
+------------------------------------------------------------
+Matrix builds allow running the same job multiple times with different configurations.
+Instead of writing multiple jobs, we define combinations.
+
+In Simple Terms:
+Matrix = Multiple variations of same job
+
+Ex:-
+
+strategy:
+  matrix:
+    node-version: [14, 16, 18]
+
+steps:
+  - uses: actions/setup-node@v3
+    with:
+      node-version: ${{ matrix.node-version }}
+
+Use Case:
+Test app on multiple Node.js versions.
+
+Ex:-
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [14, 16, 18]
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - run: npm install
+      - run: npm test
+------------------------------------------------------------
+7. Secrets Management (GitHub)
+------------------------------------------------------------
+Secrets are sensitive values like passwords, tokens, API keys.
+Used to keep credentials secure in CI/CD pipelines
+
+Stored in:
+GitHub → Repository Settings → Secrets → Actions
+
+In Simple Terms:
+Secrets = Hidden values used securely in workflow
+
+Ex:-
+env:
+  API_KEY: ${{ secrets.API_KEY }}
+
+Ex:-
+- run: echo $API_KEY
+(Never do this:This prints secret in logs).
+
+Correct use:-
+steps:
+  - name: Call API
+    run: curl -H "Authorization: Bearer $API_KEY" https://api.example.com
+
+Key Points:
+Never hardcode secrets in code
+Always use GitHub Secrets store
+Secrets are encrypted and hidden
+Avoid printing secrets in logs
+
+Note:-
+Deploy app using:
+AWS credentials
+Docker Hub login
+API authentication
+
+-----------------------------------------------------------
+GitLab is a DevOps platform that provides:
+Git repository (like GitHub)
+CI/CD pipelines
+Issue tracking
+DevOps tools (all in one place)
+------------------------------------------------------------
+8. GitLab CI Basics
+------------------------------------------------------------
+GitLab CI is used to automate build, test, and deployment of code.
+GitLab uses stages instead of jobs hierarchy.
+
+configuration file:-.gitlab-ci.yml
+
+Note:-
+GitLab uses Stages + Jobs
+Stages → Phases (Build, Test, Deploy)
+Jobs → Tasks inside each stage
+
+Ex:-
+
+stages:
+  - build
+  - test
+  - deploy
+
+build-job:
+  stage: build
+  script:
+    - echo "Building..."
+
+test-job:
+  stage: test
+  script:
+    - echo "Testing..."
+
+deploy-job:
+  stage: deploy
+  script:
+    - echo "Deploying..."
+
+In Simple Terms:
+Stages = Pipeline flow
+Jobs = Work inside each stage
+------------------------------------------------------------
+9. GitLab Runners
+------------------------------------------------------------
+Runner = Machine that executes CI jobs.
+
+Types:
+- Shared Runner (provided by GitLab)
+- Specific Runner (self-hosted)
+
+Example:
+Runner executes scripts defined in .gitlab-ci.yml
+------------------------------------------------------------
+10. GitLab Secrets (Variables)
+------------------------------------------------------------
+Stored in:
+GitLab → Settings → CI/CD → Variables
+
+Usage:
+
+script:
+  - echo $MY_SECRET
+------------------------------------------------------------
+11. Full GitHub Workflow Example
+------------------------------------------------------------
+name: Node CI
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [16, 18]
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - run: npm install
+      - run: npm test
+------------------------------------------------------------
+12. Full GitLab CI Example
+------------------------------------------------------------
+stages:
+  - build
+  - test
+
+build-job:
+  stage: build
+  script:
+    - npm install
+
+test-job:
+  stage: test
+  script:
+    - npm test
+------------------------------------------------------------
+13. Key Differences (GitHub vs GitLab)
+------------------------------------------------------------
+GitHub:
+- Uses workflows, jobs, steps
+- YAML inside .github/workflows/
+
+GitLab:
+- Uses stages and jobs
+- Single file .gitlab-ci.yml
+------------------------------------------------------------
+14. Interview/Teaching Quick Points
+------------------------------------------------------------
+- Workflow = automation pipeline
+- Trigger = when it runs
+- Job = group of tasks
+- Step = single command
+- Matrix = multiple environments
+- Secrets = secure data
+- Runner = execution machine

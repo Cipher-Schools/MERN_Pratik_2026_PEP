@@ -1,0 +1,113 @@
+-------------------------------------------------------
+⚙️ Declarative Pipeline:-
+----------------------
+A Declarative Pipeline is a simple and structured way to write a Jenkins pipeline using predefined syntax.
+
+In Simpler term:-Declarative Pipeline is a structured way to define CI/CD steps in Jenkins
+
+Ex:-
+Declarative Pipeline = 📋 Fixed Form
+You just fill the sections (Name, Address, etc.)
+
+You don’t write everything from scratch
+You follow a proper structure
+
+Q.Why use?
+
+Easy to read
+Standard format
+Beginner-friendly
+
+Stages in Pipeline:-
+Steps divided into phases
+Common Stages:
+1.Build
+2.Test
+3.Deploy
+
+Basic Structure:-
+```
+pipeline {
+    agent any
+
+    stages {
+        stage('Build') {
+            steps {
+                // build steps
+            }
+        }
+
+        stage('Test') {
+            steps {
+                // test steps
+            }
+        }
+
+        stage('Deploy') {
+            steps {
+                // deploy steps
+            }
+        }
+    }
+}
+```
+Main Components
+1. pipeline
+Starting point of the pipeline
+
+2. agent
+Where the pipeline runs (server/machine)
+
+3. stages
+Different phases of work
+
+4. stage
+One step (Build / Test / Deploy)
+
+5. steps
+Actual commands executed
+
+Key Features:-
+Easy to read 
+Structured format 
+Less chances of errors 
+Best for beginners 
+
+Q.Why do we prefer Declarative over Scripted?   ----->Think
+
+----------------------------------------------------------
+🔔 Webhooks
+----------------------------------------------------------
+Q.What are Webhooks
+
+Webhooks are a way for one application to send real-time data or notifications to another application automatically when an event happens.
+
+Ex:-
+Webhook = 📞 Instant Phone Call
+Without webhook = 📬 Checking email again and again
+Instead of asking “Did something change?”
+You get notified instantly 
+
+Flow:-
+Developer pushes code
+GitHub triggers webhook
+Jenkins receives notification
+Pipeline starts (Build → Test → Deploy)
+You push code → GitHub notifies Jenkins → Jenkins starts build
+
+--->GitHub Push → Webhook → Jenkins → Pipeline runs
+
+Key Points:-
+Real-time communication 
+No need for manual checking 
+Event-based trigger 
+Used in CI/CD pipelines
+
+Uses:-
+Where Webhooks are Used
+GitHub → Jenkins
+Payment systems (like success/failure alerts)
+Notifications between services
+Webhook = automatic trigger from GitHub to Jenkins
+
+Q.Webhook vs Manual Trigger — which is faster?  --->Think
