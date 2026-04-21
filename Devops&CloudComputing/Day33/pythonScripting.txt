@@ -1,0 +1,322 @@
+PYTHON AUTOMATION + DEVOPS SCRIPTING NOTES
+============================================================
+------------------------------------------------------------
+1. PYTHON SCRIPTING BASICS
+------------------------------------------------------------
+Definition:
+Python scripting means writing small programs (scripts) to automate tasks.
+
+Ex:-
+Rename 100 files automatically
+Download data from internet
+Deploy servers
+
+Real-world analogy:
+Think of Python script like a robot assistant that does repetitive work for you.
+
+Why Python?
+- Easy syntax (beginner-friendly)
+- Huge library support
+- Widely used in DevOps, automation, AWS
+
+Basic Example:-
+print("Hello World")
+
+Variables:
+name = "Pratik"
+age = 25
+
+print(name, age)
+
+Data Types:
+- int → 10
+- float → 10.5
+- string → "hello"
+- list → [1,2,3]
+- dict → {"name": "Pratik"}
+
+Conditions:
+
+if age > 18:
+    print("Adult")
+else:
+    print("Minor")
+
+Loops:
+
+for i in range(5):
+    print(i)
+
+Functions:
+
+def greet(name):
+    return "Hello " + name
+
+print(greet("Pratik"))
+------------------------------------------------------------
+2. FILE HANDLING (VERY IMPORTANT)
+------------------------------------------------------------
+Definition:
+File handling is used to read/write files from system.
+
+Types:
+- Read (r)
+- Write (w)
+- Append (a)
+
+Example: Reading File
+
+file = open("data.txt", "r")
+content = file.read()
+print(content)
+file.close()
+
+Better Way (recommended):
+
+with open("data.txt", "r") as file:
+    content = file.read()
+    print(content)
+
+Writing File:
+with open("data.txt", "w") as file:
+    file.write("Hello World")
+
+Appending File:
+
+with open("data.txt", "a") as file:
+    file.write("\nNew Line")
+
+Use Case:
+- Logs storing
+- Config files
+- Data processing
+------------------------------------------------------------
+3. LOGGING (IMPORTANT FOR REAL PROJECTS)
+------------------------------------------------------------
+Q.What is Logging (in simple terms)?
+Logging means recording what your program is doing while it runs.
+Instead of just showing output on screen, we store it permanently.
+
+Ex:-
+Think of logging like:
+ CCTV camera + register book
+
+CCTV = watches everything (program activity)
+Register = stores everything (log file)
+So later, if something goes wrong → you can check logs.
+
+Definition:
+Logging is used to track events/errors in application.
+
+Why not print?
+- print is temporary
+- logging is permanent + structured
+
+Problems when we sue print:-
+Disappears after program ends
+Cannot categorize messages
+Not saved anywhere
+Not useful in real systems
+
+Q.Why Logging is better?
+ Stores messages in file
+ Shows time of event
+ Categorizes messages (INFO, ERROR, etc.)
+ Helps debugging in production
+
+Example:
+BASIC LOGGING:---->
+import logging
+
+logging.basicConfig(level=logging.INFO)
+
+logging.info("App started")
+logging.warning("Low memory")
+logging.error("Something failed")
+
+Output:-
+INFO:root:App started
+WARNING:root:Low memory
+ERROR:root:Something failed
+
+LOGGING LEVELS:-
+Think of levels like priority/severity
+| Level    | Meaning                        |
+| -------- | ------------------------------ |
+| DEBUG    | Detailed info (for developers) |
+| INFO     | Normal activity                |
+| WARNING  | Something unusual              |
+| ERROR    | Something failed               |
+| CRITICAL | System crash                   |
+
+Ex:-
+logging.debug("Value of x is 10")
+logging.info("User logged in")
+logging.warning("Disk space low")
+logging.error("File not found")
+logging.critical("Server crashed")
+
+DEBUG → developer check
+INFO → normal logs
+ERROR → something broke
+
+Ex2:-LOGGING TO FILE 
+
+import logging
+logging.basicConfig(
+    filename="app.log",
+    level=logging.INFO,
+    format="%(asctime)s - %(levelname)s - %(message)s"
+)
+logging.info("App started")
+logging.error("Error occurred")
+
+Output in file (app.log):-
+2026-04-21 10:00:00 - INFO - App started
+2026-04-21 10:01:00 - ERROR - Error occurred
+
+Format Explanation
+"%(asctime)s - %(levelname)s - %(message)s"
+
+| Part      | Meaning        |
+| --------- | -------------- |
+| asctime   | Time of log    |
+| levelname | INFO / ERROR   |
+| message   | Actual message |
+------------------------------------------------------------
+4. REST APIs (VERY IMPORTANT)
+------------------------------------------------------------
+Definition:
+REST API allows communication between systems using HTTP.
+
+Methods:
+- GET → fetch data
+- POST → send data
+- PUT → update
+- DELETE → remove
+
+Python Library: requests
+
+Install:
+pip install requests
+
+Example: GET Request
+
+import requests
+
+response = requests.get("https://api.github.com")
+print(response.status_code)
+print(response.json())
+
+POST Request:
+
+data = {"name": "Pratik"}
+
+response = requests.post("https://example.com/api", json=data)
+print(response.status_code)
+
+Use Case:
+- Calling external services
+- Fetching data from APIs
+- Automation scripts
+------------------------------------------------------------
+5. BOTO3 (AWS SDK FOR PYTHON)
+------------------------------------------------------------
+Definition:
+boto3 is Python SDK to interact with AWS services.
+
+Install:
+pip install boto3
+
+Setup:
+aws configure
+(enter access key, secret key)
+
+Example: List S3 Buckets
+
+import boto3
+
+s3 = boto3.client("s3")
+
+response = s3.list_buckets()
+
+for bucket in response["Buckets"]:
+    print(bucket["Name"])
+
+Example: Upload File to S3
+
+s3.upload_file("file.txt", "my-bucket", "file.txt")
+
+Example: Launch EC2 Instance
+
+ec2 = boto3.resource("ec2")
+
+ec2.create_instances(
+    ImageId="ami-123456",
+    MinCount=1,
+    MaxCount=1,
+    InstanceType="t2.micro"
+)
+
+Use Case:
+- Automate AWS tasks
+- Deploy infrastructure
+- Manage cloud resources
+------------------------------------------------------------
+6. SCHEDULING AUTOMATION
+------------------------------------------------------------
+Definition:
+Running scripts automatically at a fixed time.
+
+Method 1: cron (Linux)
+
+Example:
+
+crontab -e
+
+Add:
+
+* * * * * python3 script.py
+
+Format:
+minute hour day month weekday
+
+Example:
+0 9 * * * → runs daily at 9 AM
+
+Method 2: Python schedule library
+
+Install:
+pip install schedule
+
+Example:
+
+import schedule
+import time
+
+def job():
+    print("Running task")
+
+schedule.every(10).seconds.do(job)
+
+while True:
+    schedule.run_pending()
+    time.sleep(1)
+
+Use Case:
+- Daily backups
+- Automated reports
+- Cleanup scripts
+------------------------------------------------------------
+7. REAL WORLD FLOW
+------------------------------------------------------------
+Example Scenario:-
+
+1. Python script runs (scheduler)
+2. Calls API (REST API)
+3. Processes data
+4. Stores in file (file handling)
+5. Logs activity (logging)
+6. Uploads to AWS (boto3)
+
+This is real DevOps automation flow.
