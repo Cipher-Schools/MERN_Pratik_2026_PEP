@@ -1,0 +1,155 @@
+------------------------------------------------------------
+5. BOTO3 (AWS SDK FOR PYTHON)
+------------------------------------------------------------
+Definition:
+boto3 is the official Python library (SDK) used to interact with AWS services.
+boto3 allows Python code to control AWS services like S3, EC2, RDS, etc.
+
+Real-Life Analogy---->
+Think like this:
+AWS = Big Cloud System
+boto3 = Remote Control
+Python = Your language
+
+So:-
+“boto3 is like a remote control using Python to operate AWS.”
+
+Q.Why do we use boto3?
+
+Without boto3:-
+You manually go to AWS Console (browser)
+Click buttons to create resources 
+
+With boto3:-
+Everything is automated using code
+Example:
+Create 100 EC2 instances → 1 script
+Upload files → automatic 
+Monitor systems → automated
+
+Installation & Setup:-
+pip install boto3 
+
+Setup:
+aws configure
+
+You will enter:-
+Access Key
+Secret Key
+Region (e.g., ap-south-1)
+Output format (json) 
+This step connects your local system to your AWS account.
+
+Two Ways to Use boto3:--
+
+1. Client (Low-level API)
+s3 = boto3.client("s3")
+More control 
+Returns raw responses (JSON)
+
+2. Resource (High-level API)
+ec2 = boto3.resource("ec2")
+Easier to use
+Object-oriented style
+Use client for detailed control, resource for easy usage.
+
+Ex:- List S3 Buckets
+
+code:--->
+```
+import boto3
+s3 = boto3.client("s3")
+response = s3.list_buckets()
+for bucket in response["Buckets"]:
+    print(bucket["Name"])
+```
+work:->
+Connect to S3
+Get all buckets
+Loop through them
+
+Upload File to S3
+s3.upload_file("file.txt", "my-bucket", "file.txt")
+"file.txt" → local file
+"my-bucket" → bucket name
+"file.txt" → file name in S3
+
+Launch EC2 Instance:-
+```
+import boto3
+
+ec2 = boto3.resource("ec2")
+
+ec2.create_instances(
+    ImageId="ami-123456",
+    MinCount=1,
+    MaxCount=1,
+    InstanceType="t2.micro"
+)
+```
+ImageId → OS template (AMI)
+InstanceType → server size
+Count → number of servers
+
+Use Case:
+- Automate AWS tasks 
+- Deploy infrastructure
+- Manage cloud resources
+------------------------------------------------------------
+6. SCHEDULING AUTOMATION
+------------------------------------------------------------
+Definition:
+Running scripts automatically at a fixed time.
+
+Method 1: cron (Linux)
+
+Ex:-
+
+crontab -e
+
+Add:
+
+* * * * * python3 script.py
+
+Format:
+minute hour day month weekday
+
+Example:
+0 9 * * * → runs daily at 9 AM
+
+Method 2: Python schedule library
+
+Install:
+pip install schedule
+
+Example:
+
+import schedule
+import time
+
+def job():
+    print("Running task")
+
+schedule.every(10).seconds.do(job)
+
+while True:
+    schedule.run_pending()
+    time.sleep(1)
+
+Use Case:
+- Daily backups
+- Automated reports
+- Cleanup scripts
+------------------------------------------------------------
+7. REAL WORLD FLOW
+------------------------------------------------------------
+Example Scenario:-
+
+1. Python script runs (scheduler)
+2. Calls API (REST API)
+3. Processes data
+4. Stores in file (file handling)
+5. Logs activity (logging)
+6. Uploads to AWS (boto3)
+
+This is real DevOps automation flow.
