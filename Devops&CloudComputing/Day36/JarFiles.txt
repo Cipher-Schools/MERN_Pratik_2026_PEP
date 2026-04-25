@@ -1,0 +1,109 @@
+JAR FILES (JAVA ARCHIVE)
+
+1. WHAT IS A JAR FILE?
+------------------------------------------------------------
+Definition:
+JAR (Java ARchive) is a file format used to package multiple 
+Java class files, resources, and metadata into a single file.
+
+Extension:
+.jar
+
+Simple Understanding:
+JAR = ZIP file + Java files
+
+It is used to bundle an entire Java application or library.
+------------------------------------------------------------
+2. WHY DO WE USE JAR FILES?
+------------------------------------------------------------
+- Combines multiple files into one
+- Easy to share and distribute
+- Reduces file size (compressed)
+- Keeps project organized
+- Required for deployment
+------------------------------------------------------------
+3. WHAT DOES A JAR FILE CONTAIN?
+------------------------------------------------------------
+- .class files (compiled Java code)
+- META-INF folder
+    - MANIFEST.MF (important file)
+- Resource files (images, config, etc.)
+
+Example Structure:
+
+myapp.jar
+│
+├── com/example/Main.class
+├── config.properties
+└── META-INF/
+    └── MANIFEST.MF
+------------------------------------------------------------
+4. MANIFEST FILE (VERY IMPORTANT)
+------------------------------------------------------------
+Location:
+META-INF/MANIFEST.MF
+
+Purpose:
+Contains metadata about the JAR
+
+Important Field:
+Main-Class
+
+Example:
+
+Main-Class: com.example.Main
+
+This tells JVM:
+“Which class to run when executing JAR”
+------------------------------------------------------------
+5. TYPES OF JAR FILES
+------------------------------------------------------------
+1. Normal JAR
+--------------------------------
+- Just contains classes
+- Cannot run directly
+
+2. Executable JAR
+--------------------------------
+- Contains Main-Class
+- Can be run directly
+
+3. Fat JAR (Uber JAR)
+--------------------------------
+- Includes all dependencies
+- Used in Spring Boot
+------------------------------------------------------------
+6. HOW TO CREATE JAR FILE
+------------------------------------------------------------
+Using Maven:
+mvn package
+
+Output:
+target/my-app-1.0.jar
+------------------------------------------------------------
+7. HOW TO RUN JAR FILE
+------------------------------------------------------------
+Command:
+
+java -jar myapp.jar
+
+Condition:
+- Must have Main-Class defined
+------------------------------------------------------------
+8. REAL-WORLD ANALOGY
+------------------------------------------------------------
+JAR = Packed Suitcase 🎒
+
+- Clothes = .class files
+- Accessories = resources
+- Label = MANIFEST.MF
+
+You carry one bag instead of many items
+------------------------------------------------------------
+9. INTERVIEW POINTS
+------------------------------------------------------------
+- JAR is a compressed archive (like ZIP)
+- Used for Java application distribution
+- Contains MANIFEST.MF
+- Executable JAR has Main-Class
+- Created using Maven/Gradle

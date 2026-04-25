@@ -1,0 +1,216 @@
+MAVEN BASICS – POM.xml & BUILD LIFECYCLE
+
+Q.WHAT IS MAVEN?
+------------------------------------------------------------
+Definition:-
+Maven is a build automation and dependency management tool 
+primarily used for Java projects.
+It can also support other languages using plugins.
+
+Simple Understanding:
+Instead of manually:
+- downloading JAR files
+- managing dependencies
+- handling build steps
+
+Maven automates everything using a single configuration file (POM.xml).
+
+Key Responsibilities:
+- Manage dependencies (libraries)
+- Build the project
+- Run tests
+- Package application (JAR/WAR)
+- Maintain project structure
+In Simple term:
+Maven automates building, dependency management, and packaging of a project.
+
+Q.What problems do you think we face if we manage dependencies manually?
+-----------------------------------------------------------------
+Ex:-
+"Imagine you are building a Java project.
+
+You need multiple libraries like Spring, Hibernate, JUnit.
+What will you do?
+
+You will:
+- Go to websites
+- Download JAR files
+- Add them manually
+- Manage versions yourself
+
+Now imagine your project has 50 dependencies…
+
+It becomes very difficult, error-prone, and time-consuming.
+
+This is where Maven comes in.
+
+Q.What do you think Maven automates?
+------------------------------------------------------------
+WHAT IS POM.xml?
+------------------------------------------------------------
+Definition:
+POM stands for Project Object Model.
+
+POM.xml is the MAIN configuration file of a Maven project.
+It defines everything Maven needs to build and manage the project.
+So, Without POM.xml, Maven cannot work.
+------------------------------------------------------------
+DETAILED UNDERSTANDING
+------------------------------------------------------------
+POM.xml contains:
+
+- Project information (name, version, organization)
+- Dependencies (external libraries like Spring, Hibernate)
+- Build configuration
+- Plugins (extra tools used during build)
+- Project structure rules
+------------------------------------------------------------
+Q.Why is it called "HEART" OF MAVEN ?
+------------------------------------------------------------
+Because:
+- Without POM.xml → Maven cannot work
+- All instructions are written inside this file
+- Maven reads this file to perform every task
+
+So: No POM.xml = No Maven project
+
+Q.WHAT MAVEN DOES WITH POM.xml ?
+
+When you run a command like:
+mvn install
+
+Maven:
+1. Reads POM.xml
+2. Downloads dependencies
+3. Compiles code
+4. Runs tests
+5. Creates JAR/WAR
+------------------------------------------------------------
+REAL-WORLD ANALOGY (VERY IMPORTANT)
+------------------------------------------------------------
+POM.xml = Blueprint of a Building 🏗️
+
+- Engineer = Maven
+- Blueprint = POM.xml
+
+Without blueprint:
+- Engineer doesn't know what to build
+
+With blueprint:
+- Everything is structured and automated
+
+In simple term:-
+"POM.xml is the configuration file that tells Maven how to build and manage the project."
+------------------------------------------------------------
+3. BASIC STRUCTURE OF POM.xml
+------------------------------------------------------------
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.example</groupId>
+    <artifactId>my-app</artifactId>
+    <version>1.0.0</version>
+
+    <dependencies>
+        <!-- dependencies here -->
+    </dependencies>
+
+</project>
+------------------------------------------------------------
+IMPORTANT TAGS IN POM.xml
+------------------------------------------------------------
+1. groupId
+--------------------------------
+- Represents organization or company name
+- Example: com.company
+
+2. artifactId
+--------------------------------
+- Name of the project (JAR/WAR)
+- Example: student-app
+
+3. version
+--------------------------------
+- Version of the project
+- Example: 1.0, 1.0.1, 2.0
+
+4. packaging
+--------------------------------
+- Type of output
+- jar (default)
+- war (for web apps)
+
+Example:
+<packaging>jar</packaging>
+
+
+DEPENDENCIES IN POM.xml 
+
+ WHAT IS A DEPENDENCY?
+------------------------------------------------------------
+Definition:
+A dependency is an external library your project needs 
+to work properly.
+
+Examples:
+- Spring (for web apps)
+- Hibernate (for database)
+- JUnit (for testing)
+------------------------------------------------------------
+ WHY DO WE NEED DEPENDENCIES?
+------------------------------------------------------------
+
+Without Maven:
+- Manually download JAR files ❌
+- Add to project ❌
+- Manage versions manually ❌
+
+With Maven:
+- Just write dependency in POM.xml
+- Maven downloads automatically 
+------------------------------------------------------------
+3. DEPENDENCY STRUCTURE
+------------------------------------------------------------
+
+<dependency>
+    <groupId>org.springframework</groupId>
+    <artifactId>spring-core</artifactId>
+    <version>5.3.0</version>
+</dependency>
+------------------------------------------------------------
+ WHERE DO DEPENDENCIES COME FROM?
+------------------------------------------------------------
+
+Maven downloads from:
+ Maven Central Repository (default)
+
+Stored in:
+ ~/.m2/repository (local system)
+
+When you add dependency → Maven also downloads:
+ Its required dependencies (transitive dependencies)
+
+Example:
+Spring → depends on other libraries  
+Maven downloads all automatically
+------------------------------------------------------------
+ DEPENDENCIES IN MAVEN
+------------------------------------------------------------
+Definition:
+External libraries required for your project.
+
+Example:
+
+<dependencies>
+    <dependency>
+        <groupId>org.springframework</groupId>
+        <artifactId>spring-core</artifactId>
+        <version>5.3.0</version>
+    </dependency>
+</dependencies>
+
+How it works:
+- Maven automatically downloads from Maven Central Repository
+- No need to manually add JAR files
