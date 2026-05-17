@@ -19,7 +19,7 @@ Instead of clicking buttons in the AWS Console, we will use **Boto3** to do the 
         "Effect": "Allow",
         "Principal": "*",
         "Action": "s3:GetObject",
-        "Resource": "arn:aws:s3:::YOUR_BUCKET_NAME_HERE/*"
+        "Resource": "arn:aws:s3:::boto3-frontend-project/*"
     }]
 }
 ```
@@ -35,7 +35,7 @@ import os
 import mimetypes
 
 # 1. Tell the script which bucket to use
-BUCKET_NAME = os.environ.get('AWS_S3_BUCKET')
+BUCKET_NAME = os.environ.get('boto3-frontend-project')
 
 s3 = boto3.client('s3')
 

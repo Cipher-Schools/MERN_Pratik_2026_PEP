@@ -1,0 +1,162 @@
+ADVANCED MAVEN & DEVOPS CONCEPTS
+-----------------------------------------------------------
+Q.WHAT IS AN ARTIFACT?
+An artifact is the final output generated after building or packaging a project.
+It is the compiled and deployable file that can be executed or deployed to a server.
+Ex:-
+- JAR file (Java application)
+- WAR file (Web application)
+
+Example of Artifact Name:- my-app-1.0.jar
+
+In Simple teams:
+Artifact = Build output + Deployable file
+-----------------------------------------------------------
+ ARTIFACT VERSIONING
+-----------------------------------------------------------
+Definition:-
+Artifact versioning is the process of assigning a unique version number to each build of a project.
+It helps in tracking changes, managing updates, and maintaining different versions over time.
+
+Ex:-
+my-app-1.0.jar → Initial version
+my-app-1.1.jar → Minor update / bug fixes
+my-app-2.0.jar → Major update with new features
+
+In Simple teams:
+Artifact Versioning = Managing different builds using version numbers
+------------------------------------------------------------
+1. Semantic Versioning (SemVer)
+------------------------------------------------------------
+MAJOR.MINOR.PATCH
+
+Example:
+1.0.0
+1.1.0
+1.1.1
+
+Meaning:
+MAJOR (1 → 2) → Breaking changes
+MINOR (1.0 → 1.1) → New features (backward compatible)
+PATCH (1.1.0 → 1.1.1) → Bug fixes
+
+ Example of  progression:-
+
+my-app-1.0.0.jar
+my-app-1.1.0.jar
+my-app-1.1.1.jar
+my-app-2.0.0.jar
+------------------------------------------------------------
+2. SNAPSHOT Version (Used in Maven)
+------------------------------------------------------------
+Ex:-
+my-app-1.0-SNAPSHOT.jar
+
+Meaning:
+This is a development version
+It can change anytime (not stable)
+Used during active development
+
+Once stable:
+1.0-SNAPSHOT → 1.0
+------------------------------------------------------------
+3. Release Version
+------------------------------------------------------------
+Ex:-
+my-app-1.0.jar
+
+Meaning:
+Stable and final version
+Ready for production use
+Does NOT change
+------------------------------------------------------------
+WHY VERSIONING IS IMPORTANT
+------------------------------------------------------------
+- Track changes easily
+- Rollback to older versions
+- Avoid conflicts
+- Maintain dependency stability
+-----------------------------------------------------------
+ HOSTED REPOSITORY
+-----------------------------------------------------------
+Definition:
+A hosted repository is a storage location where an organization stores and manages its own built artifacts (like JAR, WAR files).
+These artifacts are created internally and uploaded for reuse and distribution.
+
+Example of Tools:
+Sonatype Nexus Repository
+JFrog Artifactory
+------------------------------------------------------------
+USAGE
+------------------------------------------------------------
+- Store internal company libraries
+- Store project build artifacts
+- Share artifacts across teams and services
+- Maintain version-controlled builds
+
+In simple teams:
+A hosted repository is a private storage system used by organizations to store and manage their own build artifacts for internal usage.
+------------------------------------------------------------
+ PROXY REPOSITORY
+------------------------------------------------------------
+Definition:
+A proxy repository acts as an intermediary between your system and external repositories like Maven Central Repository.
+It fetches dependencies from the internet and caches them locally.
+------------------------------------------------------------
+HOW IT WORKS
+------------------------------------------------------------
+1. Request dependency(e.g., a library)
+2. Proxy checks local cache
+3. If not found → downloads from external repository
+4. Stores locally for future use
+------------------------------------------------------------
+BENEFITS
+------------------------------------------------------------
+- Faster downloads (cached)
+- Works even if internet is slow
+- Improves security
+- Reduces external dependency calls
+------------------------------------------------------------
+ANALOGY
+------------------------------------------------------------
+Proxy Repo = Cache Server 🚀  
+First time slow → next time fast
+-----------------------------------------------------------
+ MAVEN INTEGRATION
+-----------------------------------------------------------
+Definition:
+Maven integration means using Apache Maven within tools like CI/CD pipelines, IDEs, and
+build systems to automate dependency management and project builds.
+------------------------------------------------------------
+WHERE MAVEN IS USED
+------------------------------------------------------------
+1. IDE Integration
+- IntelliJ
+- Eclipse
+- VS Code
+
+2. CI/CD Integration
+- Jenkins
+- GitLab CI
+- GitHub Actions
+
+Automates build process
+Manages dependencies efficiently
+Ensures consistent builds across environments
+Integrates easily with artifact repositories (Nexus/Artifactory)
+------------------------------------------------------------
+EXAMPLE (CI/CD)
+------------------------------------------------------------
+Pipeline Step:
+
+- Checkout Code
+- Run: mvn clean install
+- Run tests
+- Generate artifact
+- Deploy
+------------------------------------------------------------
+WHY IMPORTANT
+
+- Automates build process
+- Ensures consistency
+- Reduces manual work
